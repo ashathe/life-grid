@@ -13,6 +13,7 @@ struct AppStateStoreTests {
 
         #expect(store.state == loaded)
         #expect(store.persistenceErrorDescription == nil)
+        #expect(store.hasLoaded)
     }
 
     @MainActor @Test func missingStateLoadsDefaults() async {
@@ -189,11 +190,22 @@ struct AppStateStoreTests {
         let repository = ScriptedAppStateRepository(failingSaveCalls: [1])
         let store = AppStateStore(environment: environment(repository: repository))
 
+        await store.load()
         await store.setRememberLastSetup(false)
         await store.saveForLifecycle()
 
         #expect(await repository.savedSnapshots() == [store.state, store.state])
         #expect(store.persistenceErrorDescription == nil)
+    }
+
+    @MainActor @Test func lifecycleSaveBeforeInitialLoadDoesNotWrite() async {
+        let repository = ScriptedAppStateRepository()
+        let store = AppStateStore(environment: environment(repository: repository))
+
+        await store.saveForLifecycle()
+
+        #expect(await repository.savedSnapshots().isEmpty)
+        #expect(!store.hasLoaded)
     }
 }
 

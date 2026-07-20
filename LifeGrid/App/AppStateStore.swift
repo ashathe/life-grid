@@ -5,6 +5,7 @@ import Observation
 final class AppStateStore {
     private(set) var state: PersistedAppState
     private(set) var persistenceErrorDescription: String?
+    private(set) var hasLoaded = false
     private let environment: AppEnvironment
 
     init(
@@ -16,6 +17,7 @@ final class AppStateStore {
     }
 
     func load() async {
+        defer { hasLoaded = true }
         do {
             state = try await environment.repository.load()
             persistenceErrorDescription = nil
@@ -63,6 +65,7 @@ final class AppStateStore {
     }
 
     func saveForLifecycle() async {
+        guard hasLoaded else { return }
         await persistCurrentState()
     }
 
