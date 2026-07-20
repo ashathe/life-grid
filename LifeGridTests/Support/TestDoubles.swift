@@ -40,3 +40,41 @@ actor RecordingSoundClient: SoundClient {
 
     func events() -> [SoundEvent] { recordedEvents }
 }
+
+enum ScriptedRepositoryError: Error {
+    case loadFailed
+    case saveFailed
+}
+
+actor ScriptedAppStateRepository: AppStateRepository {
+    private let loadedState: PersistedAppState
+    private let shouldFailLoad: Bool
+    private let failingSaveCalls: Set<Int>
+    private var saveCallCount = 0
+    private var snapshots: [PersistedAppState] = []
+
+    init(
+        loadedState: PersistedAppState = .default,
+        shouldFailLoad: Bool = false,
+        failingSaveCalls: Set<Int> = []
+    ) {
+        self.loadedState = loadedState
+        self.shouldFailLoad = shouldFailLoad
+        self.failingSaveCalls = failingSaveCalls
+    }
+
+    func load() throws -> PersistedAppState {
+        if shouldFailLoad { throw ScriptedRepositoryError.loadFailed }
+        return loadedState
+    }
+
+    func save(_ state: PersistedAppState) throws {
+        saveCallCount += 1
+        snapshots.append(state)
+        if failingSaveCalls.contains(saveCallCount) {
+            throw ScriptedRepositoryError.saveFailed
+        }
+    }
+
+    func savedSnapshots() -> [PersistedAppState] { snapshots }
+}
