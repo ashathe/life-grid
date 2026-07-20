@@ -7,6 +7,9 @@ final class AppStateStore {
     private(set) var persistenceErrorDescription: String?
     private(set) var hasLoaded = false
     private let environment: AppEnvironment
+    private var persistenceIsBlocked = false
+    private var persistenceRevision = 0
+    private var persistenceTail: Task<PersistenceOutcome, Never>?
 
     init(
         environment: AppEnvironment,
@@ -20,8 +23,10 @@ final class AppStateStore {
         defer { hasLoaded = true }
         do {
             state = try await environment.repository.load()
+            persistenceIsBlocked = false
             persistenceErrorDescription = nil
         } catch {
+            persistenceIsBlocked = true
             persistenceErrorDescription = String(describing: error)
         }
     }
@@ -77,11 +82,38 @@ final class AppStateStore {
     }
 
     private func persistCurrentState() async {
-        do {
-            try await environment.repository.save(state)
+        guard !persistenceIsBlocked else { return }
+
+        let snapshot = state
+        let predecessor = persistenceTail
+        let repository = environment.repository
+        persistenceRevision += 1
+        let revision = persistenceRevision
+        let operation = Task<PersistenceOutcome, Never> {
+            if let predecessor {
+                _ = await predecessor.value
+            }
+            do {
+                try await repository.save(snapshot)
+                return .success
+            } catch {
+                return .failure(String(describing: error))
+            }
+        }
+        persistenceTail = operation
+
+        let outcome = await operation.value
+        guard revision == persistenceRevision else { return }
+        switch outcome {
+        case .success:
             persistenceErrorDescription = nil
-        } catch {
-            persistenceErrorDescription = String(describing: error)
+        case .failure(let description):
+            persistenceErrorDescription = description
         }
     }
+}
+
+private enum PersistenceOutcome: Sendable {
+    case success
+    case failure(String)
 }

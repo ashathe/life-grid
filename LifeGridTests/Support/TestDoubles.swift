@@ -78,3 +78,42 @@ actor ScriptedAppStateRepository: AppStateRepository {
 
     func savedSnapshots() -> [PersistedAppState] { snapshots }
 }
+
+actor SuspendingFirstSaveAppStateRepository: AppStateRepository {
+    private var saveCallCount = 0
+    private var snapshots: [PersistedAppState] = []
+    private var firstSaveRelease: CheckedContinuation<Void, Never>?
+    private var firstSaveStartWaiters: [CheckedContinuation<Void, Never>] = []
+
+    func load() -> PersistedAppState { .default }
+
+    func save(_ state: PersistedAppState) async {
+        saveCallCount += 1
+        let call = saveCallCount
+
+        if call == 1 {
+            let waiters = firstSaveStartWaiters
+            firstSaveStartWaiters.removeAll()
+            waiters.forEach { $0.resume() }
+            await withCheckedContinuation { continuation in
+                firstSaveRelease = continuation
+            }
+        }
+
+        snapshots.append(state)
+    }
+
+    func waitUntilFirstSaveStarts() async {
+        guard saveCallCount == 0 else { return }
+        await withCheckedContinuation { continuation in
+            firstSaveStartWaiters.append(continuation)
+        }
+    }
+
+    func releaseFirstSave() {
+        firstSaveRelease?.resume()
+        firstSaveRelease = nil
+    }
+
+    func savedSnapshots() -> [PersistedAppState] { snapshots }
+}
