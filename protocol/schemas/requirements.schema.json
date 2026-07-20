@@ -21,7 +21,7 @@
       "change_request"
     ],
     "properties": {
-      "id": { "type": "string", "pattern": "^[A-Z]+-[0-9]{3}$" },
+      "id": { "type": "string", "pattern": "^[A-Z][A-Z0-9]*-[0-9]{3}$" },
       "title": { "type": "string", "minLength": 1 },
       "spec_section": { "type": "string", "minLength": 1 },
       "visual_references": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },

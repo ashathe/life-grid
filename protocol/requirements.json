@@ -1,0 +1,3100 @@
+[
+  {
+    "id": "APP-001",
+    "title": "Native universal SwiftUI app",
+    "spec_section": "Sections 1 and 26",
+    "visual_references": [],
+    "implementation_files": [
+      "LifeGrid.xcodeproj/project.pbxproj",
+      "LifeGrid/App"
+    ],
+    "test_files": [
+      "LifeGridTests/FoundationSmokeTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "evidence_files": [],
+    "status": "implemented",
+    "architecture_relevant": true,
+    "planned_implementation": [
+      "LifeGrid.xcodeproj/project.pbxproj",
+      "LifeGrid/App"
+    ],
+    "planned_tests": [
+      "LifeGridTests/FoundationSmokeTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "APP-002",
+    "title": "Local-only operation",
+    "spec_section": "Sections 1 and 26",
+    "visual_references": [],
+    "implementation_files": [
+      "LifeGrid.xcodeproj/project.pbxproj",
+      "LifeGrid/App"
+    ],
+    "test_files": [
+      "LifeGridTests/FoundationSmokeTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "evidence_files": [],
+    "status": "implemented",
+    "architecture_relevant": true,
+    "planned_implementation": [
+      "LifeGrid.xcodeproj/project.pbxproj",
+      "LifeGrid/App"
+    ],
+    "planned_tests": [
+      "LifeGridTests/FoundationSmokeTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "APP-003",
+    "title": "iPhone and iPad support",
+    "spec_section": "Sections 1 and 26",
+    "visual_references": [],
+    "implementation_files": [
+      "LifeGrid.xcodeproj/project.pbxproj",
+      "LifeGrid/App"
+    ],
+    "test_files": [
+      "LifeGridTests/FoundationSmokeTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "evidence_files": [],
+    "status": "implemented",
+    "architecture_relevant": true,
+    "planned_implementation": [
+      "LifeGrid.xcodeproj/project.pbxproj",
+      "LifeGrid/App"
+    ],
+    "planned_tests": [
+      "LifeGridTests/FoundationSmokeTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "APP-004",
+    "title": "Excluded capabilities remain absent",
+    "spec_section": "Sections 1 and 26",
+    "visual_references": [],
+    "implementation_files": [
+      "LifeGrid.xcodeproj/project.pbxproj",
+      "LifeGrid/App"
+    ],
+    "test_files": [
+      "LifeGridTests/FoundationSmokeTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "evidence_files": [],
+    "status": "implemented",
+    "architecture_relevant": true,
+    "planned_implementation": [
+      "LifeGrid.xcodeproj/project.pbxproj",
+      "LifeGrid/App"
+    ],
+    "planned_tests": [
+      "LifeGridTests/FoundationSmokeTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "NAV-001",
+    "title": "Four-tab bottom navigation",
+    "spec_section": "Section 2",
+    "visual_references": [],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "NAV-002",
+    "title": "Resume active game on launch",
+    "spec_section": "Section 2",
+    "visual_references": [],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "NEW-001",
+    "title": "Total player selection",
+    "spec_section": "Section 8",
+    "visual_references": [
+      "new-game"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "NEW-002",
+    "title": "Starting life presets and custom value",
+    "spec_section": "Section 8",
+    "visual_references": [
+      "new-game"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "NEW-003",
+    "title": "Optional opponent names",
+    "spec_section": "Section 8",
+    "visual_references": [
+      "new-game"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "NEW-004",
+    "title": "Stable opponent creation",
+    "spec_section": "Section 8",
+    "visual_references": [
+      "new-game"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "NEW-005",
+    "title": "Remember last setup",
+    "spec_section": "Section 8",
+    "visual_references": [
+      "new-game"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "NEW-006",
+    "title": "Start-game validation",
+    "spec_section": "Section 8",
+    "visual_references": [
+      "new-game"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "NEW-007",
+    "title": "Existing-game replacement confirmation",
+    "spec_section": "Section 8",
+    "visual_references": [
+      "new-game"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "NEW-008",
+    "title": "New Game acceptance behavior",
+    "spec_section": "Section 8",
+    "visual_references": [
+      "new-game"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "LIFE-001",
+    "title": "Local player display name",
+    "spec_section": "Sections 10.1-10.3",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "LIFE-002",
+    "title": "Life decrement control",
+    "spec_section": "Sections 10.1-10.3",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "LIFE-003",
+    "title": "Life increment control",
+    "spec_section": "Sections 10.1-10.3",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "LIFE-004",
+    "title": "Tap-and-hold repeat",
+    "spec_section": "Sections 10.1-10.3",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "LIFE-005",
+    "title": "Exact life entry",
+    "spec_section": "Sections 10.1-10.3",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "LIFE-006",
+    "title": "Negative life support",
+    "spec_section": "Sections 10.1-10.3",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "LIFE-007",
+    "title": "Undo most recent life change",
+    "spec_section": "Sections 10.1-10.3",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "CMD-001",
+    "title": "Commander tax controls",
+    "spec_section": "Sections 10.4 and 11",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad",
+      "settings"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "CMD-002",
+    "title": "Commander tax increments by two",
+    "spec_section": "Sections 10.4 and 11",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad",
+      "settings"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "CMD-003",
+    "title": "Commander mode setting",
+    "spec_section": "Sections 10.4 and 11",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad",
+      "settings"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "CMD-004",
+    "title": "Primary commander name",
+    "spec_section": "Sections 10.4 and 11",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad",
+      "settings"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "CMD-005",
+    "title": "Own partner commander setting",
+    "spec_section": "Sections 10.4 and 11",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad",
+      "settings"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "CMD-006",
+    "title": "Partner commander name",
+    "spec_section": "Sections 10.4 and 11",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad",
+      "settings"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "CMD-007",
+    "title": "Commander damage changes life setting",
+    "spec_section": "Sections 10.4 and 11",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad",
+      "settings"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "CMD-008",
+    "title": "Per-opponent commander damage",
+    "spec_section": "Sections 10.4 and 11",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad",
+      "settings"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "CMD-009",
+    "title": "Partner commander damage",
+    "spec_section": "Sections 10.4 and 11",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad",
+      "settings"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "CMD-010",
+    "title": "Commander lethal threshold",
+    "spec_section": "Sections 10.4 and 11",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad",
+      "settings"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "CMD-011",
+    "title": "Commander acceptance behavior",
+    "spec_section": "Sections 10.4 and 11",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad",
+      "settings"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "OPP-001",
+    "title": "Opponent card list",
+    "spec_section": "Sections 9, 12, and 13",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad",
+      "status-player-sheets"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "OPP-002",
+    "title": "Add opponent during game",
+    "spec_section": "Sections 9, 12, and 13",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad",
+      "status-player-sheets"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "OPP-003",
+    "title": "Opponent stable identity",
+    "spec_section": "Sections 9, 12, and 13",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad",
+      "status-player-sheets"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "OPP-004",
+    "title": "Opponent display name",
+    "spec_section": "Sections 9, 12, and 13",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad",
+      "status-player-sheets"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "OPP-005",
+    "title": "Primary commander row",
+    "spec_section": "Sections 9, 12, and 13",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad",
+      "status-player-sheets"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "OPP-006",
+    "title": "Partner commander row",
+    "spec_section": "Sections 9, 12, and 13",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad",
+      "status-player-sheets"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "OPP-007",
+    "title": "Opponent overflow menu",
+    "spec_section": "Sections 9, 12, and 13",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad",
+      "status-player-sheets"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "OPP-008",
+    "title": "Rename opponent",
+    "spec_section": "Sections 9, 12, and 13",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad",
+      "status-player-sheets"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "OPP-009",
+    "title": "Add or remove partner",
+    "spec_section": "Sections 9, 12, and 13",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad",
+      "status-player-sheets"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "OPP-010",
+    "title": "Hide player",
+    "spec_section": "Sections 9, 12, and 13",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad",
+      "status-player-sheets"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "OPP-011",
+    "title": "Hidden Monarch handling",
+    "spec_section": "Sections 9, 12, and 13",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad",
+      "status-player-sheets"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "OPP-012",
+    "title": "Out of Game tray",
+    "spec_section": "Sections 9, 12, and 13",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad",
+      "status-player-sheets"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "OPP-013",
+    "title": "Restore hidden player",
+    "spec_section": "Sections 9, 12, and 13",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad",
+      "status-player-sheets"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "STS-001",
+    "title": "Player status sheet",
+    "spec_section": "Section 14",
+    "visual_references": [
+      "status-player-sheets"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "STS-002",
+    "title": "Monarch toggle",
+    "spec_section": "Section 14",
+    "visual_references": [
+      "status-player-sheets"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "STS-003",
+    "title": "Single Monarch invariant",
+    "spec_section": "Section 14",
+    "visual_references": [
+      "status-player-sheets"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "STS-004",
+    "title": "Monarch transfer",
+    "spec_section": "Section 14",
+    "visual_references": [
+      "status-player-sheets"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "STS-005",
+    "title": "Citys Blessing toggle",
+    "spec_section": "Section 14",
+    "visual_references": [
+      "status-player-sheets"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "STS-006",
+    "title": "Per-player blessing state",
+    "spec_section": "Section 14",
+    "visual_references": [
+      "status-player-sheets"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "STS-007",
+    "title": "Status acceptance behavior",
+    "spec_section": "Section 14",
+    "visual_references": [
+      "status-player-sheets"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "CTR-001",
+    "title": "Built-in counter library",
+    "spec_section": "Section 15",
+    "visual_references": [
+      "counters",
+      "game-iphone",
+      "game-ipad"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "CTR-002",
+    "title": "Poison counter",
+    "spec_section": "Section 15",
+    "visual_references": [
+      "counters",
+      "game-iphone",
+      "game-ipad"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "CTR-003",
+    "title": "Energy counter",
+    "spec_section": "Section 15",
+    "visual_references": [
+      "counters",
+      "game-iphone",
+      "game-ipad"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "CTR-004",
+    "title": "Experience counter",
+    "spec_section": "Section 15",
+    "visual_references": [
+      "counters",
+      "game-iphone",
+      "game-ipad"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "CTR-005",
+    "title": "Treasure counter",
+    "spec_section": "Section 15",
+    "visual_references": [
+      "counters",
+      "game-iphone",
+      "game-ipad"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "CTR-006",
+    "title": "Radiation counter",
+    "spec_section": "Section 15",
+    "visual_references": [
+      "counters",
+      "game-iphone",
+      "game-ipad"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "CTR-007",
+    "title": "Storm counter",
+    "spec_section": "Section 15",
+    "visual_references": [
+      "counters",
+      "game-iphone",
+      "game-ipad"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "CTR-008",
+    "title": "Charge counter",
+    "spec_section": "Section 15",
+    "visual_references": [
+      "counters",
+      "game-iphone",
+      "game-ipad"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "CTR-009",
+    "title": "Doom counter",
+    "spec_section": "Section 15",
+    "visual_references": [
+      "counters",
+      "game-iphone",
+      "game-ipad"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "CTR-010",
+    "title": "Tickets counter",
+    "spec_section": "Section 15",
+    "visual_references": [
+      "counters",
+      "game-iphone",
+      "game-ipad"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "CTR-011",
+    "title": "Numeric counter adjustment",
+    "spec_section": "Section 15",
+    "visual_references": [
+      "counters",
+      "game-iphone",
+      "game-ipad"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "CTR-012",
+    "title": "Negative numeric counter values",
+    "spec_section": "Section 15",
+    "visual_references": [
+      "counters",
+      "game-iphone",
+      "game-ipad"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "CTR-013",
+    "title": "Day and Night state",
+    "spec_section": "Section 15",
+    "visual_references": [
+      "counters",
+      "game-iphone",
+      "game-ipad"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "CTR-014",
+    "title": "Pin and unpin counters",
+    "spec_section": "Section 15",
+    "visual_references": [
+      "counters",
+      "game-iphone",
+      "game-ipad"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "CST-001",
+    "title": "Create custom counter",
+    "spec_section": "Section 16",
+    "visual_references": [
+      "counters"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "CST-002",
+    "title": "Custom counter name validation",
+    "spec_section": "Section 16",
+    "visual_references": [
+      "counters"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "CST-003",
+    "title": "Stable custom counter identity",
+    "spec_section": "Section 16",
+    "visual_references": [
+      "counters"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "CST-004",
+    "title": "Adjust custom counter",
+    "spec_section": "Section 16",
+    "visual_references": [
+      "counters"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "CST-005",
+    "title": "Pin custom counter",
+    "spec_section": "Section 16",
+    "visual_references": [
+      "counters"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "CST-006",
+    "title": "Manage custom counters",
+    "spec_section": "Section 16",
+    "visual_references": [
+      "counters"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "CST-007",
+    "title": "Delete custom counter safely",
+    "spec_section": "Section 16",
+    "visual_references": [
+      "counters"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "WARN-001",
+    "title": "Poison lethal threshold",
+    "spec_section": "Section 17",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "WARN-002",
+    "title": "Commander lethal threshold",
+    "spec_section": "Section 17",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "WARN-003",
+    "title": "Life lethal threshold",
+    "spec_section": "Section 17",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "WARN-004",
+    "title": "Textual lethal warning",
+    "spec_section": "Section 17",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "WARN-005",
+    "title": "Color-independent warning",
+    "spec_section": "Section 17",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "WARN-006",
+    "title": "Warning transition trigger",
+    "spec_section": "Section 17",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "WARN-007",
+    "title": "Haptic warning event",
+    "spec_section": "Section 17",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "WARN-008",
+    "title": "Warning acceptance behavior",
+    "spec_section": "Section 17",
+    "visual_references": [
+      "game-iphone",
+      "game-ipad"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "DICE-001",
+    "title": "Standard dice choices",
+    "spec_section": "Section 18",
+    "visual_references": [
+      "dice"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "DICE-002",
+    "title": "Custom die creation",
+    "spec_section": "Section 18",
+    "visual_references": [
+      "dice"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "DICE-003",
+    "title": "Custom die side validation",
+    "spec_section": "Section 18",
+    "visual_references": [
+      "dice"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "DICE-004",
+    "title": "Saved custom dice",
+    "spec_section": "Section 18",
+    "visual_references": [
+      "dice"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "DICE-005",
+    "title": "Number of dice control",
+    "spec_section": "Section 18",
+    "visual_references": [
+      "dice"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "DICE-006",
+    "title": "Dice count validation",
+    "spec_section": "Section 18",
+    "visual_references": [
+      "dice"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "DICE-007",
+    "title": "Deterministic roll range",
+    "spec_section": "Section 18",
+    "visual_references": [
+      "dice"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "DICE-008",
+    "title": "Individual roll results",
+    "spec_section": "Section 18",
+    "visual_references": [
+      "dice"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "DICE-009",
+    "title": "Roll total",
+    "spec_section": "Section 18",
+    "visual_references": [
+      "dice"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "DICE-010",
+    "title": "Five-entry roll history",
+    "spec_section": "Section 18",
+    "visual_references": [
+      "dice"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "DICE-011",
+    "title": "Coin flip",
+    "spec_section": "Section 18",
+    "visual_references": [
+      "dice"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "DICE-012",
+    "title": "Random starting player",
+    "spec_section": "Section 18",
+    "visual_references": [
+      "dice"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "DICE-013",
+    "title": "Random opponent",
+    "spec_section": "Section 18",
+    "visual_references": [
+      "dice"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "DICE-014",
+    "title": "Visible-player random pool",
+    "spec_section": "Section 18",
+    "visual_references": [
+      "dice"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "DICE-015",
+    "title": "Randomizer feedback",
+    "spec_section": "Section 18",
+    "visual_references": [
+      "dice"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "DICE-016",
+    "title": "Dice acceptance behavior",
+    "spec_section": "Section 18",
+    "visual_references": [
+      "dice"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "SET-001",
+    "title": "Approved default settings",
+    "spec_section": "Sections 3, 7, 19, and 20",
+    "visual_references": [
+      "settings"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "SET-002",
+    "title": "Player name setting",
+    "spec_section": "Sections 3, 7, 19, and 20",
+    "visual_references": [
+      "settings"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "SET-003",
+    "title": "Commander setting",
+    "spec_section": "Sections 3, 7, 19, and 20",
+    "visual_references": [
+      "settings"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "SET-004",
+    "title": "Own partner setting",
+    "spec_section": "Sections 3, 7, 19, and 20",
+    "visual_references": [
+      "settings"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "SET-005",
+    "title": "Commander damage life-link setting",
+    "spec_section": "Sections 3, 7, 19, and 20",
+    "visual_references": [
+      "settings"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "SET-006",
+    "title": "Keep-screen-awake setting",
+    "spec_section": "Sections 3, 7, 19, and 20",
+    "visual_references": [
+      "settings"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "SET-007",
+    "title": "Dark appearance",
+    "spec_section": "Sections 3, 7, 19, and 20",
+    "visual_references": [
+      "settings"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "SET-008",
+    "title": "System appearance",
+    "spec_section": "Sections 3, 7, 19, and 20",
+    "visual_references": [
+      "settings"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "SET-009",
+    "title": "Light appearance",
+    "spec_section": "Sections 3, 7, 19, and 20",
+    "visual_references": [
+      "settings"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "SET-010",
+    "title": "Compact app scale",
+    "spec_section": "Sections 3, 7, 19, and 20",
+    "visual_references": [
+      "settings"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "SET-011",
+    "title": "Balanced and Large app scales",
+    "spec_section": "Sections 3, 7, 19, and 20",
+    "visual_references": [
+      "settings"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "SET-012",
+    "title": "Haptic and sound settings",
+    "spec_section": "Sections 3, 7, 19, and 20",
+    "visual_references": [
+      "settings"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "RST-001",
+    "title": "Quick Restart access",
+    "spec_section": "Section 21",
+    "visual_references": [
+      "quick-restart"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "RST-002",
+    "title": "Quick Restart confirmation",
+    "spec_section": "Section 21",
+    "visual_references": [
+      "quick-restart"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "RST-003",
+    "title": "Reset life to starting value",
+    "spec_section": "Section 21",
+    "visual_references": [
+      "quick-restart"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "RST-004",
+    "title": "Reset numeric counters",
+    "spec_section": "Section 21",
+    "visual_references": [
+      "quick-restart"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "RST-005",
+    "title": "Reset commander damage",
+    "spec_section": "Section 21",
+    "visual_references": [
+      "quick-restart"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "RST-006",
+    "title": "Reset commander tax",
+    "spec_section": "Section 21",
+    "visual_references": [
+      "quick-restart"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "RST-007",
+    "title": "Reset statuses and visibility",
+    "spec_section": "Section 21",
+    "visual_references": [
+      "quick-restart"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "RST-008",
+    "title": "Preserve player and configuration data",
+    "spec_section": "Section 21",
+    "visual_references": [
+      "quick-restart"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "RST-009",
+    "title": "Full reset access",
+    "spec_section": "Section 21",
+    "visual_references": [
+      "quick-restart"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "PST-001",
+    "title": "Versioned complete state",
+    "spec_section": "Sections 5 and 22",
+    "visual_references": [],
+    "implementation_files": [
+      "LifeGrid/Models",
+      "LifeGrid/Persistence",
+      "LifeGrid/App/AppStateStore.swift"
+    ],
+    "test_files": [
+      "LifeGridTests/Models/PersistedAppStateTests.swift",
+      "LifeGridTests/Persistence/JSONAppStateRepositoryTests.swift",
+      "LifeGridTests/App/AppStateStoreTests.swift"
+    ],
+    "evidence_files": [],
+    "status": "implemented",
+    "architecture_relevant": true,
+    "planned_implementation": [
+      "LifeGrid/Models",
+      "LifeGrid/Persistence",
+      "LifeGrid/App/AppStateStore.swift"
+    ],
+    "planned_tests": [
+      "LifeGridTests/Models/PersistedAppStateTests.swift",
+      "LifeGridTests/Persistence/JSONAppStateRepositoryTests.swift",
+      "LifeGridTests/App/AppStateStoreTests.swift"
+    ],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "PST-002",
+    "title": "Atomic local JSON snapshot",
+    "spec_section": "Sections 5 and 22",
+    "visual_references": [],
+    "implementation_files": [
+      "LifeGrid/Models",
+      "LifeGrid/Persistence",
+      "LifeGrid/App/AppStateStore.swift"
+    ],
+    "test_files": [
+      "LifeGridTests/Models/PersistedAppStateTests.swift",
+      "LifeGridTests/Persistence/JSONAppStateRepositoryTests.swift",
+      "LifeGridTests/App/AppStateStoreTests.swift"
+    ],
+    "evidence_files": [],
+    "status": "implemented",
+    "architecture_relevant": true,
+    "planned_implementation": [
+      "LifeGrid/Models",
+      "LifeGrid/Persistence",
+      "LifeGrid/App/AppStateStore.swift"
+    ],
+    "planned_tests": [
+      "LifeGridTests/Models/PersistedAppStateTests.swift",
+      "LifeGridTests/Persistence/JSONAppStateRepositoryTests.swift",
+      "LifeGridTests/App/AppStateStoreTests.swift"
+    ],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "PST-003",
+    "title": "Immediate meaningful-change save",
+    "spec_section": "Sections 5 and 22",
+    "visual_references": [],
+    "implementation_files": [
+      "LifeGrid/Models",
+      "LifeGrid/Persistence",
+      "LifeGrid/App/AppStateStore.swift"
+    ],
+    "test_files": [
+      "LifeGridTests/Models/PersistedAppStateTests.swift",
+      "LifeGridTests/Persistence/JSONAppStateRepositoryTests.swift",
+      "LifeGridTests/App/AppStateStoreTests.swift"
+    ],
+    "evidence_files": [],
+    "status": "implemented",
+    "architecture_relevant": true,
+    "planned_implementation": [
+      "LifeGrid/Models",
+      "LifeGrid/Persistence",
+      "LifeGrid/App/AppStateStore.swift"
+    ],
+    "planned_tests": [
+      "LifeGridTests/Models/PersistedAppStateTests.swift",
+      "LifeGridTests/Persistence/JSONAppStateRepositoryTests.swift",
+      "LifeGridTests/App/AppStateStoreTests.swift"
+    ],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "PST-004",
+    "title": "Approved first-launch defaults",
+    "spec_section": "Sections 5 and 22",
+    "visual_references": [],
+    "implementation_files": [
+      "LifeGrid/Models",
+      "LifeGrid/Persistence",
+      "LifeGrid/App/AppStateStore.swift"
+    ],
+    "test_files": [
+      "LifeGridTests/Models/PersistedAppStateTests.swift",
+      "LifeGridTests/Persistence/JSONAppStateRepositoryTests.swift",
+      "LifeGridTests/App/AppStateStoreTests.swift"
+    ],
+    "evidence_files": [],
+    "status": "implemented",
+    "architecture_relevant": true,
+    "planned_implementation": [
+      "LifeGrid/Models",
+      "LifeGrid/Persistence",
+      "LifeGrid/App/AppStateStore.swift"
+    ],
+    "planned_tests": [
+      "LifeGridTests/Models/PersistedAppStateTests.swift",
+      "LifeGridTests/Persistence/JSONAppStateRepositoryTests.swift",
+      "LifeGridTests/App/AppStateStoreTests.swift"
+    ],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "PST-005",
+    "title": "Migration and error boundary",
+    "spec_section": "Sections 5 and 22",
+    "visual_references": [],
+    "implementation_files": [
+      "LifeGrid/Models",
+      "LifeGrid/Persistence",
+      "LifeGrid/App/AppStateStore.swift"
+    ],
+    "test_files": [
+      "LifeGridTests/Models/PersistedAppStateTests.swift",
+      "LifeGridTests/Persistence/JSONAppStateRepositoryTests.swift",
+      "LifeGridTests/App/AppStateStoreTests.swift"
+    ],
+    "evidence_files": [],
+    "status": "implemented",
+    "architecture_relevant": true,
+    "planned_implementation": [
+      "LifeGrid/Models",
+      "LifeGrid/Persistence",
+      "LifeGrid/App/AppStateStore.swift"
+    ],
+    "planned_tests": [
+      "LifeGridTests/Models/PersistedAppStateTests.swift",
+      "LifeGridTests/Persistence/JSONAppStateRepositoryTests.swift",
+      "LifeGridTests/App/AppStateStoreTests.swift"
+    ],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "PST-006",
+    "title": "Persisted custom definitions",
+    "spec_section": "Sections 5 and 22",
+    "visual_references": [],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "PST-007",
+    "title": "Persisted five-roll history",
+    "spec_section": "Sections 5 and 22",
+    "visual_references": [],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "PST-008",
+    "title": "No transient presentation persistence",
+    "spec_section": "Sections 5 and 22",
+    "visual_references": [],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "VIS-001",
+    "title": "Approved visual identity",
+    "spec_section": "Sections 3 and 4",
+    "visual_references": [
+      "new-game",
+      "game-iphone",
+      "counters",
+      "dice",
+      "settings",
+      "status-player-sheets",
+      "quick-restart",
+      "game-ipad",
+      "approved-icon"
+    ],
+    "implementation_files": [
+      "LifeGrid/Models/AppPreferences.swift",
+      "LifeGrid/Shared/Layout",
+      "LifeGrid/Shared/Theme"
+    ],
+    "test_files": [
+      "LifeGridTests/Shared/LayoutFoundationTests.swift"
+    ],
+    "evidence_files": [],
+    "status": "implemented",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "VIS-002",
+    "title": "Geometry-based responsive layout",
+    "spec_section": "Sections 3 and 4",
+    "visual_references": [
+      "new-game",
+      "game-iphone",
+      "counters",
+      "dice",
+      "settings",
+      "status-player-sheets",
+      "quick-restart",
+      "game-ipad",
+      "approved-icon"
+    ],
+    "implementation_files": [
+      "LifeGrid/Models/AppPreferences.swift",
+      "LifeGrid/Shared/Layout",
+      "LifeGrid/Shared/Theme"
+    ],
+    "test_files": [
+      "LifeGridTests/Shared/LayoutFoundationTests.swift"
+    ],
+    "evidence_files": [],
+    "status": "implemented",
+    "architecture_relevant": true,
+    "planned_implementation": [
+      "LifeGrid/Models/AppPreferences.swift",
+      "LifeGrid/Shared/Layout",
+      "LifeGrid/Shared/Theme"
+    ],
+    "planned_tests": [
+      "LifeGridTests/Shared/LayoutFoundationTests.swift"
+    ],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "VIS-003",
+    "title": "True two-column wide game layout",
+    "spec_section": "Sections 3 and 4",
+    "visual_references": [
+      "new-game",
+      "game-iphone",
+      "counters",
+      "dice",
+      "settings",
+      "status-player-sheets",
+      "quick-restart",
+      "game-ipad",
+      "approved-icon"
+    ],
+    "implementation_files": [
+      "LifeGrid/Models/AppPreferences.swift",
+      "LifeGrid/Shared/Layout",
+      "LifeGrid/Shared/Theme"
+    ],
+    "test_files": [
+      "LifeGridTests/Shared/LayoutFoundationTests.swift"
+    ],
+    "evidence_files": [],
+    "status": "implemented",
+    "architecture_relevant": true,
+    "planned_implementation": [
+      "LifeGrid/Models/AppPreferences.swift",
+      "LifeGrid/Shared/Layout",
+      "LifeGrid/Shared/Theme"
+    ],
+    "planned_tests": [
+      "LifeGridTests/Shared/LayoutFoundationTests.swift"
+    ],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "VIS-004",
+    "title": "Dark default appearance",
+    "spec_section": "Sections 3 and 4",
+    "visual_references": [
+      "new-game",
+      "game-iphone",
+      "counters",
+      "dice",
+      "settings",
+      "status-player-sheets",
+      "quick-restart",
+      "game-ipad",
+      "approved-icon"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "VIS-005",
+    "title": "System and Light semantic parity",
+    "spec_section": "Sections 3 and 4",
+    "visual_references": [
+      "new-game",
+      "game-iphone",
+      "counters",
+      "dice",
+      "settings",
+      "status-player-sheets",
+      "quick-restart",
+      "game-ipad",
+      "approved-icon"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "VIS-006",
+    "title": "Purple primary accent",
+    "spec_section": "Sections 3 and 4",
+    "visual_references": [
+      "new-game",
+      "game-iphone",
+      "counters",
+      "dice",
+      "settings",
+      "status-player-sheets",
+      "quick-restart",
+      "game-ipad",
+      "approved-icon"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "VIS-007",
+    "title": "Red destructive and lethal semantics",
+    "spec_section": "Sections 3 and 4",
+    "visual_references": [
+      "new-game",
+      "game-iphone",
+      "counters",
+      "dice",
+      "settings",
+      "status-player-sheets",
+      "quick-restart",
+      "game-ipad",
+      "approved-icon"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "VIS-008",
+    "title": "Semantic scale tokens",
+    "spec_section": "Sections 3 and 4",
+    "visual_references": [
+      "new-game",
+      "game-iphone",
+      "counters",
+      "dice",
+      "settings",
+      "status-player-sheets",
+      "quick-restart",
+      "game-ipad",
+      "approved-icon"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "VIS-009",
+    "title": "Use selected icon exactly without redesign",
+    "spec_section": "Sections 3 and 4",
+    "visual_references": [
+      "new-game",
+      "game-iphone",
+      "counters",
+      "dice",
+      "settings",
+      "status-player-sheets",
+      "quick-restart",
+      "game-ipad",
+      "approved-icon"
+    ],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "A11Y-001",
+    "title": "Semantic accessible values",
+    "spec_section": "Section 23",
+    "visual_references": [],
+    "implementation_files": [
+      "LifeGrid/Shared/Accessibility",
+      "LifeGrid/Shared/Theme/AppScaleTokens.swift"
+    ],
+    "test_files": [
+      "LifeGridTests/Shared/LayoutFoundationTests.swift"
+    ],
+    "evidence_files": [],
+    "status": "implemented",
+    "architecture_relevant": true,
+    "planned_implementation": [
+      "LifeGrid/Shared/Accessibility",
+      "LifeGrid/Shared/Theme/AppScaleTokens.swift"
+    ],
+    "planned_tests": [
+      "LifeGridTests/Shared/LayoutFoundationTests.swift"
+    ],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "A11Y-002",
+    "title": "Minimum 44-point targets",
+    "spec_section": "Section 23",
+    "visual_references": [],
+    "implementation_files": [
+      "LifeGrid/Shared/Accessibility",
+      "LifeGrid/Shared/Theme/AppScaleTokens.swift"
+    ],
+    "test_files": [
+      "LifeGridTests/Shared/LayoutFoundationTests.swift"
+    ],
+    "evidence_files": [],
+    "status": "implemented",
+    "architecture_relevant": true,
+    "planned_implementation": [
+      "LifeGrid/Shared/Accessibility",
+      "LifeGrid/Shared/Theme/AppScaleTokens.swift"
+    ],
+    "planned_tests": [
+      "LifeGridTests/Shared/LayoutFoundationTests.swift"
+    ],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "A11Y-003",
+    "title": "Dynamic Type support",
+    "spec_section": "Section 23",
+    "visual_references": [],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "A11Y-004",
+    "title": "Full accessible player names",
+    "spec_section": "Section 23",
+    "visual_references": [],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "A11Y-005",
+    "title": "Full accessible commander names",
+    "spec_section": "Section 23",
+    "visual_references": [],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "A11Y-006",
+    "title": "Text plus color status meaning",
+    "spec_section": "Section 23",
+    "visual_references": [],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "A11Y-007",
+    "title": "Accessibility announcements",
+    "spec_section": "Section 23",
+    "visual_references": [],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "A11Y-008",
+    "title": "Reduce Motion behavior",
+    "spec_section": "Section 23",
+    "visual_references": [],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "A11Y-009",
+    "title": "Keyboard and pointer support",
+    "spec_section": "Section 23",
+    "visual_references": [],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "A11Y-010",
+    "title": "Accessibility acceptance behavior",
+    "spec_section": "Section 23",
+    "visual_references": [],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "TEST-001",
+    "title": "Approved defaults test",
+    "spec_section": "Section 28",
+    "visual_references": [],
+    "implementation_files": [
+      "LifeGridTests"
+    ],
+    "test_files": [
+      "LifeGridTests",
+      "LifeGridUITests"
+    ],
+    "evidence_files": [],
+    "status": "implemented",
+    "architecture_relevant": true,
+    "planned_implementation": [
+      "LifeGridTests"
+    ],
+    "planned_tests": [
+      "LifeGridTests",
+      "LifeGridUITests"
+    ],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "TEST-002",
+    "title": "Complete state round-trip test",
+    "spec_section": "Section 28",
+    "visual_references": [],
+    "implementation_files": [
+      "LifeGridTests"
+    ],
+    "test_files": [
+      "LifeGridTests",
+      "LifeGridUITests"
+    ],
+    "evidence_files": [],
+    "status": "implemented",
+    "architecture_relevant": true,
+    "planned_implementation": [
+      "LifeGridTests"
+    ],
+    "planned_tests": [
+      "LifeGridTests",
+      "LifeGridUITests"
+    ],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "TEST-003",
+    "title": "Repository persistence test",
+    "spec_section": "Section 28",
+    "visual_references": [],
+    "implementation_files": [
+      "LifeGridTests"
+    ],
+    "test_files": [
+      "LifeGridTests",
+      "LifeGridUITests"
+    ],
+    "evidence_files": [],
+    "status": "implemented",
+    "architecture_relevant": true,
+    "planned_implementation": [
+      "LifeGridTests"
+    ],
+    "planned_tests": [
+      "LifeGridTests",
+      "LifeGridUITests"
+    ],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "TEST-004",
+    "title": "Store load and save test",
+    "spec_section": "Section 28",
+    "visual_references": [],
+    "implementation_files": [
+      "LifeGridTests"
+    ],
+    "test_files": [
+      "LifeGridTests",
+      "LifeGridUITests"
+    ],
+    "evidence_files": [],
+    "status": "implemented",
+    "architecture_relevant": true,
+    "planned_implementation": [
+      "LifeGridTests"
+    ],
+    "planned_tests": [
+      "LifeGridTests",
+      "LifeGridUITests"
+    ],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "TEST-005",
+    "title": "Life increment test",
+    "spec_section": "Section 28",
+    "visual_references": [],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "TEST-006",
+    "title": "Life decrement test",
+    "spec_section": "Section 28",
+    "visual_references": [],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "TEST-007",
+    "title": "Life exact-entry test",
+    "spec_section": "Section 28",
+    "visual_references": [],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "TEST-008",
+    "title": "Life undo test",
+    "spec_section": "Section 28",
+    "visual_references": [],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "TEST-009",
+    "title": "Commander damage test",
+    "spec_section": "Section 28",
+    "visual_references": [],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "TEST-010",
+    "title": "Commander life-link test",
+    "spec_section": "Section 28",
+    "visual_references": [],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "TEST-011",
+    "title": "Partner commander test",
+    "spec_section": "Section 28",
+    "visual_references": [],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "TEST-012",
+    "title": "Opponent identity test",
+    "spec_section": "Section 28",
+    "visual_references": [],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "TEST-013",
+    "title": "Hide and restore player test",
+    "spec_section": "Section 28",
+    "visual_references": [],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "TEST-014",
+    "title": "Monarch invariant test",
+    "spec_section": "Section 28",
+    "visual_references": [],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "TEST-015",
+    "title": "Counter behavior test",
+    "spec_section": "Section 28",
+    "visual_references": [],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "TEST-016",
+    "title": "Custom counter test",
+    "spec_section": "Section 28",
+    "visual_references": [],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "TEST-017",
+    "title": "Lethal warning test",
+    "spec_section": "Section 28",
+    "visual_references": [],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "TEST-018",
+    "title": "Dice and history test",
+    "spec_section": "Section 28",
+    "visual_references": [],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "TEST-019",
+    "title": "Reset preservation test",
+    "spec_section": "Section 28",
+    "visual_references": [],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  },
+  {
+    "id": "TEST-020",
+    "title": "Accessibility and responsive test",
+    "spec_section": "Section 28",
+    "visual_references": [],
+    "implementation_files": [],
+    "test_files": [],
+    "evidence_files": [],
+    "status": "not_started",
+    "architecture_relevant": false,
+    "planned_implementation": [],
+    "planned_tests": [],
+    "approved_variance": null,
+    "change_request": null
+  }
+]
