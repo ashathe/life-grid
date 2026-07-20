@@ -30,6 +30,46 @@ struct JSONAppStateRepositoryTests {
         #expect(siblings.map(\.lastPathComponent) == [JSONAppStateRepository.fileName])
     }
 
+    @Test func versionOneSnapshotMigratesWithoutLosingState() async throws {
+        let directory = try makeTemporaryDirectory()
+        defer { try? FileManager.default.removeItem(at: directory) }
+        let repository = JSONAppStateRepository(directoryURL: directory)
+        let current = completeState
+        let legacy = LegacyPersistedAppStateV1(
+            schemaVersion: 1,
+            preferences: LegacyAppPreferencesV1(
+                playerName: current.preferences.playerName,
+                commanderEnabled: current.preferences.commanderEnabled,
+                ownPartnerCommanderEnabled: current.preferences.ownPartnerCommanderEnabled,
+                commanderDamageChangesLife: current.preferences.commanderDamageChangesLife,
+                keepScreenAwakeDuringGames: current.preferences.keepScreenAwakeDuringGames,
+                hapticsEnabled: current.preferences.hapticsEnabled,
+                soundEffectsEnabled: current.preferences.soundEffectsEnabled,
+                appearance: current.preferences.appearance,
+                appScale: current.preferences.appScale
+            ),
+            lastSetup: current.lastSetup,
+            activeGame: current.activeGame,
+            customCounters: current.customCounters,
+            savedDice: current.savedDice,
+            diceHistory: current.diceHistory
+        )
+        let snapshotURL = directory.appendingPathComponent(JSONAppStateRepository.fileName)
+        try JSONEncoder.lifeGrid.encode(legacy).write(to: snapshotURL)
+
+        let loaded = try await repository.load()
+
+        #expect(loaded.schemaVersion == 2)
+        #expect(loaded.preferences.playerName == legacy.preferences.playerName)
+        #expect(loaded.preferences.defaultStartingLife == 40)
+        #expect(loaded.preferences.rememberLastSetup)
+        #expect(loaded.lastSetup == legacy.lastSetup)
+        #expect(loaded.activeGame == legacy.activeGame)
+        #expect(loaded.customCounters == legacy.customCounters)
+        #expect(loaded.savedDice == legacy.savedDice)
+        #expect(loaded.diceHistory == legacy.diceHistory)
+    }
+
     @Test func unsupportedFutureSchemaThrowsWithoutReplacingFile() async throws {
         let directory = try makeTemporaryDirectory()
         defer { try? FileManager.default.removeItem(at: directory) }
@@ -66,6 +106,28 @@ struct JSONAppStateRepositoryTests {
         #expect(FileManager.default.fileExists(atPath: snapshotURL.path))
         #expect(try Data(contentsOf: snapshotURL) == original)
     }
+}
+
+private struct LegacyPersistedAppStateV1: Codable {
+    var schemaVersion: Int
+    var preferences: LegacyAppPreferencesV1
+    var lastSetup: GameSetup
+    var activeGame: ActiveGame?
+    var customCounters: [CustomCounterDefinition]
+    var savedDice: [SavedDieDefinition]
+    var diceHistory: [DiceRollEntry]
+}
+
+private struct LegacyAppPreferencesV1: Codable {
+    var playerName: String
+    var commanderEnabled: Bool
+    var ownPartnerCommanderEnabled: Bool
+    var commanderDamageChangesLife: Bool
+    var keepScreenAwakeDuringGames: Bool
+    var hapticsEnabled: Bool
+    var soundEffectsEnabled: Bool
+    var appearance: AppearanceMode
+    var appScale: AppScale
 }
 
 private extension JSONAppStateRepositoryTests {

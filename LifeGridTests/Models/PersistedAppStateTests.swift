@@ -6,7 +6,8 @@ struct PersistedAppStateTests {
     @Test func approvedDefaultsAreStable() {
         let state = PersistedAppState.default
 
-        #expect(state.schemaVersion == 1)
+        #expect(PersistedAppState.currentSchemaVersion == 2)
+        #expect(state.schemaVersion == 2)
         #expect(state.preferences.playerName == "")
         #expect(state.preferences.commanderEnabled)
         #expect(!state.preferences.ownPartnerCommanderEnabled)
@@ -16,6 +17,8 @@ struct PersistedAppStateTests {
         #expect(!state.preferences.soundEffectsEnabled)
         #expect(state.preferences.appearance == .dark)
         #expect(state.preferences.appScale == .balanced)
+        #expect(state.preferences.defaultStartingLife == 40)
+        #expect(state.preferences.rememberLastSetup)
         #expect(state.lastSetup == GameSetup(totalPlayers: 4, startingLife: 40, opponentNames: []))
         #expect(state.activeGame == nil)
         #expect(state.customCounters.isEmpty)
@@ -71,7 +74,7 @@ private extension PersistedAppState {
         }
 
         return PersistedAppState(
-            schemaVersion: 1,
+            schemaVersion: 2,
             preferences: .default,
             lastSetup: GameSetup(totalPlayers: 3, startingLife: 40, opponentNames: ["Amanda", "Chris"]),
             activeGame: ActiveGame(
