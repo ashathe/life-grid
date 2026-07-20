@@ -12,8 +12,14 @@
       "LifeGridTests/FoundationSmokeTests.swift",
       "LifeGridUITests/LifeGridUITests.swift"
     ],
-    "evidence_files": [],
-    "status": "implemented",
+    "evidence_files": [
+      "reviews/architecture/architecture-summary.md",
+      "reviews/architecture/dependency-map.md",
+      "reports/test-results/phase1-iphone-build.xcresult",
+      "reports/test-results/phase1-ipad-build.xcresult",
+      "reports/test-results/phase1-verification.md"
+    ],
+    "status": "verified",
     "architecture_relevant": true,
     "planned_implementation": [
       "LifeGrid.xcodeproj/project.pbxproj",
@@ -39,8 +45,14 @@
       "LifeGridTests/FoundationSmokeTests.swift",
       "LifeGridUITests/LifeGridUITests.swift"
     ],
-    "evidence_files": [],
-    "status": "implemented",
+    "evidence_files": [
+      "reviews/architecture/architecture-summary.md",
+      "reviews/architecture/dependency-map.md",
+      "reports/test-results/phase1-iphone-build.xcresult",
+      "reports/test-results/phase1-ipad-build.xcresult",
+      "reports/test-results/phase1-verification.md"
+    ],
+    "status": "verified",
     "architecture_relevant": true,
     "planned_implementation": [
       "LifeGrid.xcodeproj/project.pbxproj",
@@ -66,8 +78,14 @@
       "LifeGridTests/FoundationSmokeTests.swift",
       "LifeGridUITests/LifeGridUITests.swift"
     ],
-    "evidence_files": [],
-    "status": "implemented",
+    "evidence_files": [
+      "reviews/architecture/architecture-summary.md",
+      "reviews/architecture/dependency-map.md",
+      "reports/test-results/phase1-iphone-build.xcresult",
+      "reports/test-results/phase1-ipad-build.xcresult",
+      "reports/test-results/phase1-verification.md"
+    ],
+    "status": "verified",
     "architecture_relevant": true,
     "planned_implementation": [
       "LifeGrid.xcodeproj/project.pbxproj",
@@ -93,8 +111,14 @@
       "LifeGridTests/FoundationSmokeTests.swift",
       "LifeGridUITests/LifeGridUITests.swift"
     ],
-    "evidence_files": [],
-    "status": "implemented",
+    "evidence_files": [
+      "reviews/architecture/architecture-summary.md",
+      "reviews/architecture/dependency-map.md",
+      "reports/test-results/phase1-iphone-build.xcresult",
+      "reports/test-results/phase1-ipad-build.xcresult",
+      "reports/test-results/phase1-verification.md"
+    ],
+    "status": "verified",
     "architecture_relevant": true,
     "planned_implementation": [
       "LifeGrid.xcodeproj/project.pbxproj",
@@ -2147,8 +2171,13 @@
       "LifeGridTests/Persistence/JSONAppStateRepositoryTests.swift",
       "LifeGridTests/App/AppStateStoreTests.swift"
     ],
-    "evidence_files": [],
-    "status": "implemented",
+    "evidence_files": [
+      "reviews/architecture/state-model.md",
+      "reviews/architecture/persistence-plan.md",
+      "reports/test-results/phase1-unit-tests.xcresult",
+      "reports/test-results/phase1-verification.md"
+    ],
+    "status": "verified",
     "architecture_relevant": true,
     "planned_implementation": [
       "LifeGrid/Models",
@@ -2178,8 +2207,13 @@
       "LifeGridTests/Persistence/JSONAppStateRepositoryTests.swift",
       "LifeGridTests/App/AppStateStoreTests.swift"
     ],
-    "evidence_files": [],
-    "status": "implemented",
+    "evidence_files": [
+      "reviews/architecture/state-model.md",
+      "reviews/architecture/persistence-plan.md",
+      "reports/test-results/phase1-unit-tests.xcresult",
+      "reports/test-results/phase1-verification.md"
+    ],
+    "status": "verified",
     "architecture_relevant": true,
     "planned_implementation": [
       "LifeGrid/Models",
@@ -2209,8 +2243,13 @@
       "LifeGridTests/Persistence/JSONAppStateRepositoryTests.swift",
       "LifeGridTests/App/AppStateStoreTests.swift"
     ],
-    "evidence_files": [],
-    "status": "implemented",
+    "evidence_files": [
+      "reviews/architecture/state-model.md",
+      "reviews/architecture/persistence-plan.md",
+      "reports/test-results/phase1-unit-tests.xcresult",
+      "reports/test-results/phase1-verification.md"
+    ],
+    "status": "verified",
     "architecture_relevant": true,
     "planned_implementation": [
       "LifeGrid/Models",
@@ -2240,8 +2279,13 @@
       "LifeGridTests/Persistence/JSONAppStateRepositoryTests.swift",
       "LifeGridTests/App/AppStateStoreTests.swift"
     ],
-    "evidence_files": [],
-    "status": "implemented",
+    "evidence_files": [
+      "reviews/architecture/state-model.md",
+      "reviews/architecture/persistence-plan.md",
+      "reports/test-results/phase1-unit-tests.xcresult",
+      "reports/test-results/phase1-verification.md"
+    ],
+    "status": "verified",
     "architecture_relevant": true,
     "planned_implementation": [
       "LifeGrid/Models",
@@ -2271,8 +2315,13 @@
       "LifeGridTests/Persistence/JSONAppStateRepositoryTests.swift",
       "LifeGridTests/App/AppStateStoreTests.swift"
     ],
-    "evidence_files": [],
-    "status": "implemented",
+    "evidence_files": [
+      "reviews/architecture/state-model.md",
+      "reviews/architecture/persistence-plan.md",
+      "reports/test-results/phase1-unit-tests.xcresult",
+      "reports/test-results/phase1-verification.md"
+    ],
+    "status": "verified",
     "architecture_relevant": true,
     "planned_implementation": [
       "LifeGrid/Models",
@@ -2386,8 +2435,13 @@
     "test_files": [
       "LifeGridTests/Shared/LayoutFoundationTests.swift"
     ],
-    "evidence_files": [],
-    "status": "implemented",
+    "evidence_files": [
+      "reviews/architecture/architecture-summary.md",
+      "reviews/architecture/risk-register.md",
+      "reports/test-results/phase1-unit-tests.xcresult",
+      "reports/test-results/phase1-verification.md"
+    ],
+    "status": "verified",
     "architecture_relevant": true,
     "planned_implementation": [
       "LifeGrid/Models/AppPreferences.swift",
@@ -2423,8 +2477,13 @@
     "test_files": [
       "LifeGridTests/Shared/LayoutFoundationTests.swift"
     ],
-    "evidence_files": [],
-    "status": "implemented",
+    "evidence_files": [
+      "reviews/architecture/architecture-summary.md",
+      "reviews/architecture/risk-register.md",
+      "reports/test-results/phase1-unit-tests.xcresult",
+      "reports/test-results/phase1-verification.md"
+    ],
+    "status": "verified",
     "architecture_relevant": true,
     "planned_implementation": [
       "LifeGrid/Models/AppPreferences.swift",
@@ -2599,8 +2658,13 @@
     "test_files": [
       "LifeGridTests/Shared/LayoutFoundationTests.swift"
     ],
-    "evidence_files": [],
-    "status": "implemented",
+    "evidence_files": [
+      "reviews/architecture/test-strategy.md",
+      "reviews/architecture/risk-register.md",
+      "reports/test-results/phase1-unit-tests.xcresult",
+      "reports/test-results/phase1-verification.md"
+    ],
+    "status": "verified",
     "architecture_relevant": true,
     "planned_implementation": [
       "LifeGrid/Shared/Accessibility",
@@ -2624,8 +2688,13 @@
     "test_files": [
       "LifeGridTests/Shared/LayoutFoundationTests.swift"
     ],
-    "evidence_files": [],
-    "status": "implemented",
+    "evidence_files": [
+      "reviews/architecture/test-strategy.md",
+      "reviews/architecture/risk-register.md",
+      "reports/test-results/phase1-unit-tests.xcresult",
+      "reports/test-results/phase1-verification.md"
+    ],
+    "status": "verified",
     "architecture_relevant": true,
     "planned_implementation": [
       "LifeGrid/Shared/Accessibility",
@@ -2769,8 +2838,13 @@
       "LifeGridTests",
       "LifeGridUITests"
     ],
-    "evidence_files": [],
-    "status": "implemented",
+    "evidence_files": [
+      "reviews/architecture/test-strategy.md",
+      "reports/test-results/phase1-unit-tests.xcresult",
+      "reports/test-results/phase1-ui-smoke.xcresult",
+      "reports/test-results/phase1-verification.md"
+    ],
+    "status": "verified",
     "architecture_relevant": true,
     "planned_implementation": [
       "LifeGridTests"
@@ -2794,8 +2868,13 @@
       "LifeGridTests",
       "LifeGridUITests"
     ],
-    "evidence_files": [],
-    "status": "implemented",
+    "evidence_files": [
+      "reviews/architecture/test-strategy.md",
+      "reports/test-results/phase1-unit-tests.xcresult",
+      "reports/test-results/phase1-ui-smoke.xcresult",
+      "reports/test-results/phase1-verification.md"
+    ],
+    "status": "verified",
     "architecture_relevant": true,
     "planned_implementation": [
       "LifeGridTests"
@@ -2819,8 +2898,13 @@
       "LifeGridTests",
       "LifeGridUITests"
     ],
-    "evidence_files": [],
-    "status": "implemented",
+    "evidence_files": [
+      "reviews/architecture/test-strategy.md",
+      "reports/test-results/phase1-unit-tests.xcresult",
+      "reports/test-results/phase1-ui-smoke.xcresult",
+      "reports/test-results/phase1-verification.md"
+    ],
+    "status": "verified",
     "architecture_relevant": true,
     "planned_implementation": [
       "LifeGridTests"
@@ -2844,8 +2928,13 @@
       "LifeGridTests",
       "LifeGridUITests"
     ],
-    "evidence_files": [],
-    "status": "implemented",
+    "evidence_files": [
+      "reviews/architecture/test-strategy.md",
+      "reports/test-results/phase1-unit-tests.xcresult",
+      "reports/test-results/phase1-ui-smoke.xcresult",
+      "reports/test-results/phase1-verification.md"
+    ],
+    "status": "verified",
     "architecture_relevant": true,
     "planned_implementation": [
       "LifeGridTests"
