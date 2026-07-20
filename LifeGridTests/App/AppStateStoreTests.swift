@@ -207,6 +207,51 @@ struct AppStateStoreTests {
         #expect(await repository.savedSnapshots().isEmpty)
         #expect(!store.hasLoaded)
     }
+
+    @MainActor @Test func failedLoadBlocksWritesThatCouldReplaceUnreadableState() async {
+        let repository = ScriptedAppStateRepository(shouldFailLoad: true)
+        let store = AppStateStore(environment: environment(repository: repository))
+
+        await store.load()
+        await store.saveForLifecycle()
+        await store.setRememberLastSetup(false)
+
+        #expect(store.hasLoaded)
+        #expect(store.persistenceErrorDescription != nil)
+        #expect(await repository.savedSnapshots().isEmpty)
+    }
+
+    @MainActor @Test func overlappingMutationsPersistInIntentOrder() async {
+        let repository = SuspendingFirstSaveAppStateRepository()
+        let store = AppStateStore(environment: environment(repository: repository))
+
+        let firstMutation = Task { @MainActor in
+            await store.applyFoundationMutation {
+                $0.preferences.playerName = "First"
+            }
+        }
+        await repository.waitUntilFirstSaveStarts()
+
+        var secondMutationApplied = false
+        let secondMutation = Task { @MainActor in
+            await store.applyFoundationMutation {
+                $0.preferences.playerName = "Second"
+                secondMutationApplied = true
+            }
+        }
+        while !secondMutationApplied {
+            await Task.yield()
+        }
+
+        await repository.releaseFirstSave()
+        await firstMutation.value
+        await secondMutation.value
+
+        let names = await repository.savedSnapshots().map(\.preferences.playerName)
+        #expect(names == ["First", "Second"])
+        #expect(store.state.preferences.playerName == "Second")
+        #expect(store.persistenceErrorDescription == nil)
+    }
 }
 
 private extension AppStateStoreTests {

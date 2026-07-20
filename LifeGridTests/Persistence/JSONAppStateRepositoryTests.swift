@@ -141,6 +141,44 @@ private extension JSONAppStateRepositoryTests {
     var completeState: PersistedAppState {
         var state = PersistedAppState.default
         state.preferences.playerName = "Michi"
+        let customCounterID = UUID(uuidString: "33333333-3333-3333-3333-333333333333")!
+        state.customCounters = [
+            CustomCounterDefinition(
+                id: customCounterID,
+                name: "Quest",
+                createdAt: Date(timeIntervalSince1970: 1_699_999_000)
+            )
+        ]
+        state.activeGame = ActiveGame(
+            id: UUID(uuidString: "44444444-4444-4444-4444-444444444444")!,
+            startedAt: Date(timeIntervalSince1970: 1_700_000_000),
+            startingLife: 40,
+            currentLife: 34,
+            opponents: [
+                OpponentState(
+                    id: UUID(uuidString: "55555555-5555-5555-5555-555555555555")!,
+                    displayName: "Amanda",
+                    isVisible: true,
+                    primaryCommanderName: "Atraxa",
+                    primaryCommanderDamage: 5,
+                    partner: nil,
+                    hasCitysBlessing: true
+                )
+            ],
+            ownCommanderAName: "Muldrotha",
+            ownCommanderBName: nil,
+            ownCommanderTaxA: 2,
+            ownCommanderTaxB: 0,
+            currentMonarchPlayerID: .local,
+            playerHasCitysBlessing: false,
+            counterValues: [
+                .builtIn(.poison): 3,
+                .custom(customCounterID): 7
+            ],
+            dayNightState: .night,
+            pinnedCounterIDs: [.custom(customCounterID)],
+            keepAwakeOverride: true
+        )
         state.savedDice = [
             SavedDieDefinition(
                 id: UUID(uuidString: "11111111-1111-1111-1111-111111111111")!,
