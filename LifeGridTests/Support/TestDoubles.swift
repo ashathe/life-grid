@@ -49,22 +49,29 @@ enum ScriptedRepositoryError: Error {
 actor ScriptedAppStateRepository: AppStateRepository {
     private let loadedState: PersistedAppState
     private let shouldFailLoad: Bool
+    private let failingLoadCalls: Set<Int>
     private let failingSaveCalls: Set<Int>
+    private var loadCallCount = 0
     private var saveCallCount = 0
     private var snapshots: [PersistedAppState] = []
 
     init(
         loadedState: PersistedAppState = .default,
         shouldFailLoad: Bool = false,
+        failingLoadCalls: Set<Int> = [],
         failingSaveCalls: Set<Int> = []
     ) {
         self.loadedState = loadedState
         self.shouldFailLoad = shouldFailLoad
+        self.failingLoadCalls = failingLoadCalls
         self.failingSaveCalls = failingSaveCalls
     }
 
     func load() throws -> PersistedAppState {
-        if shouldFailLoad { throw ScriptedRepositoryError.loadFailed }
+        loadCallCount += 1
+        if shouldFailLoad || failingLoadCalls.contains(loadCallCount) {
+            throw ScriptedRepositoryError.loadFailed
+        }
         return loadedState
     }
 
