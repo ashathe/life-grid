@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Life Grid Change Request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "status",
+    "requested_by",
+    "request_date",
+    "requested_change",
+    "reason",
+    "affected_requirement_ids",
+    "risks",
+    "test_impact",
+    "explicit_approval_statement"
+  ],
+  "properties": {
+    "id": { "type": "string", "pattern": "^CR-[0-9]{3}$" },
+    "status": { "enum": ["draft", "pending", "approved", "rejected", "implemented"] },
+    "requested_by": { "type": "string", "minLength": 1 },
+    "request_date": { "type": "string", "format": "date" },
+    "requested_change": { "type": "string", "minLength": 1 },
+    "reason": { "type": "string", "minLength": 1 },
+    "affected_requirement_ids": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "risks": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "test_impact": { "type": "array", "items": { "type": "string" } },
+    "explicit_approval_statement": { "type": ["string", "null"] }
+  }
+}
