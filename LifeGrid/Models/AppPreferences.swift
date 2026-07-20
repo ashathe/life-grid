@@ -22,6 +22,8 @@ struct AppPreferences: Codable, Equatable, Sendable {
     var soundEffectsEnabled: Bool
     var appearance: AppearanceMode
     var appScale: AppScale
+    var defaultStartingLife: Int
+    var rememberLastSetup: Bool
 
     static let `default` = AppPreferences(
         playerName: "",
@@ -32,6 +34,8 @@ struct AppPreferences: Codable, Equatable, Sendable {
         hapticsEnabled: true,
         soundEffectsEnabled: false,
         appearance: .dark,
-        appScale: .balanced
+        appScale: .balanced,
+        defaultStartingLife: 40,
+        rememberLastSetup: true
     )
 }
