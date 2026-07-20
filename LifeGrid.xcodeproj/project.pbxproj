@@ -19,6 +19,10 @@
 		A2000000000000000000000A /* ActiveGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3000000000000000000000A /* ActiveGame.swift */; };
 		A2000000000000000000000B /* DiceModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3000000000000000000000B /* DiceModels.swift */; };
 		A2000000000000000000000C /* PersistedAppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3000000000000000000000C /* PersistedAppState.swift */; };
+		A2000000000000000000000D /* JSONAppStateRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3000000000000000000000D /* JSONAppStateRepositoryTests.swift */; };
+		A2000000000000000000000E /* AppStateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3000000000000000000000E /* AppStateRepository.swift */; };
+		A2000000000000000000000F /* JSONAppStateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3000000000000000000000F /* JSONAppStateRepository.swift */; };
+		A20000000000000000000011 /* StateMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000011 /* StateMigration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +55,10 @@
 		A3000000000000000000000A /* ActiveGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveGame.swift; sourceTree = "<group>"; };
 		A3000000000000000000000B /* DiceModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceModels.swift; sourceTree = "<group>"; };
 		A3000000000000000000000C /* PersistedAppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistedAppState.swift; sourceTree = "<group>"; };
+		A3000000000000000000000D /* JSONAppStateRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence/JSONAppStateRepositoryTests.swift; sourceTree = "<group>"; };
+		A3000000000000000000000E /* AppStateRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateRepository.swift; sourceTree = "<group>"; };
+		A3000000000000000000000F /* JSONAppStateRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONAppStateRepository.swift; sourceTree = "<group>"; };
+		A30000000000000000000011 /* StateMigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateMigration.swift; sourceTree = "<group>"; };
 		A30000000000000000000010 /* Life Grid.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Life Grid.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A30000000000000000000020 /* LifeGridTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LifeGridTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A30000000000000000000030 /* LifeGridUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LifeGridUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,7 +93,7 @@
 		};
 		A10000000000000000000004 /* LifeGrid */ = {
 			isa = PBXGroup;
-			children = (A10000000000000000000007 /* App */, A10000000000000000000008 /* Models */);
+			children = (A10000000000000000000007 /* App */, A10000000000000000000008 /* Models */, A10000000000000000000009 /* Persistence */);
 			path = LifeGrid;
 			sourceTree = "<group>";
 		};
@@ -112,9 +120,19 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		A10000000000000000000009 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				A3000000000000000000000E /* AppStateRepository.swift */,
+				A3000000000000000000000F /* JSONAppStateRepository.swift */,
+				A30000000000000000000011 /* StateMigration.swift */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
 		A10000000000000000000005 /* LifeGridTests */ = {
 			isa = PBXGroup;
-			children = (A30000000000000000000003 /* FoundationSmokeTests.swift */, A30000000000000000000005 /* PersistedAppStateTests.swift */);
+			children = (A30000000000000000000003 /* FoundationSmokeTests.swift */, A30000000000000000000005 /* PersistedAppStateTests.swift */, A3000000000000000000000D /* JSONAppStateRepositoryTests.swift */);
 			path = LifeGridTests;
 			sourceTree = "<group>";
 		};
@@ -195,8 +213,8 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		A50000000000000000000010 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A20000000000000000000001, A20000000000000000000002, A20000000000000000000006, A20000000000000000000007, A20000000000000000000008, A20000000000000000000009, A2000000000000000000000A, A2000000000000000000000B, A2000000000000000000000C); runOnlyForDeploymentPostprocessing = 0; };
-		A50000000000000000000020 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A20000000000000000000003, A20000000000000000000005); runOnlyForDeploymentPostprocessing = 0; };
+		A50000000000000000000010 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A20000000000000000000001, A20000000000000000000002, A20000000000000000000006, A20000000000000000000007, A20000000000000000000008, A20000000000000000000009, A2000000000000000000000A, A2000000000000000000000B, A2000000000000000000000C, A2000000000000000000000E, A2000000000000000000000F, A20000000000000000000011); runOnlyForDeploymentPostprocessing = 0; };
+		A50000000000000000000020 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A20000000000000000000003, A20000000000000000000005, A2000000000000000000000D); runOnlyForDeploymentPostprocessing = 0; };
 		A50000000000000000000030 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A20000000000000000000004); runOnlyForDeploymentPostprocessing = 0; };
 /* End PBXSourcesBuildPhase section */
 
