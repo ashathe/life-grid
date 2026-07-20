@@ -27,6 +27,48 @@ final class AppStateStore {
     func applyFoundationMutation(
         _ mutation: (inout PersistedAppState) -> Void
     ) async {
+        await mutateAndPersist(mutation)
+    }
+
+    func startGame(
+        using setup: GameSetup,
+        rememberLastSetup: Bool
+    ) async {
+        let startedAt = await environment.clock.now()
+        let game = ActiveGameFactory.make(
+            setup: setup,
+            startedAt: startedAt
+        )
+        await mutateAndPersist { state in
+            state.preferences.rememberLastSetup = rememberLastSetup
+            state.activeGame = game
+            if rememberLastSetup {
+                state.lastSetup = setup
+            }
+        }
+    }
+
+    func setRememberLastSetup(_ enabled: Bool) async {
+        await mutateAndPersist { state in
+            state.preferences.rememberLastSetup = enabled
+        }
+    }
+
+    func setDefaultStartingLife(_ value: Int) async {
+        guard value > 0 else { return }
+        await mutateAndPersist { state in
+            state.preferences.defaultStartingLife = value
+            state.lastSetup.startingLife = value
+        }
+    }
+
+    func saveForLifecycle() async {
+        await persistCurrentState()
+    }
+
+    private func mutateAndPersist(
+        _ mutation: (inout PersistedAppState) -> Void
+    ) async {
         mutation(&state)
         await persistCurrentState()
     }

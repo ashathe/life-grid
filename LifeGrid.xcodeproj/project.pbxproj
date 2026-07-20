@@ -41,6 +41,8 @@
 		A20000000000000000000041 /* NewGameDraftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000041 /* NewGameDraftTests.swift */; };
 		A20000000000000000000042 /* StartingLifeInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000042 /* StartingLifeInput.swift */; };
 		A20000000000000000000043 /* NewGameDraft.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000043 /* NewGameDraft.swift */; };
+		A20000000000000000000044 /* ActiveGameFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000044 /* ActiveGameFactoryTests.swift */; };
+		A20000000000000000000045 /* ActiveGameFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000045 /* ActiveGameFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +97,8 @@
 		A30000000000000000000041 /* NewGameDraftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameDraftTests.swift; sourceTree = "<group>"; };
 		A30000000000000000000042 /* StartingLifeInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartingLifeInput.swift; sourceTree = "<group>"; };
 		A30000000000000000000043 /* NewGameDraft.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameDraft.swift; sourceTree = "<group>"; };
+		A30000000000000000000044 /* ActiveGameFactoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveGameFactoryTests.swift; sourceTree = "<group>"; };
+		A30000000000000000000045 /* ActiveGameFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveGameFactory.swift; sourceTree = "<group>"; };
 		A30000000000000000000010 /* Life Grid.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Life Grid.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A30000000000000000000020 /* LifeGridTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LifeGridTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A30000000000000000000030 /* LifeGridUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LifeGridUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -197,7 +201,7 @@
 		};
 		A1000000000000000000000B /* NewGame Feature Tests */ = {
 			isa = PBXGroup;
-			children = (A30000000000000000000040 /* StartingLifeInputTests.swift */, A30000000000000000000041 /* NewGameDraftTests.swift */);
+			children = (A30000000000000000000040 /* StartingLifeInputTests.swift */, A30000000000000000000041 /* NewGameDraftTests.swift */, A30000000000000000000044 /* ActiveGameFactoryTests.swift */);
 			path = Features/NewGame;
 			sourceTree = "<group>";
 		};
@@ -209,7 +213,7 @@
 		};
 		A1000000000000000000000D /* NewGame */ = {
 			isa = PBXGroup;
-			children = (A30000000000000000000042 /* StartingLifeInput.swift */, A30000000000000000000043 /* NewGameDraft.swift */);
+			children = (A30000000000000000000042 /* StartingLifeInput.swift */, A30000000000000000000043 /* NewGameDraft.swift */, A30000000000000000000045 /* ActiveGameFactory.swift */);
 			path = NewGame;
 			sourceTree = "<group>";
 		};
@@ -284,8 +288,8 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		A50000000000000000000010 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A20000000000000000000001, A20000000000000000000002, A20000000000000000000006, A20000000000000000000007, A20000000000000000000008, A20000000000000000000009, A2000000000000000000000A, A2000000000000000000000B, A2000000000000000000000C, A2000000000000000000000E, A2000000000000000000000F, A20000000000000000000011, A20000000000000000000014, A20000000000000000000015, A20000000000000000000016, A20000000000000000000017, A20000000000000000000018, A2000000000000000000001A, A2000000000000000000001C, A2000000000000000000001D, A2000000000000000000001E, A2000000000000000000001F, A20000000000000000000042, A20000000000000000000043); runOnlyForDeploymentPostprocessing = 0; };
-		A50000000000000000000020 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A20000000000000000000003, A20000000000000000000005, A2000000000000000000000D, A20000000000000000000012, A20000000000000000000013, A20000000000000000000019, A2000000000000000000001B, A20000000000000000000040, A20000000000000000000041); runOnlyForDeploymentPostprocessing = 0; };
+		A50000000000000000000010 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A20000000000000000000001, A20000000000000000000002, A20000000000000000000006, A20000000000000000000007, A20000000000000000000008, A20000000000000000000009, A2000000000000000000000A, A2000000000000000000000B, A2000000000000000000000C, A2000000000000000000000E, A2000000000000000000000F, A20000000000000000000011, A20000000000000000000014, A20000000000000000000015, A20000000000000000000016, A20000000000000000000017, A20000000000000000000018, A2000000000000000000001A, A2000000000000000000001C, A2000000000000000000001D, A2000000000000000000001E, A2000000000000000000001F, A20000000000000000000042, A20000000000000000000043, A20000000000000000000045); runOnlyForDeploymentPostprocessing = 0; };
+		A50000000000000000000020 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A20000000000000000000003, A20000000000000000000005, A2000000000000000000000D, A20000000000000000000012, A20000000000000000000013, A20000000000000000000019, A2000000000000000000001B, A20000000000000000000040, A20000000000000000000041, A20000000000000000000044); runOnlyForDeploymentPostprocessing = 0; };
 		A50000000000000000000030 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A20000000000000000000004); runOnlyForDeploymentPostprocessing = 0; };
 /* End PBXSourcesBuildPhase section */
 
