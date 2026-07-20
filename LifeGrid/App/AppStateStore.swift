@@ -8,6 +8,7 @@ final class AppStateStore {
     private(set) var hasLoaded = false
     private let environment: AppEnvironment
     private var persistenceIsBlocked = false
+    private var recoveryTask: Task<Bool, Never>?
     private var persistenceRevision = 0
     private var persistenceTail: Task<PersistenceOutcome, Never>?
 
@@ -77,8 +78,33 @@ final class AppStateStore {
     private func mutateAndPersist(
         _ mutation: (inout PersistedAppState) -> Void
     ) async {
+        guard await recoverPersistenceIfNeeded() else { return }
         mutation(&state)
         await persistCurrentState()
+    }
+
+    private func recoverPersistenceIfNeeded() async -> Bool {
+        guard persistenceIsBlocked else { return true }
+        if let recoveryTask {
+            return await recoveryTask.value
+        }
+
+        let repository = environment.repository
+        let operation = Task<Bool, Never> { @MainActor in
+            do {
+                state = try await repository.load()
+                persistenceIsBlocked = false
+                persistenceErrorDescription = nil
+                return true
+            } catch {
+                persistenceErrorDescription = String(describing: error)
+                return false
+            }
+        }
+        recoveryTask = operation
+        let recovered = await operation.value
+        recoveryTask = nil
+        return recovered
     }
 
     private func persistCurrentState() async {

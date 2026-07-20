@@ -218,7 +218,20 @@ struct AppStateStoreTests {
 
         #expect(store.hasLoaded)
         #expect(store.persistenceErrorDescription != nil)
+        #expect(store.state.preferences.rememberLastSetup)
         #expect(await repository.savedSnapshots().isEmpty)
+    }
+
+    @MainActor @Test func mutationRetriesTransientLoadBeforeChangingState() async {
+        let repository = ScriptedAppStateRepository(failingLoadCalls: [1])
+        let store = AppStateStore(environment: environment(repository: repository))
+
+        await store.load()
+        await store.setRememberLastSetup(false)
+
+        #expect(!store.state.preferences.rememberLastSetup)
+        #expect(store.persistenceErrorDescription == nil)
+        #expect(await repository.savedSnapshots() == [store.state])
     }
 
     @MainActor @Test func overlappingMutationsPersistInIntentOrder() async {
