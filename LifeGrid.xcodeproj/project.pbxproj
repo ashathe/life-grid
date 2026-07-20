@@ -23,6 +23,13 @@
 		A2000000000000000000000E /* AppStateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3000000000000000000000E /* AppStateRepository.swift */; };
 		A2000000000000000000000F /* JSONAppStateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3000000000000000000000F /* JSONAppStateRepository.swift */; };
 		A20000000000000000000011 /* StateMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000011 /* StateMigration.swift */; };
+		A20000000000000000000012 /* TestDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000012 /* TestDoubles.swift */; };
+		A20000000000000000000013 /* AppEnvironmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000013 /* AppEnvironmentTests.swift */; };
+		A20000000000000000000014 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000014 /* AppEnvironment.swift */; };
+		A20000000000000000000015 /* RandomSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000015 /* RandomSource.swift */; };
+		A20000000000000000000016 /* ClockClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000016 /* ClockClient.swift */; };
+		A20000000000000000000017 /* HapticsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000017 /* HapticsClient.swift */; };
+		A20000000000000000000018 /* SoundClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000018 /* SoundClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +66,13 @@
 		A3000000000000000000000E /* AppStateRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateRepository.swift; sourceTree = "<group>"; };
 		A3000000000000000000000F /* JSONAppStateRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONAppStateRepository.swift; sourceTree = "<group>"; };
 		A30000000000000000000011 /* StateMigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateMigration.swift; sourceTree = "<group>"; };
+		A30000000000000000000012 /* TestDoubles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Support/TestDoubles.swift; sourceTree = "<group>"; };
+		A30000000000000000000013 /* AppEnvironmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/AppEnvironmentTests.swift; sourceTree = "<group>"; };
+		A30000000000000000000014 /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
+		A30000000000000000000015 /* RandomSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Randomness/RandomSource.swift; sourceTree = "<group>"; };
+		A30000000000000000000016 /* ClockClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time/ClockClient.swift; sourceTree = "<group>"; };
+		A30000000000000000000017 /* HapticsClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback/HapticsClient.swift; sourceTree = "<group>"; };
+		A30000000000000000000018 /* SoundClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback/SoundClient.swift; sourceTree = "<group>"; };
 		A30000000000000000000010 /* Life Grid.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Life Grid.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A30000000000000000000020 /* LifeGridTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LifeGridTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A30000000000000000000030 /* LifeGridUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LifeGridUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -93,7 +107,7 @@
 		};
 		A10000000000000000000004 /* LifeGrid */ = {
 			isa = PBXGroup;
-			children = (A10000000000000000000007 /* App */, A10000000000000000000008 /* Models */, A10000000000000000000009 /* Persistence */);
+			children = (A10000000000000000000007 /* App */, A10000000000000000000008 /* Models */, A10000000000000000000009 /* Persistence */, A1000000000000000000000A /* Shared */);
 			path = LifeGrid;
 			sourceTree = "<group>";
 		};
@@ -102,6 +116,7 @@
 			children = (
 				A30000000000000000000001 /* LifeGridApp.swift */,
 				A30000000000000000000002 /* FoundationRootView.swift */,
+				A30000000000000000000014 /* AppEnvironment.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -130,9 +145,20 @@
 			path = Persistence;
 			sourceTree = "<group>";
 		};
+		A1000000000000000000000A /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				A30000000000000000000015 /* RandomSource.swift */,
+				A30000000000000000000016 /* ClockClient.swift */,
+				A30000000000000000000017 /* HapticsClient.swift */,
+				A30000000000000000000018 /* SoundClient.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 		A10000000000000000000005 /* LifeGridTests */ = {
 			isa = PBXGroup;
-			children = (A30000000000000000000003 /* FoundationSmokeTests.swift */, A30000000000000000000005 /* PersistedAppStateTests.swift */, A3000000000000000000000D /* JSONAppStateRepositoryTests.swift */);
+			children = (A30000000000000000000003 /* FoundationSmokeTests.swift */, A30000000000000000000005 /* PersistedAppStateTests.swift */, A3000000000000000000000D /* JSONAppStateRepositoryTests.swift */, A30000000000000000000012 /* TestDoubles.swift */, A30000000000000000000013 /* AppEnvironmentTests.swift */);
 			path = LifeGridTests;
 			sourceTree = "<group>";
 		};
@@ -213,8 +239,8 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		A50000000000000000000010 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A20000000000000000000001, A20000000000000000000002, A20000000000000000000006, A20000000000000000000007, A20000000000000000000008, A20000000000000000000009, A2000000000000000000000A, A2000000000000000000000B, A2000000000000000000000C, A2000000000000000000000E, A2000000000000000000000F, A20000000000000000000011); runOnlyForDeploymentPostprocessing = 0; };
-		A50000000000000000000020 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A20000000000000000000003, A20000000000000000000005, A2000000000000000000000D); runOnlyForDeploymentPostprocessing = 0; };
+		A50000000000000000000010 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A20000000000000000000001, A20000000000000000000002, A20000000000000000000006, A20000000000000000000007, A20000000000000000000008, A20000000000000000000009, A2000000000000000000000A, A2000000000000000000000B, A2000000000000000000000C, A2000000000000000000000E, A2000000000000000000000F, A20000000000000000000011, A20000000000000000000014, A20000000000000000000015, A20000000000000000000016, A20000000000000000000017, A20000000000000000000018); runOnlyForDeploymentPostprocessing = 0; };
+		A50000000000000000000020 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A20000000000000000000003, A20000000000000000000005, A2000000000000000000000D, A20000000000000000000012, A20000000000000000000013); runOnlyForDeploymentPostprocessing = 0; };
 		A50000000000000000000030 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A20000000000000000000004); runOnlyForDeploymentPostprocessing = 0; };
 /* End PBXSourcesBuildPhase section */
 
