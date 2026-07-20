@@ -5,7 +5,7 @@
 - Request date: 2026-07-20
 - Approval date: 2026-07-20
 - Approved by: User
-- Implementation commit: Pending Phase 2 implementation
+- Implementation commit: b4efd5d
 
 ## Requested change
 
@@ -62,4 +62,8 @@ APPROVED by the user on 2026-07-20 during Phase 2 design review.
 
 ## Completion evidence
 
-Pending Phase 2 implementation.
+- Store precedence and active-game immutability: `LifeGridTests/App/AppStateStoreTests.swift`
+- Preset/custom validation: `LifeGridTests/Features/NewGame/StartingLifeInputTests.swift`
+- End-to-end Settings-to-next-New-Game behavior: `LifeGridUITests/LifeGridUITests.swift`
+- Visual variance review: `reviews/visuals/settings/phase2-default-life-variance.md`
+- Final test evidence: `reports/test-results/phase2-tests.xcresult`

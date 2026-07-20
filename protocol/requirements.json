@@ -136,13 +136,26 @@
     "title": "Four-tab bottom navigation",
     "spec_section": "Section 2",
     "visual_references": [],
-    "implementation_files": [],
-    "test_files": [],
-    "evidence_files": [],
-    "status": "not_started",
+    "implementation_files": [
+      "LifeGrid/App/LifeGridRootView.swift"
+    ],
+    "test_files": [
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "evidence_files": [
+      "reports/test-results/phase2-tests.xcresult",
+      "reports/test-results/phase2-new-game-iphone.png",
+      "reports/test-results/phase2-new-game-ipad.png",
+      "reports/test-results/phase2-verification.md"
+    ],
+    "status": "verified",
     "architecture_relevant": false,
-    "planned_implementation": [],
-    "planned_tests": [],
+    "planned_implementation": [
+      "LifeGrid/App/LifeGridRootView.swift"
+    ],
+    "planned_tests": [
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
     "approved_variance": null,
     "change_request": null
   },
@@ -151,13 +164,35 @@
     "title": "Resume active game on launch",
     "spec_section": "Section 2",
     "visual_references": [],
-    "implementation_files": [],
-    "test_files": [],
-    "evidence_files": [],
-    "status": "not_started",
+    "implementation_files": [
+      "LifeGrid/App/LifeGridRootView.swift",
+      "LifeGrid/App/AppStateStore.swift",
+      "LifeGrid/Features/Game/ActiveGameSummaryScreen.swift",
+      "LifeGrid/Persistence/JSONAppStateRepository.swift"
+    ],
+    "test_files": [
+      "LifeGridTests/App/AppStateStoreTests.swift",
+      "LifeGridTests/Persistence/JSONAppStateRepositoryTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "evidence_files": [
+      "reports/test-results/phase2-tests.xcresult",
+      "reports/test-results/phase2-active-game-iphone.png",
+      "reports/test-results/phase2-verification.md"
+    ],
+    "status": "verified",
     "architecture_relevant": false,
-    "planned_implementation": [],
-    "planned_tests": [],
+    "planned_implementation": [
+      "LifeGrid/App/LifeGridRootView.swift",
+      "LifeGrid/App/AppStateStore.swift",
+      "LifeGrid/Features/Game/ActiveGameSummaryScreen.swift",
+      "LifeGrid/Persistence/JSONAppStateRepository.swift"
+    ],
+    "planned_tests": [
+      "LifeGridTests/App/AppStateStoreTests.swift",
+      "LifeGridTests/Persistence/JSONAppStateRepositoryTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
     "approved_variance": null,
     "change_request": null
   },
@@ -168,13 +203,30 @@
     "visual_references": [
       "new-game"
     ],
-    "implementation_files": [],
-    "test_files": [],
-    "evidence_files": [],
-    "status": "not_started",
+    "implementation_files": [
+      "LifeGrid/Features/NewGame/NewGameDraft.swift",
+      "LifeGrid/Features/NewGame/NewGameScreen.swift"
+    ],
+    "test_files": [
+      "LifeGridTests/Features/NewGame/NewGameDraftTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "evidence_files": [
+      "reviews/visuals/new-game/phase2-comparison.md",
+      "reports/test-results/phase2-tests.xcresult",
+      "reports/test-results/phase2-new-game-iphone.png",
+      "reports/test-results/phase2-verification.md"
+    ],
+    "status": "verified",
     "architecture_relevant": false,
-    "planned_implementation": [],
-    "planned_tests": [],
+    "planned_implementation": [
+      "LifeGrid/Features/NewGame/NewGameDraft.swift",
+      "LifeGrid/Features/NewGame/NewGameScreen.swift"
+    ],
+    "planned_tests": [
+      "LifeGridTests/Features/NewGame/NewGameDraftTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
     "approved_variance": null,
     "change_request": null
   },
@@ -185,15 +237,45 @@
     "visual_references": [
       "new-game"
     ],
-    "implementation_files": [],
-    "test_files": [],
-    "evidence_files": [],
-    "status": "not_started",
+    "implementation_files": [
+      "LifeGrid/Features/NewGame/StartingLifeInput.swift",
+      "LifeGrid/Features/NewGame/NewGameDraft.swift",
+      "LifeGrid/Shared/Components/StartingLifePicker.swift",
+      "LifeGrid/Features/NewGame/NewGameScreen.swift",
+      "LifeGrid/Features/Settings/SettingsScreen.swift"
+    ],
+    "test_files": [
+      "LifeGridTests/Features/NewGame/StartingLifeInputTests.swift",
+      "LifeGridTests/Features/NewGame/NewGameDraftTests.swift",
+      "LifeGridTests/App/AppStateStoreTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "evidence_files": [
+      "changes/CR-001-default-starting-life.md",
+      "reviews/visuals/new-game/phase2-comparison.md",
+      "reviews/visuals/settings/phase2-default-life-variance.md",
+      "reports/test-results/phase2-tests.xcresult",
+      "reports/test-results/phase2-new-game-iphone.png",
+      "reports/test-results/phase2-settings-default-life-iphone.png",
+      "reports/test-results/phase2-verification.md"
+    ],
+    "status": "verified",
     "architecture_relevant": false,
-    "planned_implementation": [],
-    "planned_tests": [],
-    "approved_variance": null,
-    "change_request": null
+    "planned_implementation": [
+      "LifeGrid/Features/NewGame/StartingLifeInput.swift",
+      "LifeGrid/Features/NewGame/NewGameDraft.swift",
+      "LifeGrid/Shared/Components/StartingLifePicker.swift",
+      "LifeGrid/Features/NewGame/NewGameScreen.swift",
+      "LifeGrid/Features/Settings/SettingsScreen.swift"
+    ],
+    "planned_tests": [
+      "LifeGridTests/Features/NewGame/StartingLifeInputTests.swift",
+      "LifeGridTests/Features/NewGame/NewGameDraftTests.swift",
+      "LifeGridTests/App/AppStateStoreTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "approved_variance": "Settings owns Default Starting Life and updates only the remembered setup life field, never an active game.",
+    "change_request": "changes/CR-001-default-starting-life.md"
   },
   {
     "id": "NEW-003",
@@ -202,13 +284,30 @@
     "visual_references": [
       "new-game"
     ],
-    "implementation_files": [],
-    "test_files": [],
-    "evidence_files": [],
-    "status": "not_started",
+    "implementation_files": [
+      "LifeGrid/Features/NewGame/NewGameDraft.swift",
+      "LifeGrid/Features/NewGame/NewGameScreen.swift"
+    ],
+    "test_files": [
+      "LifeGridTests/Features/NewGame/NewGameDraftTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "evidence_files": [
+      "reviews/visuals/new-game/phase2-comparison.md",
+      "reports/test-results/phase2-tests.xcresult",
+      "reports/test-results/phase2-new-game-iphone.png",
+      "reports/test-results/phase2-verification.md"
+    ],
+    "status": "verified",
     "architecture_relevant": false,
-    "planned_implementation": [],
-    "planned_tests": [],
+    "planned_implementation": [
+      "LifeGrid/Features/NewGame/NewGameDraft.swift",
+      "LifeGrid/Features/NewGame/NewGameScreen.swift"
+    ],
+    "planned_tests": [
+      "LifeGridTests/Features/NewGame/NewGameDraftTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
     "approved_variance": null,
     "change_request": null
   },
@@ -219,13 +318,37 @@
     "visual_references": [
       "new-game"
     ],
-    "implementation_files": [],
-    "test_files": [],
-    "evidence_files": [],
-    "status": "not_started",
+    "implementation_files": [
+      "LifeGrid/Features/NewGame/ActiveGameFactory.swift",
+      "LifeGrid/Models/OpponentState.swift",
+      "LifeGrid/Models/ActiveGame.swift",
+      "LifeGrid/App/AppStateStore.swift"
+    ],
+    "test_files": [
+      "LifeGridTests/Features/NewGame/ActiveGameFactoryTests.swift",
+      "LifeGridTests/App/AppStateStoreTests.swift",
+      "LifeGridTests/Models/PersistedAppStateTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "evidence_files": [
+      "reports/test-results/phase2-tests.xcresult",
+      "reports/test-results/phase2-active-game-iphone.png",
+      "reports/test-results/phase2-verification.md"
+    ],
+    "status": "verified",
     "architecture_relevant": false,
-    "planned_implementation": [],
-    "planned_tests": [],
+    "planned_implementation": [
+      "LifeGrid/Features/NewGame/ActiveGameFactory.swift",
+      "LifeGrid/Models/OpponentState.swift",
+      "LifeGrid/Models/ActiveGame.swift",
+      "LifeGrid/App/AppStateStore.swift"
+    ],
+    "planned_tests": [
+      "LifeGridTests/Features/NewGame/ActiveGameFactoryTests.swift",
+      "LifeGridTests/App/AppStateStoreTests.swift",
+      "LifeGridTests/Models/PersistedAppStateTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
     "approved_variance": null,
     "change_request": null
   },
@@ -236,15 +359,39 @@
     "visual_references": [
       "new-game"
     ],
-    "implementation_files": [],
-    "test_files": [],
-    "evidence_files": [],
-    "status": "not_started",
+    "implementation_files": [
+      "LifeGrid/Models/AppPreferences.swift",
+      "LifeGrid/Features/NewGame/NewGameDraft.swift",
+      "LifeGrid/Features/NewGame/NewGameScreen.swift",
+      "LifeGrid/App/AppStateStore.swift"
+    ],
+    "test_files": [
+      "LifeGridTests/Features/NewGame/NewGameDraftTests.swift",
+      "LifeGridTests/App/AppStateStoreTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "evidence_files": [
+      "changes/CR-001-default-starting-life.md",
+      "reviews/visuals/new-game/phase2-comparison.md",
+      "reports/test-results/phase2-tests.xcresult",
+      "reports/test-results/phase2-new-game-iphone.png",
+      "reports/test-results/phase2-verification.md"
+    ],
+    "status": "verified",
     "architecture_relevant": false,
-    "planned_implementation": [],
-    "planned_tests": [],
-    "approved_variance": null,
-    "change_request": null
+    "planned_implementation": [
+      "LifeGrid/Models/AppPreferences.swift",
+      "LifeGrid/Features/NewGame/NewGameDraft.swift",
+      "LifeGrid/Features/NewGame/NewGameScreen.swift",
+      "LifeGrid/App/AppStateStore.swift"
+    ],
+    "planned_tests": [
+      "LifeGridTests/Features/NewGame/NewGameDraftTests.swift",
+      "LifeGridTests/App/AppStateStoreTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "approved_variance": "Settings owns Default Starting Life and remember-last-setup off preserves the previous remembered setup.",
+    "change_request": "changes/CR-001-default-starting-life.md"
   },
   {
     "id": "NEW-006",
@@ -253,13 +400,34 @@
     "visual_references": [
       "new-game"
     ],
-    "implementation_files": [],
-    "test_files": [],
-    "evidence_files": [],
-    "status": "not_started",
+    "implementation_files": [
+      "LifeGrid/Features/NewGame/StartingLifeInput.swift",
+      "LifeGrid/Features/NewGame/NewGameDraft.swift",
+      "LifeGrid/Features/NewGame/NewGameScreen.swift"
+    ],
+    "test_files": [
+      "LifeGridTests/Features/NewGame/StartingLifeInputTests.swift",
+      "LifeGridTests/Features/NewGame/NewGameDraftTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "evidence_files": [
+      "reviews/visuals/new-game/phase2-comparison.md",
+      "reports/test-results/phase2-tests.xcresult",
+      "reports/test-results/phase2-invalid-custom-life-iphone.png",
+      "reports/test-results/phase2-verification.md"
+    ],
+    "status": "verified",
     "architecture_relevant": false,
-    "planned_implementation": [],
-    "planned_tests": [],
+    "planned_implementation": [
+      "LifeGrid/Features/NewGame/StartingLifeInput.swift",
+      "LifeGrid/Features/NewGame/NewGameDraft.swift",
+      "LifeGrid/Features/NewGame/NewGameScreen.swift"
+    ],
+    "planned_tests": [
+      "LifeGridTests/Features/NewGame/StartingLifeInputTests.swift",
+      "LifeGridTests/Features/NewGame/NewGameDraftTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
     "approved_variance": null,
     "change_request": null
   },
@@ -270,13 +438,30 @@
     "visual_references": [
       "new-game"
     ],
-    "implementation_files": [],
-    "test_files": [],
-    "evidence_files": [],
-    "status": "not_started",
+    "implementation_files": [
+      "LifeGrid/Features/NewGame/NewGameScreen.swift",
+      "LifeGrid/App/AppStateStore.swift"
+    ],
+    "test_files": [
+      "LifeGridTests/App/AppStateStoreTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "evidence_files": [
+      "reviews/visuals/new-game/phase2-comparison.md",
+      "reports/test-results/phase2-tests.xcresult",
+      "reports/test-results/phase2-replacement-confirmation-iphone.png",
+      "reports/test-results/phase2-verification.md"
+    ],
+    "status": "verified",
     "architecture_relevant": false,
-    "planned_implementation": [],
-    "planned_tests": [],
+    "planned_implementation": [
+      "LifeGrid/Features/NewGame/NewGameScreen.swift",
+      "LifeGrid/App/AppStateStore.swift"
+    ],
+    "planned_tests": [
+      "LifeGridTests/App/AppStateStoreTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
     "approved_variance": null,
     "change_request": null
   },
@@ -287,13 +472,35 @@
     "visual_references": [
       "new-game"
     ],
-    "implementation_files": [],
-    "test_files": [],
-    "evidence_files": [],
-    "status": "not_started",
+    "implementation_files": [
+      "LifeGrid/Features/NewGame",
+      "LifeGrid/Features/Game/ActiveGameSummaryScreen.swift",
+      "LifeGrid/App/AppStateStore.swift"
+    ],
+    "test_files": [
+      "LifeGridTests/Features/NewGame",
+      "LifeGridTests/App/AppStateStoreTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "evidence_files": [
+      "reviews/visuals/new-game/phase2-comparison.md",
+      "reports/test-results/phase2-tests.xcresult",
+      "reports/test-results/phase2-new-game-iphone.png",
+      "reports/test-results/phase2-active-game-iphone.png",
+      "reports/test-results/phase2-verification.md"
+    ],
+    "status": "verified",
     "architecture_relevant": false,
-    "planned_implementation": [],
-    "planned_tests": [],
+    "planned_implementation": [
+      "LifeGrid/Features/NewGame",
+      "LifeGrid/Features/Game/ActiveGameSummaryScreen.swift",
+      "LifeGrid/App/AppStateStore.swift"
+    ],
+    "planned_tests": [
+      "LifeGridTests/Features/NewGame",
+      "LifeGridTests/App/AppStateStoreTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
     "approved_variance": null,
     "change_request": null
   },
@@ -1806,15 +2013,39 @@
     "visual_references": [
       "settings"
     ],
-    "implementation_files": [],
-    "test_files": [],
-    "evidence_files": [],
-    "status": "not_started",
+    "implementation_files": [
+      "LifeGrid/Models/AppPreferences.swift",
+      "LifeGrid/Features/Settings/SettingsScreen.swift",
+      "LifeGrid/Shared/Components/StartingLifePicker.swift",
+      "LifeGrid/App/AppStateStore.swift"
+    ],
+    "test_files": [
+      "LifeGridTests/Models/PersistedAppStateTests.swift",
+      "LifeGridTests/App/AppStateStoreTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "evidence_files": [
+      "changes/CR-001-default-starting-life.md",
+      "reviews/visuals/settings/phase2-default-life-variance.md",
+      "reports/test-results/phase2-tests.xcresult",
+      "reports/test-results/phase2-settings-default-life-iphone.png",
+      "reports/test-results/phase2-verification.md"
+    ],
+    "status": "in_progress",
     "architecture_relevant": false,
-    "planned_implementation": [],
-    "planned_tests": [],
-    "approved_variance": null,
-    "change_request": null
+    "planned_implementation": [
+      "LifeGrid/Models/AppPreferences.swift",
+      "LifeGrid/Features/Settings/SettingsScreen.swift",
+      "LifeGrid/Shared/Components/StartingLifePicker.swift",
+      "LifeGrid/App/AppStateStore.swift"
+    ],
+    "planned_tests": [
+      "LifeGridTests/Models/PersistedAppStateTests.swift",
+      "LifeGridTests/App/AppStateStoreTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "approved_variance": "Phase 2 adds the user-approved Default Starting Life control; all other approved default Settings controls remain deferred to Phase 6.",
+    "change_request": "changes/CR-001-default-starting-life.md"
   },
   {
     "id": "SET-002",
