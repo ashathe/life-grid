@@ -46,7 +46,6 @@ struct ActiveGameSummaryScreen: View {
             }
             .background(LifeGridPalette.background.ignoresSafeArea())
             .foregroundStyle(LifeGridPalette.primaryText)
-            .navigationTitle("Game")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("New Game") { showsNewGame = true }
