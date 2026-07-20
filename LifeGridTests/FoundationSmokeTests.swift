@@ -13,4 +13,16 @@ struct FoundationSmokeTests {
         )
         _ = Text("Card").modifier(LifeGridCard())
     }
+
+    @MainActor @Test func newGameScreenLoadsApplicationModule() {
+        let store = AppStateStore(environment: AppEnvironment(
+            repository: ScriptedAppStateRepository(),
+            randomSource: ScriptedRandomSource([1]),
+            clock: TestClock(date: .distantPast),
+            haptics: NoOpHapticsClient(),
+            sound: NoOpSoundClient()
+        ))
+
+        _ = NewGameScreen(store: store)
+    }
 }
