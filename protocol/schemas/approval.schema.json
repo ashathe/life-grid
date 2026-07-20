@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Life Grid Milestone Approval",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "milestone",
+    "reviewed_commit",
+    "review_date",
+    "reviewer",
+    "validator_result",
+    "evidence_reviewed",
+    "accepted_variances",
+    "rejected_variances",
+    "follow_up_requirements",
+    "explicit_approval_statement"
+  ],
+  "properties": {
+    "milestone": { "type": "string", "minLength": 1 },
+    "reviewed_commit": { "type": "string", "pattern": "^[0-9a-f]{7,40}$" },
+    "review_date": { "type": "string", "format": "date" },
+    "reviewer": { "type": "string", "minLength": 1 },
+    "validator_result": { "type": "string", "minLength": 1 },
+    "evidence_reviewed": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "accepted_variances": { "type": "array", "items": { "type": "string" } },
+    "rejected_variances": { "type": "array", "items": { "type": "string" } },
+    "follow_up_requirements": { "type": "array", "items": { "type": "string" } },
+    "explicit_approval_statement": { "const": "APPROVED" }
+  }
+}
