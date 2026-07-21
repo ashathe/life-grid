@@ -7,8 +7,14 @@ struct ActiveGameSummaryScreen: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                LocalLifeCard(store: store, game: game)
-                .id(game.id)
+                VStack(alignment: .leading, spacing: 16) {
+                    LocalLifeCard(store: store, game: game)
+                        .id(game.id)
+
+                    if store.state.preferences.commanderEnabled {
+                        opponentsSection
+                    }
+                }
                 .frame(maxWidth: 560)
                 .padding(16)
                 .frame(maxWidth: .infinity)
@@ -35,5 +41,28 @@ struct ActiveGameSummaryScreen: View {
             preconditionFailure("ActiveGameSummaryScreen requires an active game")
         }
         return game
+    }
+
+    private var opponentsSection: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                Text("Opponents")
+                    .font(.headline)
+                Spacer()
+                if game.opponents.count < OpponentState.maximumCount {
+                    Button("Add Opponent") {
+                        Task { await store.addOpponent() }
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(LifeGridPalette.accent)
+                    .accessibilityHint("Adds a new opponent to this game")
+                    .accessibilityIdentifier("add-opponent")
+                }
+            }
+
+            ForEach(game.opponents.filter(\.isVisible)) { opponent in
+                OpponentCard(store: store, opponentID: opponent.id)
+            }
+        }
     }
 }

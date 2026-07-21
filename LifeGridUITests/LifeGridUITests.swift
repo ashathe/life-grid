@@ -233,6 +233,32 @@ final class LifeGridUITests: XCTestCase {
     }
 
     @MainActor
+    func testOpponentCardsAddDamageAndPersist() {
+        let app = launchResetApp()
+        startDefaultGame(in: app)
+
+        XCTAssertTrue(app.buttons["add-opponent"].waitForExistence(timeout: 2))
+        XCTAssertTrue(app.staticTexts["Opponent 1"].exists)
+        XCTAssertFalse(app.staticTexts["Opponent 1 life"].exists)
+
+        let total = app.buttons["Set Opponent 1's commander damage"]
+        XCTAssertEqual(total.value as? String, "0")
+        app.buttons["Add one commander damage from Opponent 1"].tap()
+        assertValue("1", for: total)
+        assertValue("39", for: app.buttons["life-total"])
+
+        app.buttons["add-opponent"].tap()
+        XCTAssertTrue(app.staticTexts["Opponent 4"].waitForExistence(timeout: 2))
+        attachScreenshot(named: "phase3b-primary-opponents", app: app)
+
+        app.terminate()
+        let restored = launchPreservingApp()
+        XCTAssertTrue(element("game-screen", in: restored).waitForExistence(timeout: 3))
+        assertValue("1", for: restored.buttons["Set Opponent 1's commander damage"])
+        assertValue("39", for: restored.buttons["life-total"])
+    }
+
+    @MainActor
     func testFourTabsRemainAvailable() {
         let app = launchResetApp()
 
