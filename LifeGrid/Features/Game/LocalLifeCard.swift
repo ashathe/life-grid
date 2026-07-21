@@ -7,9 +7,7 @@ struct LocalLifeCard: View {
     @State private var exactLifeText = ""
     @State private var exactLifeError: String?
     @State private var showsExactLifeEntry = false
-    @State private var undoState: LocalLifeUndoState?
-    @State private var undoCancellationTask: Task<Void, Never>?
-    @State private var heldOperationRestoreValue: Int?
+    @State private var lifeInteraction = LocalLifeInteractionController()
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
@@ -21,15 +19,10 @@ struct LocalLifeCard: View {
 
                 Spacer()
 
-                if let undoState {
+                if lifeInteraction.undoState != nil {
                     Button("Undo") {
-                        undoCancellationTask?.cancel()
-                        undoCancellationTask = nil
-                        self.undoState = nil
                         Task {
-                            await store.restoreLocalLife(
-                                to: undoState.restoreValue
-                            )
+                            await lifeInteraction.undo(in: store)
                         }
                     }
                     .frame(minWidth: 44, minHeight: 44)
@@ -58,9 +51,7 @@ struct LocalLifeCard: View {
             exactLifeSheet
         }
         .onDisappear {
-            undoCancellationTask?.cancel()
-            undoCancellationTask = nil
-            undoState = nil
+            lifeInteraction.cancel()
         }
     }
 
@@ -209,7 +200,7 @@ struct LocalLifeCard: View {
         Self.displayName(for: store.state.preferences.playerName)
     }
 
-    static func displayName(for playerName: String) -> String {
+    nonisolated static func displayName(for playerName: String) -> String {
         let trimmedName = playerName.trimmingCharacters(
             in: .whitespacesAndNewlines
         )
@@ -233,12 +224,7 @@ struct LocalLifeCard: View {
 
     @MainActor
     private func applyManualDelta(_ amount: Int) async {
-        guard let change = await store.changeLocalLife(by: amount) else {
-            return
-        }
-        if heldOperationRestoreValue == nil {
-            heldOperationRestoreValue = change.previousValue
-        }
+        await lifeInteraction.applyManualDelta(amount, to: store)
     }
 
     @MainActor
@@ -253,45 +239,12 @@ struct LocalLifeCard: View {
 
         exactLifeError = nil
         showsExactLifeEntry = false
-        undoCancellationTask?.cancel()
-        let operation = LocalLifeUndoState(
-            restoreValue: change.previousValue,
-            operationID: UUID()
-        )
-        undoState = operation
-        scheduleUndoExpiration(matching: operation.operationID)
+        lifeInteraction.registerUndo(restoreValue: change.previousValue)
     }
 
     @MainActor
     private func finishHeldOperation() {
-        guard let restoreValue = heldOperationRestoreValue else {
-            return
-        }
-        heldOperationRestoreValue = nil
-
-        undoCancellationTask?.cancel()
-        let operation = LocalLifeUndoState(
-            restoreValue: restoreValue,
-            operationID: UUID()
-        )
-        undoState = operation
-        scheduleUndoExpiration(matching: operation.operationID)
-    }
-
-    @MainActor
-    private func scheduleUndoExpiration(matching operationID: UUID) {
-        undoCancellationTask = Task { @MainActor in
-            do {
-                try await Task.sleep(for: .seconds(4))
-            } catch {
-                return
-            }
-            guard undoState?.operationID == operationID else {
-                return
-            }
-            undoState = nil
-            undoCancellationTask = nil
-        }
+        lifeInteraction.finishHeldOperation()
     }
 
     private func taxButton(
