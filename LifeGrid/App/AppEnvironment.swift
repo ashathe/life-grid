@@ -29,7 +29,7 @@ struct AppEnvironment: Sendable {
             repository: JSONAppStateRepository(directoryURL: stateDirectory),
             randomSource: SystemRandomSource(),
             clock: SystemClockClient(),
-            haptics: NoOpHapticsClient(),
+            haptics: UIKitHapticsClient(),
             sound: NoOpSoundClient()
         )
     }
