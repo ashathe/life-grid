@@ -5,7 +5,7 @@
 - UI-flow checkpoint: `37f91aa` (`test: verify New Game relaunch flows`)
 - Xcode: 26.6 (17F113)
 - Swift: 6.3.3
-- Phase 2 manual approval: Pending
+- Phase 2 manual approval: Approved by the project owner on 2026-07-21; this does not approve Visual Gate 2 or Functional Build Gate 3
 
 ## Final Xcode evidence
 
