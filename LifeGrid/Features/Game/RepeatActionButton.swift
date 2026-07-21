@@ -83,8 +83,10 @@ struct RepeatActionButton<Label: View>: View {
     private let accessibilityHint: String
     private let onInitial: @MainActor @Sendable () async -> Void
     private let onRepeat: @MainActor @Sendable () async -> Void
+    private let onEnd: @MainActor @Sendable () async -> Void
     private let label: Label
     @State private var driver: RepeatActionDriver
+    @State private var actionTail: Task<Void, Never>?
     @GestureState private var gestureIsActive = false
 
     init(
@@ -93,12 +95,14 @@ struct RepeatActionButton<Label: View>: View {
         schedule: RepeatActionSchedule = .localLife,
         onInitial: @escaping @MainActor @Sendable () async -> Void,
         onRepeat: @escaping @MainActor @Sendable () async -> Void,
+        onEnd: @escaping @MainActor @Sendable () async -> Void = {},
         @ViewBuilder label: () -> Label
     ) {
         self.accessibilityLabel = accessibilityLabel
         self.accessibilityHint = accessibilityHint
         self.onInitial = onInitial
         self.onRepeat = onRepeat
+        self.onEnd = onEnd
         self.label = label()
         _driver = State(initialValue: RepeatActionDriver(schedule: schedule))
     }
@@ -115,20 +119,19 @@ struct RepeatActionButton<Label: View>: View {
                     .onChanged { _ in
                         driver.begin(
                             onInitial: {
-                                Task { @MainActor in
-                                    await onInitial()
-                                }
+                                enqueue(onInitial)
                             },
                             onRepeat: {
-                                Task { @MainActor in
-                                    await onRepeat()
-                                }
+                                enqueue(onRepeat)
                             }
                         )
                     }
             )
             .onChange(of: gestureIsActive) { wasActive, isActive in
                 driver.gestureActivityChanged(from: wasActive, to: isActive)
+                if wasActive, !isActive {
+                    enqueue(onEnd)
+                }
             }
             .accessibilityAddTraits(.isButton)
             .accessibilityLabel(accessibilityLabel)
@@ -136,5 +139,18 @@ struct RepeatActionButton<Label: View>: View {
             .onDisappear {
                 driver.cancel()
             }
+    }
+
+    private func enqueue(
+        _ action: @escaping @MainActor @Sendable () async -> Void
+    ) {
+        let predecessor = actionTail
+        actionTail = Task { @MainActor in
+            if let predecessor {
+                await predecessor.value
+            }
+            guard !Task.isCancelled else { return }
+            await action()
+        }
     }
 }
