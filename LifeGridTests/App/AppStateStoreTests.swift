@@ -265,17 +265,217 @@ struct AppStateStoreTests {
         #expect(store.state.preferences.playerName == "Second")
         #expect(store.persistenceErrorDescription == nil)
     }
+
+    @MainActor @Test func localLifeChangesByOneAndPersistsCompleteSnapshots() async {
+        var initial = PersistedAppState.default
+        initial.activeGame = activeGame(startingLife: 40)
+        let repository = ScriptedAppStateRepository()
+        let store = AppStateStore(
+            environment: environment(repository: repository),
+            initialState: initial
+        )
+
+        let decreased = await store.changeLocalLife(by: -1)
+        let increased = await store.changeLocalLife(by: 1)
+
+        #expect(decreased == ManualLifeChange(previousValue: 40, currentValue: 39))
+        #expect(increased == ManualLifeChange(previousValue: 39, currentValue: 40))
+        #expect(store.state.activeGame?.currentLife == 40)
+        #expect(await repository.savedSnapshots() == [
+            snapshot(from: initial, currentLife: 39),
+            store.state,
+        ])
+    }
+
+    @MainActor @Test func exactLocalLifeEntryAcceptsIntegerBounds() async {
+        var initial = PersistedAppState.default
+        initial.activeGame = activeGame(startingLife: 40)
+        let repository = ScriptedAppStateRepository()
+        let store = AppStateStore(
+            environment: environment(repository: repository),
+            initialState: initial
+        )
+
+        let minimum = await store.setLocalLife(to: .min)
+        let maximum = await store.setLocalLife(to: .max)
+
+        #expect(minimum == ManualLifeChange(previousValue: 40, currentValue: .min))
+        #expect(maximum == ManualLifeChange(previousValue: .min, currentValue: .max))
+        #expect(store.state.activeGame?.currentLife == .max)
+        #expect(await repository.savedSnapshots().count == 2)
+    }
+
+    @MainActor @Test func localLifeIntentsDoNothingWithoutAnActiveGame() async {
+        let repository = ScriptedAppStateRepository()
+        let store = AppStateStore(environment: environment(repository: repository))
+
+        let changed = await store.changeLocalLife(by: 1)
+        let set = await store.setLocalLife(to: -10)
+        await store.restoreLocalLife(to: 40)
+
+        #expect(changed == nil)
+        #expect(set == nil)
+        #expect(store.state.activeGame == nil)
+        #expect(await repository.savedSnapshots().isEmpty)
+    }
+
+    @MainActor @Test func localLifeChangeOverflowDoesNotMutateOrPersist() async {
+        var initial = PersistedAppState.default
+        initial.activeGame = activeGame(startingLife: .max)
+        let repository = ScriptedAppStateRepository()
+        let store = AppStateStore(
+            environment: environment(repository: repository),
+            initialState: initial
+        )
+
+        let result = await store.changeLocalLife(by: 1)
+
+        #expect(result == nil)
+        #expect(store.state == initial)
+        #expect(await repository.savedSnapshots().isEmpty)
+    }
+
+    @MainActor @Test func localCommanderTaxAdjustmentsClampAndDoNotChangeLife() async {
+        var initial = PersistedAppState.default
+        initial.activeGame = activeGame(startingLife: 40)
+        let repository = ScriptedAppStateRepository()
+        let store = AppStateStore(
+            environment: environment(repository: repository),
+            initialState: initial
+        )
+
+        await store.adjustLocalCommanderTax(.primary, by: 2)
+        await store.adjustLocalCommanderTax(.partner, by: 2)
+        await store.adjustLocalCommanderTax(.primary, by: -4)
+
+        #expect(store.state.activeGame?.currentLife == 40)
+        #expect(store.state.activeGame?.ownCommanderTaxA == 0)
+        #expect(store.state.activeGame?.ownCommanderTaxB == 2)
+        #expect(await repository.savedSnapshots().count == 3)
+    }
+
+    @MainActor @Test func commanderTaxDoesNothingWithoutAnActiveGameOrOnOverflow() async {
+        let repository = ScriptedAppStateRepository()
+        let store = AppStateStore(environment: environment(repository: repository))
+
+        await store.adjustLocalCommanderTax(.primary, by: 2)
+
+        #expect(await repository.savedSnapshots().isEmpty)
+
+        var initial = PersistedAppState.default
+        var game = activeGame(startingLife: 40)
+        game.ownCommanderTaxA = .max
+        initial.activeGame = game
+        let overflowRepository = ScriptedAppStateRepository()
+        let overflowStore = AppStateStore(
+            environment: environment(repository: overflowRepository),
+            initialState: initial
+        )
+
+        await overflowStore.adjustLocalCommanderTax(.primary, by: 2)
+
+        #expect(overflowStore.state == initial)
+        #expect(await overflowRepository.savedSnapshots().isEmpty)
+    }
+
+    @MainActor @Test func localLifeAndTaxIntentsRespectFailedLoadProtection() async {
+        var initial = PersistedAppState.default
+        initial.activeGame = activeGame(startingLife: 40)
+        let repository = ScriptedAppStateRepository(shouldFailLoad: true)
+        let store = AppStateStore(
+            environment: environment(repository: repository),
+            initialState: initial
+        )
+
+        await store.load()
+        let changed = await store.changeLocalLife(by: 1)
+        let set = await store.setLocalLife(to: 12)
+        await store.restoreLocalLife(to: 20)
+        await store.adjustLocalCommanderTax(.primary, by: 2)
+
+        #expect(changed == nil)
+        #expect(set == nil)
+        #expect(store.state == initial)
+        #expect(await repository.savedSnapshots().isEmpty)
+    }
+
+    @MainActor @Test func localLifeAndTaxIntentsRetainInMemoryStateAfterSaveFailure() async {
+        var initial = PersistedAppState.default
+        initial.activeGame = activeGame(startingLife: 40)
+        let repository = ScriptedAppStateRepository(failingSaveCalls: [1, 2, 3, 4])
+        let store = AppStateStore(
+            environment: environment(repository: repository),
+            initialState: initial
+        )
+
+        let changed = await store.changeLocalLife(by: -1)
+        let set = await store.setLocalLife(to: -10)
+        await store.restoreLocalLife(to: 40)
+        await store.adjustLocalCommanderTax(.primary, by: 2)
+
+        #expect(changed == ManualLifeChange(previousValue: 40, currentValue: 39))
+        #expect(set == ManualLifeChange(previousValue: 39, currentValue: -10))
+        #expect(store.state.activeGame?.currentLife == 40)
+        #expect(store.state.activeGame?.ownCommanderTaxA == 2)
+        #expect(store.persistenceErrorDescription != nil)
+        #expect(await repository.savedSnapshots().count == 4)
+    }
+
+    @MainActor @Test func hapticsPlayOnlyWhenEnabledWithoutPersisting() async {
+        let enabledHaptics = RecordingHapticsClient()
+        let enabledRepository = ScriptedAppStateRepository()
+        let enabledStore = AppStateStore(
+            environment: environment(
+                repository: enabledRepository,
+                haptics: enabledHaptics
+            )
+        )
+
+        await enabledStore.playHaptic(.adjustment)
+
+        #expect(await enabledHaptics.events() == [.adjustment])
+        #expect(await enabledRepository.savedSnapshots().isEmpty)
+
+        var disabled = PersistedAppState.default
+        disabled.preferences.hapticsEnabled = false
+        let disabledHaptics = RecordingHapticsClient()
+        let disabledRepository = ScriptedAppStateRepository()
+        let disabledStore = AppStateStore(
+            environment: environment(
+                repository: disabledRepository,
+                haptics: disabledHaptics
+            ),
+            initialState: disabled
+        )
+
+        await disabledStore.playHaptic(.adjustment)
+
+        #expect(await disabledHaptics.events().isEmpty)
+        #expect(await disabledRepository.savedSnapshots().isEmpty)
+    }
 }
 
 private extension AppStateStoreTests {
-    func environment(repository: any AppStateRepository) -> AppEnvironment {
+    func environment(
+        repository: any AppStateRepository,
+        haptics: any HapticsClient = NoOpHapticsClient()
+    ) -> AppEnvironment {
         AppEnvironment(
             repository: repository,
             randomSource: ScriptedRandomSource([1]),
             clock: TestClock(date: .distantPast),
-            haptics: NoOpHapticsClient(),
+            haptics: haptics,
             sound: NoOpSoundClient()
         )
+    }
+
+    func snapshot(
+        from state: PersistedAppState,
+        currentLife: Int
+    ) -> PersistedAppState {
+        var snapshot = state
+        snapshot.activeGame?.currentLife = currentLife
+        return snapshot
     }
 
     func activeGame(startingLife: Int) -> ActiveGame {

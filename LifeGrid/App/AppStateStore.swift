@@ -47,27 +47,116 @@ final class AppStateStore {
             setup: setup,
             startedAt: startedAt
         )
-        await mutateAndPersist { state in
+        await mutateAndPersist({ state in
             state.preferences.rememberLastSetup = rememberLastSetup
             state.activeGame = game
             if rememberLastSetup {
                 state.lastSetup = setup
             }
-        }
+        })
     }
 
     func setRememberLastSetup(_ enabled: Bool) async {
-        await mutateAndPersist { state in
+        await mutateAndPersist({ state in
             state.preferences.rememberLastSetup = enabled
-        }
+        })
     }
 
     func setDefaultStartingLife(_ value: Int) async {
         guard value > 0 else { return }
-        await mutateAndPersist { state in
+        await mutateAndPersist({ state in
             state.preferences.defaultStartingLife = value
             state.lastSetup.startingLife = value
-        }
+        })
+    }
+
+    @discardableResult
+    func changeLocalLife(by amount: Int) async -> ManualLifeChange? {
+        guard state.activeGame != nil else { return nil }
+
+        var change: ManualLifeChange?
+        let didMutate = await mutateAndPersist(onlyIf: { state in
+            guard var game = state.activeGame else { return false }
+            let previousValue = game.currentLife
+            let result = previousValue.addingReportingOverflow(amount)
+            guard !result.overflow else { return false }
+
+            game.currentLife = result.partialValue
+            state.activeGame = game
+            change = ManualLifeChange(
+                previousValue: previousValue,
+                currentValue: result.partialValue
+            )
+            return true
+        })
+        return didMutate ? change : nil
+    }
+
+    @discardableResult
+    func setLocalLife(to value: Int) async -> ManualLifeChange? {
+        guard state.activeGame != nil else { return nil }
+
+        var change: ManualLifeChange?
+        let didMutate = await mutateAndPersist(onlyIf: { state in
+            guard var game = state.activeGame else { return false }
+            let previousValue = game.currentLife
+
+            game.currentLife = value
+            state.activeGame = game
+            change = ManualLifeChange(
+                previousValue: previousValue,
+                currentValue: value
+            )
+            return true
+        })
+        return didMutate ? change : nil
+    }
+
+    func restoreLocalLife(to value: Int) async {
+        guard state.activeGame != nil else { return }
+
+        _ = await mutateAndPersist(onlyIf: { state in
+            guard var game = state.activeGame else { return false }
+            game.currentLife = value
+            state.activeGame = game
+            return true
+        })
+    }
+
+    func playHaptic(_ event: HapticEvent) async {
+        guard state.preferences.hapticsEnabled else { return }
+        await environment.haptics.play(event)
+    }
+
+    func adjustLocalCommanderTax(
+        _ slot: LocalCommanderTaxSlot,
+        by amount: Int
+    ) async {
+        guard state.activeGame != nil else { return }
+
+        _ = await mutateAndPersist(onlyIf: { state in
+            guard var game = state.activeGame else { return false }
+            let currentValue: Int
+            switch slot {
+            case .primary:
+                currentValue = game.ownCommanderTaxA
+            case .partner:
+                currentValue = game.ownCommanderTaxB
+            }
+
+            let result = currentValue.addingReportingOverflow(amount)
+            guard !result.overflow else { return false }
+            let updatedValue = max(0, result.partialValue)
+
+            switch slot {
+            case .primary:
+                game.ownCommanderTaxA = updatedValue
+            case .partner:
+                game.ownCommanderTaxB = updatedValue
+            }
+            state.activeGame = game
+            return true
+        })
     }
 
     func saveForLifecycle() async {
@@ -76,11 +165,21 @@ final class AppStateStore {
     }
 
     private func mutateAndPersist(
+        onlyIf mutation: (inout PersistedAppState) -> Bool
+    ) async -> Bool {
+        guard await recoverPersistenceIfNeeded() else { return false }
+        guard mutation(&state) else { return false }
+        await persistCurrentState()
+        return true
+    }
+
+    private func mutateAndPersist(
         _ mutation: (inout PersistedAppState) -> Void
     ) async {
-        guard await recoverPersistenceIfNeeded() else { return }
-        mutation(&state)
-        await persistCurrentState()
+        _ = await mutateAndPersist(onlyIf: { state in
+            mutation(&state)
+            return true
+        })
     }
 
     private func recoverPersistenceIfNeeded() async -> Bool {
