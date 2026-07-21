@@ -1,0 +1,3 @@
+PROTOCOL.md whitespace=-blank-at-eol
+docs/approved/*.md whitespace=-blank-at-eol
+*.pdf binary

@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Life Grid Visual References",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "id",
+      "approved_source",
+      "pdf_page",
+      "required_devices",
+      "required_orientations",
+      "required_appearances",
+      "required_app_scales",
+      "related_requirement_ids",
+      "review_directory",
+      "current_approval_status"
+    ],
+    "properties": {
+      "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+      "approved_source": { "type": "string", "minLength": 1 },
+      "pdf_page": { "type": ["integer", "null"], "minimum": 1 },
+      "required_devices": { "type": "array", "items": { "type": "string" }, "minItems": 1, "uniqueItems": true },
+      "required_orientations": { "type": "array", "items": { "type": "string" }, "minItems": 1, "uniqueItems": true },
+      "required_appearances": { "type": "array", "items": { "enum": ["dark", "system", "light"] }, "uniqueItems": true },
+      "required_app_scales": { "type": "array", "items": { "enum": ["compact", "balanced", "large"] }, "uniqueItems": true },
+      "related_requirement_ids": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+      "review_directory": { "type": "string", "minLength": 1 },
+      "current_approval_status": { "enum": ["not_started", "in_review", "approved", "blocked"] }
+    }
+  }
+}

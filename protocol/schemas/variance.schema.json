@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Life Grid Variance",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "classification", "description", "requirement_ids", "status", "reviewer_decision"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^VAR-[0-9]{3}$" },
+    "classification": { "enum": ["V0", "V1", "V2"] },
+    "description": { "type": "string", "minLength": 1 },
+    "requirement_ids": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "status": { "enum": ["open", "resolved", "accepted", "rejected"] },
+    "reviewer_decision": { "type": ["string", "null"] }
+  }
+}
