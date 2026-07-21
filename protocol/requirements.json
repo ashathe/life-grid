@@ -512,14 +512,29 @@
       "game-iphone",
       "game-ipad"
     ],
-    "implementation_files": [],
-    "test_files": [],
-    "evidence_files": [],
-    "status": "not_started",
+    "implementation_files": [
+      "LifeGrid/Models/AppPreferences.swift",
+      "LifeGrid/Features/Game/LocalLifeCard.swift",
+      "LifeGrid/Features/Game/ActiveGameSummaryScreen.swift"
+    ],
+    "test_files": [
+      "LifeGridTests/Features/Game/ManualLifeChangeTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "evidence_files": [
+      "reports/test-results/phase3a-task3-tests.xcresult",
+      "reports/test-results/phase3a-ui-tests.xcresult",
+      "reports/test-results/phase3a-tests.xcresult",
+      "reports/test-results/phase3a-iphone-build.xcresult",
+      "reports/test-results/phase3a-game-iphone.png",
+      "reports/test-results/phase3a-verification.md",
+      "reviews/visuals/game/phase3a-local-life-comparison.md"
+    ],
+    "status": "verified",
     "architecture_relevant": false,
     "planned_implementation": [],
     "planned_tests": [],
-    "approved_variance": null,
+    "approved_variance": "changes/CR-002-iphone-primary-delivery.md confines Phase 3A verification to iPhone portrait; the game-ipad reference remains historical and iPad implementation/verification is deferred. Saved-name display and the You fallback are verified; editing from Settings or the local-card menu is deferred.",
     "change_request": null
   },
   {
@@ -530,14 +545,34 @@
       "game-iphone",
       "game-ipad"
     ],
-    "implementation_files": [],
-    "test_files": [],
-    "evidence_files": [],
-    "status": "not_started",
+    "implementation_files": [
+      "LifeGrid/App/AppStateStore.swift",
+      "LifeGrid/Features/Game/ManualLifeChange.swift",
+      "LifeGrid/Features/Game/RepeatActionButton.swift",
+      "LifeGrid/Features/Game/LocalLifeCard.swift",
+      "LifeGrid/Features/Game/ActiveGameSummaryScreen.swift"
+    ],
+    "test_files": [
+      "LifeGridTests/App/AppStateStoreTests.swift",
+      "LifeGridTests/Features/Game/RepeatActionButtonTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "evidence_files": [
+      "reports/test-results/phase3a-task1-tests.xcresult",
+      "reports/test-results/phase3a-task2-tests.xcresult",
+      "reports/test-results/phase3a-task3-tests.xcresult",
+      "reports/test-results/phase3a-ui-tests.xcresult",
+      "reports/test-results/phase3a-tests.xcresult",
+      "reports/test-results/phase3a-iphone-build.xcresult",
+      "reports/test-results/phase3a-game-iphone.png",
+      "reports/test-results/phase3a-verification.md",
+      "reviews/visuals/game/phase3a-local-life-comparison.md"
+    ],
+    "status": "verified",
     "architecture_relevant": false,
     "planned_implementation": [],
     "planned_tests": [],
-    "approved_variance": null,
+    "approved_variance": "changes/CR-002-iphone-primary-delivery.md confines Phase 3A verification to the local iPhone portrait decrement control; the game-ipad reference remains historical and iPad implementation/verification is deferred. Opponent, counter, and commander-damage controls are deferred.",
     "change_request": null
   },
   {
@@ -548,14 +583,34 @@
       "game-iphone",
       "game-ipad"
     ],
-    "implementation_files": [],
-    "test_files": [],
-    "evidence_files": [],
-    "status": "not_started",
+    "implementation_files": [
+      "LifeGrid/App/AppStateStore.swift",
+      "LifeGrid/Features/Game/ManualLifeChange.swift",
+      "LifeGrid/Features/Game/RepeatActionButton.swift",
+      "LifeGrid/Features/Game/LocalLifeCard.swift",
+      "LifeGrid/Features/Game/ActiveGameSummaryScreen.swift"
+    ],
+    "test_files": [
+      "LifeGridTests/App/AppStateStoreTests.swift",
+      "LifeGridTests/Features/Game/RepeatActionButtonTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "evidence_files": [
+      "reports/test-results/phase3a-task1-tests.xcresult",
+      "reports/test-results/phase3a-task2-tests.xcresult",
+      "reports/test-results/phase3a-task3-tests.xcresult",
+      "reports/test-results/phase3a-ui-tests.xcresult",
+      "reports/test-results/phase3a-tests.xcresult",
+      "reports/test-results/phase3a-iphone-build.xcresult",
+      "reports/test-results/phase3a-game-iphone.png",
+      "reports/test-results/phase3a-verification.md",
+      "reviews/visuals/game/phase3a-local-life-comparison.md"
+    ],
+    "status": "verified",
     "architecture_relevant": false,
     "planned_implementation": [],
     "planned_tests": [],
-    "approved_variance": null,
+    "approved_variance": "changes/CR-002-iphone-primary-delivery.md confines Phase 3A verification to the local iPhone portrait increment control; the game-ipad reference remains historical and iPad implementation/verification is deferred. Opponent, counter, and commander-damage controls are deferred.",
     "change_request": null
   },
   {
@@ -566,14 +621,37 @@
       "game-iphone",
       "game-ipad"
     ],
-    "implementation_files": [],
-    "test_files": [],
-    "evidence_files": [],
-    "status": "not_started",
+    "implementation_files": [
+      "LifeGrid/App/AppStateStore.swift",
+      "LifeGrid/App/AppEnvironment.swift",
+      "LifeGrid/Shared/Feedback/HapticsClient.swift",
+      "LifeGrid/Features/Game/ManualLifeChange.swift",
+      "LifeGrid/Features/Game/RepeatActionButton.swift",
+      "LifeGrid/Features/Game/LocalLifeCard.swift"
+    ],
+    "test_files": [
+      "LifeGridTests/App/AppStateStoreTests.swift",
+      "LifeGridTests/App/AppEnvironmentTests.swift",
+      "LifeGridTests/Features/Game/RepeatActionButtonTests.swift",
+      "LifeGridTests/Features/Game/ManualLifeChangeTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "evidence_files": [
+      "reports/test-results/phase3a-task1-tests.xcresult",
+      "reports/test-results/phase3a-task2-tests.xcresult",
+      "reports/test-results/phase3a-task3-tests.xcresult",
+      "reports/test-results/phase3a-ui-tests.xcresult",
+      "reports/test-results/phase3a-tests.xcresult",
+      "reports/test-results/phase3a-iphone-build.xcresult",
+      "reports/test-results/phase3a-game-iphone.png",
+      "reports/test-results/phase3a-verification.md",
+      "reviews/visuals/game/phase3a-local-life-comparison.md"
+    ],
+    "status": "verified",
     "architecture_relevant": false,
     "planned_implementation": [],
     "planned_tests": [],
-    "approved_variance": null,
+    "approved_variance": "changes/CR-002-iphone-primary-delivery.md confines Phase 3A repeat verification to local-life controls on iPhone portrait; the game-ipad reference remains historical and iPad implementation/verification is deferred. Multiple persisted local-life mutations and their single grouped release Undo are verified deterministically through the production interaction controller and app-state store; no raw long-press UI timing claim is made. Repeat behavior for counters and commander damage is deferred.",
     "change_request": null
   },
   {
@@ -584,14 +662,31 @@
       "game-iphone",
       "game-ipad"
     ],
-    "implementation_files": [],
-    "test_files": [],
-    "evidence_files": [],
-    "status": "not_started",
+    "implementation_files": [
+      "LifeGrid/App/AppStateStore.swift",
+      "LifeGrid/Features/Game/ManualLifeChange.swift",
+      "LifeGrid/Features/Game/LocalLifeCard.swift"
+    ],
+    "test_files": [
+      "LifeGridTests/App/AppStateStoreTests.swift",
+      "LifeGridTests/Features/Game/ManualLifeChangeTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "evidence_files": [
+      "reports/test-results/phase3a-task1-tests.xcresult",
+      "reports/test-results/phase3a-task3-tests.xcresult",
+      "reports/test-results/phase3a-ui-tests.xcresult",
+      "reports/test-results/phase3a-tests.xcresult",
+      "reports/test-results/phase3a-iphone-build.xcresult",
+      "reports/test-results/phase3a-game-iphone.png",
+      "reports/test-results/phase3a-verification.md",
+      "reviews/visuals/game/phase3a-local-life-comparison.md"
+    ],
+    "status": "verified",
     "architecture_relevant": false,
     "planned_implementation": [],
     "planned_tests": [],
-    "approved_variance": null,
+    "approved_variance": "changes/CR-002-iphone-primary-delivery.md confines Phase 3A exact-life verification to iPhone portrait; the game-ipad reference remains historical and iPad implementation/verification is deferred. Exact entry for counters and commander damage is deferred.",
     "change_request": null
   },
   {
@@ -602,14 +697,31 @@
       "game-iphone",
       "game-ipad"
     ],
-    "implementation_files": [],
-    "test_files": [],
-    "evidence_files": [],
-    "status": "not_started",
+    "implementation_files": [
+      "LifeGrid/App/AppStateStore.swift",
+      "LifeGrid/Features/Game/ManualLifeChange.swift",
+      "LifeGrid/Features/Game/LocalLifeCard.swift"
+    ],
+    "test_files": [
+      "LifeGridTests/App/AppStateStoreTests.swift",
+      "LifeGridTests/Features/Game/ManualLifeChangeTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "evidence_files": [
+      "reports/test-results/phase3a-task1-tests.xcresult",
+      "reports/test-results/phase3a-task3-tests.xcresult",
+      "reports/test-results/phase3a-ui-tests.xcresult",
+      "reports/test-results/phase3a-tests.xcresult",
+      "reports/test-results/phase3a-iphone-build.xcresult",
+      "reports/test-results/phase3a-game-iphone.png",
+      "reports/test-results/phase3a-verification.md",
+      "reviews/visuals/game/phase3a-local-life-comparison.md"
+    ],
+    "status": "verified",
     "architecture_relevant": false,
     "planned_implementation": [],
     "planned_tests": [],
-    "approved_variance": null,
+    "approved_variance": "changes/CR-002-iphone-primary-delivery.md confines negative-life verification to iPhone portrait; the game-ipad reference remains historical and iPad implementation/verification is deferred. Opponent commander-damage-linked life behavior is deferred.",
     "change_request": null
   },
   {
@@ -620,14 +732,32 @@
       "game-iphone",
       "game-ipad"
     ],
-    "implementation_files": [],
-    "test_files": [],
-    "evidence_files": [],
-    "status": "not_started",
+    "implementation_files": [
+      "LifeGrid/App/AppStateStore.swift",
+      "LifeGrid/Features/Game/ManualLifeChange.swift",
+      "LifeGrid/Features/Game/LocalLifeCard.swift",
+      "LifeGrid/Features/Game/ActiveGameSummaryScreen.swift"
+    ],
+    "test_files": [
+      "LifeGridTests/App/AppStateStoreTests.swift",
+      "LifeGridTests/Features/Game/ManualLifeChangeTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "evidence_files": [
+      "reports/test-results/phase3a-task1-tests.xcresult",
+      "reports/test-results/phase3a-task3-tests.xcresult",
+      "reports/test-results/phase3a-ui-tests.xcresult",
+      "reports/test-results/phase3a-tests.xcresult",
+      "reports/test-results/phase3a-iphone-build.xcresult",
+      "reports/test-results/phase3a-game-iphone.png",
+      "reports/test-results/phase3a-verification.md",
+      "reviews/visuals/game/phase3a-local-life-comparison.md"
+    ],
+    "status": "verified",
     "architecture_relevant": false,
     "planned_implementation": [],
     "planned_tests": [],
-    "approved_variance": null,
+    "approved_variance": "changes/CR-002-iphone-primary-delivery.md confines Phase 3A Undo verification to direct manual local-life operations on iPhone portrait; the game-ipad reference remains historical and iPad implementation/verification is deferred. Production controller/store integration verifies one-shot restore and exact four-second expiration with deterministic time control, while UI automation verifies replacement by a newer manual operation. Commander-damage-linked life and all opponent behavior are deferred and create no Phase 3A Undo claim.",
     "change_request": null
   },
   {
@@ -639,14 +769,31 @@
       "game-ipad",
       "settings"
     ],
-    "implementation_files": [],
-    "test_files": [],
-    "evidence_files": [],
-    "status": "not_started",
+    "implementation_files": [
+      "LifeGrid/App/AppStateStore.swift",
+      "LifeGrid/Features/Game/ManualLifeChange.swift",
+      "LifeGrid/Features/Game/LocalLifeCard.swift",
+      "LifeGrid/Features/Game/ActiveGameSummaryScreen.swift"
+    ],
+    "test_files": [
+      "LifeGridTests/App/AppStateStoreTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "evidence_files": [
+      "reports/test-results/phase3a-task1-tests.xcresult",
+      "reports/test-results/phase3a-task3-tests.xcresult",
+      "reports/test-results/phase3a-ui-tests.xcresult",
+      "reports/test-results/phase3a-tests.xcresult",
+      "reports/test-results/phase3a-iphone-build.xcresult",
+      "reports/test-results/phase3a-game-iphone.png",
+      "reports/test-results/phase3a-verification.md",
+      "reviews/visuals/game/phase3a-local-life-comparison.md"
+    ],
+    "status": "verified",
     "architecture_relevant": false,
     "planned_implementation": [],
     "planned_tests": [],
-    "approved_variance": null,
+    "approved_variance": "changes/CR-002-iphone-primary-delivery.md confines Phase 3A commander-tax verification to the one local primary row on iPhone portrait; the game-ipad reference remains historical and iPad implementation/verification is deferred. Partner A/B selection, commander names, and Settings configuration are deferred.",
     "change_request": null
   },
   {
@@ -658,14 +805,30 @@
       "game-ipad",
       "settings"
     ],
-    "implementation_files": [],
-    "test_files": [],
-    "evidence_files": [],
-    "status": "not_started",
+    "implementation_files": [
+      "LifeGrid/App/AppStateStore.swift",
+      "LifeGrid/Features/Game/ManualLifeChange.swift",
+      "LifeGrid/Features/Game/LocalLifeCard.swift"
+    ],
+    "test_files": [
+      "LifeGridTests/App/AppStateStoreTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "evidence_files": [
+      "reports/test-results/phase3a-task1-tests.xcresult",
+      "reports/test-results/phase3a-task3-tests.xcresult",
+      "reports/test-results/phase3a-ui-tests.xcresult",
+      "reports/test-results/phase3a-tests.xcresult",
+      "reports/test-results/phase3a-iphone-build.xcresult",
+      "reports/test-results/phase3a-game-iphone.png",
+      "reports/test-results/phase3a-verification.md",
+      "reviews/visuals/game/phase3a-local-life-comparison.md"
+    ],
+    "status": "verified",
     "architecture_relevant": false,
     "planned_implementation": [],
     "planned_tests": [],
-    "approved_variance": null,
+    "approved_variance": "changes/CR-002-iphone-primary-delivery.md confines Phase 3A +/-2 and floor-zero tax verification to the local primary row on iPhone portrait; the game-ipad reference remains historical and iPad implementation/verification is deferred. Partner-tax UI is deferred.",
     "change_request": null
   },
   {
@@ -677,14 +840,29 @@
       "game-ipad",
       "settings"
     ],
-    "implementation_files": [],
-    "test_files": [],
-    "evidence_files": [],
-    "status": "not_started",
+    "implementation_files": [
+      "LifeGrid/Models/AppPreferences.swift",
+      "LifeGrid/App/AppEnvironment.swift",
+      "LifeGrid/App/AppStateStore.swift",
+      "LifeGrid/Features/Game/LocalLifeCard.swift"
+    ],
+    "test_files": [
+      "LifeGridTests/Models/PersistedAppStateTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "evidence_files": [
+      "reports/test-results/phase3a-ui-tests.xcresult",
+      "reports/test-results/phase3a-tests.xcresult",
+      "reports/test-results/phase3a-iphone-build.xcresult",
+      "reports/test-results/phase3a-game-iphone.png",
+      "reports/test-results/phase3a-verification.md",
+      "reviews/visuals/game/phase3a-local-life-comparison.md"
+    ],
+    "status": "verified",
     "architecture_relevant": false,
     "planned_implementation": [],
     "planned_tests": [],
-    "approved_variance": null,
+    "approved_variance": "changes/CR-002-iphone-primary-delivery.md confines Phase 3A verification to respecting the default-on commander preference on iPhone portrait; the game-ipad reference remains historical and iPad implementation/verification is deferred. The production Settings toggle remains deferred, so this does not verify user-facing commander-mode configuration.",
     "change_request": null
   },
   {
