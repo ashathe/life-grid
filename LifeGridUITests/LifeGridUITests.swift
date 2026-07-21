@@ -259,6 +259,45 @@ final class LifeGridUITests: XCTestCase {
     }
 
     @MainActor
+    func testPrimaryDamageExactEntryLethalAndInvalidInput() {
+        let app = launchResetApp()
+        startDefaultGame(in: app)
+        let total = app.buttons["Set Opponent 1's commander damage"]
+
+        total.tap()
+        let entry = app.textFields["Commander damage"]
+        XCTAssertTrue(entry.waitForExistence(timeout: 2))
+        replaceText(in: entry, with: "21")
+        app.buttons["Set"].tap()
+        assertValue("21, commander lethal", for: total)
+        assertValue("19", for: app.buttons["life-total"])
+
+        total.tap()
+        XCTAssertTrue(entry.waitForExistence(timeout: 2))
+        replaceText(in: entry, with: "-1")
+        app.buttons["Set"].tap()
+        XCTAssertTrue(app.staticTexts[
+            "Enter a non-negative whole-number commander damage value."
+        ].waitForExistence(timeout: 2))
+        XCTAssertTrue(element("opponent-damage-exact-entry", in: app).exists)
+        app.buttons["Cancel"].tap()
+        assertValue("21, commander lethal", for: total)
+    }
+
+    @MainActor
+    func testCommanderDisabledFixtureHidesOpponentCardsWithoutBreakingLife() {
+        let app = launchResetApp(
+            additionalArguments: [commanderDisabledArgument]
+        )
+        startDefaultGame(in: app)
+
+        XCTAssertTrue(app.buttons["life-total"].exists)
+        XCTAssertFalse(app.staticTexts["Opponents"].exists)
+        XCTAssertFalse(app.buttons["add-opponent"].exists)
+        XCTAssertFalse(app.buttons["Set Opponent 1's commander damage"].exists)
+    }
+
+    @MainActor
     func testFourTabsRemainAvailable() {
         let app = launchResetApp()
 
