@@ -1,3 +1,4 @@
+import Foundation
 import Observation
 
 @MainActor
@@ -162,6 +163,45 @@ final class AppStateStore {
         })
     }
 
+    @discardableResult
+    func addOpponent() async -> OpponentState? {
+        var added: OpponentState?
+        let didMutate = await mutateAndPersist(onlyIf: { state in
+            guard var game = state.activeGame,
+                  game.opponents.count < OpponentState.maximumCount else { return false }
+            let opponent = OpponentState.newDefault(
+                displayName: OpponentState.nextDefaultDisplayName(in: game.opponents)
+            )
+            game.opponents.append(opponent)
+            state.activeGame = game
+            added = opponent
+            return true
+        })
+        return didMutate ? added : nil
+    }
+
+    @discardableResult
+    func changePrimaryCommanderDamage(
+        for opponentID: UUID,
+        by amount: Int
+    ) async -> CommanderDamageChange? {
+        guard amount != 0 else { return nil }
+        return await updatePrimaryCommanderDamage(for: opponentID) { current in
+            let result = current.addingReportingOverflow(amount)
+            guard !result.overflow else { return nil }
+            return max(0, result.partialValue)
+        }
+    }
+
+    @discardableResult
+    func setPrimaryCommanderDamage(
+        for opponentID: UUID,
+        to value: Int
+    ) async -> CommanderDamageChange? {
+        guard value >= 0 else { return nil }
+        return await updatePrimaryCommanderDamage(for: opponentID) { _ in value }
+    }
+
     func saveForLifecycle() async {
         guard hasLoaded else { return }
         await persistCurrentState()
@@ -183,6 +223,49 @@ final class AppStateStore {
             mutation(&state)
             return true
         })
+    }
+
+    private func updatePrimaryCommanderDamage(
+        for opponentID: UUID,
+        transform: (Int) -> Int?
+    ) async -> CommanderDamageChange? {
+        var change: CommanderDamageChange?
+        let didMutate = await mutateAndPersist(onlyIf: { state in
+            guard var game = state.activeGame,
+                  let opponentIndex = game.opponents.firstIndex(where: { $0.id == opponentID }) else {
+                return false
+            }
+
+            let previousDamage = game.opponents[opponentIndex].primaryCommanderDamage
+            guard let currentDamage = transform(previousDamage),
+                  currentDamage != previousDamage else {
+                return false
+            }
+            let damageDelta = currentDamage.subtractingReportingOverflow(previousDamage)
+            guard !damageDelta.overflow else { return false }
+
+            let previousLife = game.currentLife
+            let currentLife: Int
+            if state.preferences.commanderDamageChangesLife {
+                let lifeResult = previousLife.subtractingReportingOverflow(damageDelta.partialValue)
+                guard !lifeResult.overflow else { return false }
+                currentLife = lifeResult.partialValue
+            } else {
+                currentLife = previousLife
+            }
+
+            game.opponents[opponentIndex].primaryCommanderDamage = currentDamage
+            game.currentLife = currentLife
+            state.activeGame = game
+            change = CommanderDamageChange(
+                previousDamage: previousDamage,
+                currentDamage: currentDamage,
+                previousLife: previousLife,
+                currentLife: currentLife
+            )
+            return true
+        })
+        return didMutate ? change : nil
     }
 
     private func recoverPersistenceIfNeeded() async -> Bool {
