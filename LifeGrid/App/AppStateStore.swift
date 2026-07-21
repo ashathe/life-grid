@@ -24,6 +24,9 @@ final class AppStateStore {
         defer { hasLoaded = true }
         do {
             state = try await environment.repository.load()
+            if environment.uiTestingCommanderDisabled {
+                state.preferences.commanderEnabled = false
+            }
             persistenceIsBlocked = false
             persistenceErrorDescription = nil
         } catch {
