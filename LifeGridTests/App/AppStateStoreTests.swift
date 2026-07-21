@@ -421,6 +421,207 @@ struct AppStateStoreTests {
         #expect(await repository.savedSnapshots().count == 4)
     }
 
+    @MainActor @Test func addOpponentAppendsDefaultAndStopsAtFive() async {
+        var initial = PersistedAppState.default
+        initial.activeGame = activeGame(startingLife: 40, opponentNames: [
+            "Opponent 1", "Amanda", "Opponent 3", "Opponent 4",
+        ])
+        let repository = ScriptedAppStateRepository()
+        let store = AppStateStore(
+            environment: environment(repository: repository),
+            initialState: initial
+        )
+
+        let added = await store.addOpponent()
+        let blocked = await store.addOpponent()
+
+        #expect(added?.displayName == "Opponent 2")
+        #expect(store.state.activeGame?.opponents.count == 5)
+        #expect(blocked == nil)
+        #expect(await repository.savedSnapshots().count == 1)
+    }
+
+    @MainActor @Test func primaryDamageAtomicallyLinksLifeInBothDirections() async {
+        var initial = PersistedAppState.default
+        initial.activeGame = activeGame(startingLife: 40, opponentNames: ["Amanda"])
+        let id = try! #require(initial.activeGame?.opponents[0].id)
+        let repository = ScriptedAppStateRepository()
+        let store = AppStateStore(
+            environment: environment(repository: repository),
+            initialState: initial
+        )
+
+        let up = await store.changePrimaryCommanderDamage(for: id, by: 3)
+        let down = await store.changePrimaryCommanderDamage(for: id, by: -2)
+
+        #expect(up == CommanderDamageChange(
+            previousDamage: 0,
+            currentDamage: 3,
+            previousLife: 40,
+            currentLife: 37
+        ))
+        #expect(down == CommanderDamageChange(
+            previousDamage: 3,
+            currentDamage: 1,
+            previousLife: 37,
+            currentLife: 39
+        ))
+        #expect(store.state.activeGame?.opponents[0].primaryCommanderDamage == 1)
+        #expect(store.state.activeGame?.currentLife == 39)
+        #expect(await repository.savedSnapshots().count == 2)
+    }
+
+    @MainActor @Test func exactPrimaryDamageEntryAppliesLinkedLifeDelta() async {
+        var initial = PersistedAppState.default
+        initial.activeGame = activeGame(startingLife: 40, opponentNames: ["Amanda"])
+        let id = try! #require(initial.activeGame?.opponents[0].id)
+        let repository = ScriptedAppStateRepository()
+        let store = AppStateStore(
+            environment: environment(repository: repository),
+            initialState: initial
+        )
+
+        let increased = await store.setPrimaryCommanderDamage(for: id, to: 8)
+        let decreased = await store.setPrimaryCommanderDamage(for: id, to: 3)
+
+        #expect(increased == CommanderDamageChange(
+            previousDamage: 0,
+            currentDamage: 8,
+            previousLife: 40,
+            currentLife: 32
+        ))
+        #expect(decreased == CommanderDamageChange(
+            previousDamage: 8,
+            currentDamage: 3,
+            previousLife: 32,
+            currentLife: 37
+        ))
+    }
+
+    @MainActor @Test func primaryDamageDoesNotChangeLifeWhenLinkIsOff() async {
+        var initial = PersistedAppState.default
+        initial.preferences.commanderDamageChangesLife = false
+        initial.activeGame = activeGame(startingLife: 40, opponentNames: ["Amanda"])
+        let id = try! #require(initial.activeGame?.opponents[0].id)
+        let repository = ScriptedAppStateRepository()
+        let store = AppStateStore(
+            environment: environment(repository: repository),
+            initialState: initial
+        )
+
+        let change = await store.changePrimaryCommanderDamage(for: id, by: 4)
+
+        #expect(change == CommanderDamageChange(
+            previousDamage: 0,
+            currentDamage: 4,
+            previousLife: 40,
+            currentLife: 40
+        ))
+        #expect(store.state.activeGame?.currentLife == 40)
+        #expect(await repository.savedSnapshots().count == 1)
+    }
+
+    @MainActor @Test func primaryDamageNoOpsAtZeroAndForSameExactValue() async {
+        var initial = PersistedAppState.default
+        initial.activeGame = activeGame(startingLife: 40, opponentNames: ["Amanda"])
+        let id = try! #require(initial.activeGame?.opponents[0].id)
+        let repository = ScriptedAppStateRepository()
+        let store = AppStateStore(
+            environment: environment(repository: repository),
+            initialState: initial
+        )
+
+        let decremented = await store.changePrimaryCommanderDamage(for: id, by: -1)
+        let zeroDelta = await store.changePrimaryCommanderDamage(for: id, by: 0)
+        let unchanged = await store.setPrimaryCommanderDamage(for: id, to: 0)
+        let negativeExact = await store.setPrimaryCommanderDamage(for: id, to: -1)
+
+        #expect(decremented == nil)
+        #expect(zeroDelta == nil)
+        #expect(unchanged == nil)
+        #expect(negativeExact == nil)
+        #expect(store.state == initial)
+        #expect(await repository.savedSnapshots().isEmpty)
+    }
+
+    @MainActor @Test func primaryDamageDoesNothingForMissingOpponentOrGame() async {
+        var initial = PersistedAppState.default
+        initial.activeGame = activeGame(startingLife: 40, opponentNames: ["Amanda"])
+        let repository = ScriptedAppStateRepository()
+        let store = AppStateStore(
+            environment: environment(repository: repository),
+            initialState: initial
+        )
+
+        let missing = await store.changePrimaryCommanderDamage(for: UUID(), by: 1)
+        let noGameRepository = ScriptedAppStateRepository()
+        let noGameStore = AppStateStore(environment: environment(repository: noGameRepository))
+        let noGame = await noGameStore.setPrimaryCommanderDamage(for: UUID(), to: 1)
+
+        #expect(missing == nil)
+        #expect(noGame == nil)
+        #expect(store.state == initial)
+        #expect(await repository.savedSnapshots().isEmpty)
+        #expect(await noGameRepository.savedSnapshots().isEmpty)
+    }
+
+    @MainActor @Test func primaryDamageOverflowDoesNotMutateOrPersist() async {
+        var initial = PersistedAppState.default
+        var game = activeGame(startingLife: 40, opponentNames: ["Amanda"])
+        game.opponents[0].primaryCommanderDamage = .max
+        initial.activeGame = game
+        let id = game.opponents[0].id
+        let repository = ScriptedAppStateRepository()
+        let store = AppStateStore(
+            environment: environment(repository: repository),
+            initialState: initial
+        )
+
+        let change = await store.changePrimaryCommanderDamage(for: id, by: 1)
+
+        #expect(change == nil)
+        #expect(store.state == initial)
+        #expect(await repository.savedSnapshots().isEmpty)
+    }
+
+    @MainActor @Test func linkedLifeOverflowDoesNotMutateOrPersist() async {
+        var initial = PersistedAppState.default
+        var game = activeGame(startingLife: 40, opponentNames: ["Amanda"])
+        game.currentLife = .min
+        initial.activeGame = game
+        let id = game.opponents[0].id
+        let repository = ScriptedAppStateRepository()
+        let store = AppStateStore(
+            environment: environment(repository: repository),
+            initialState: initial
+        )
+
+        let change = await store.changePrimaryCommanderDamage(for: id, by: 1)
+
+        #expect(change == nil)
+        #expect(store.state == initial)
+        #expect(await repository.savedSnapshots().isEmpty)
+    }
+
+    @MainActor @Test func primaryDamageKeepsOpponentsIndependent() async {
+        var initial = PersistedAppState.default
+        initial.activeGame = activeGame(startingLife: 40, opponentNames: ["Amanda", "Bryn"])
+        let firstID = try! #require(initial.activeGame?.opponents[0].id)
+        let secondID = try! #require(initial.activeGame?.opponents[1].id)
+        let repository = ScriptedAppStateRepository()
+        let store = AppStateStore(
+            environment: environment(repository: repository),
+            initialState: initial
+        )
+
+        _ = await store.changePrimaryCommanderDamage(for: firstID, by: 2)
+        _ = await store.changePrimaryCommanderDamage(for: secondID, by: 3)
+
+        #expect(store.state.activeGame?.opponents.map(\.primaryCommanderDamage) == [2, 3])
+        #expect(store.state.activeGame?.currentLife == 35)
+        #expect(await repository.savedSnapshots().count == 2)
+    }
+
     @MainActor @Test func hapticsPlayOnlyWhenEnabledWithoutPersisting() async {
         let enabledHaptics = RecordingHapticsClient()
         let enabledRepository = ScriptedAppStateRepository()
@@ -478,23 +679,22 @@ private extension AppStateStoreTests {
         return snapshot
     }
 
-    func activeGame(startingLife: Int) -> ActiveGame {
-        ActiveGame(
+    func activeGame(
+        startingLife: Int,
+        opponentNames: [String] = ["Opponent 1"]
+    ) -> ActiveGame {
+        let opponentIDs = opponentNames.indices.map { index in
+            UUID(uuidString: String(format: "00000000-0000-0000-0000-%012d", index + 1))!
+        }
+        return ActiveGameFactory.make(
+            setup: GameSetup(
+                totalPlayers: opponentNames.count + 1,
+                startingLife: startingLife,
+                opponentNames: opponentNames
+            ),
             id: UUID(uuidString: "11111111-1111-1111-1111-111111111111")!,
-            startedAt: Date(timeIntervalSince1970: 1_700_000_000),
-            startingLife: startingLife,
-            currentLife: startingLife,
-            opponents: [],
-            ownCommanderAName: nil,
-            ownCommanderBName: nil,
-            ownCommanderTaxA: 0,
-            ownCommanderTaxB: 0,
-            currentMonarchPlayerID: nil,
-            playerHasCitysBlessing: false,
-            counterValues: [:],
-            dayNightState: .notSet,
-            pinnedCounterIDs: [],
-            keepAwakeOverride: nil
+            opponentIDs: opponentIDs,
+            startedAt: Date(timeIntervalSince1970: 1_700_000_000)
         )
     }
 }
