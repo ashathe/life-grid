@@ -3,6 +3,12 @@ import Testing
 @testable import LifeGrid
 
 struct AppEnvironmentTests {
+    @Test func liveEnvironmentUsesUIKitHaptics() {
+        let environment = AppEnvironment.live()
+
+        #expect(environment.haptics is UIKitHapticsClient)
+    }
+
     @Test func deterministicRandomSourceReturnsScriptedValues() async {
         let source = ScriptedRandomSource([4, 1, 3])
 
