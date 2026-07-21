@@ -544,6 +544,44 @@ struct AppStateStoreTests {
         #expect(await repository.savedSnapshots().isEmpty)
     }
 
+    @MainActor @Test func repeatStyleDamageChangesAtThresholdAndZeroOnlyPersistRealMutations() async {
+        var initial = PersistedAppState.default
+        var game = activeGame(startingLife: 40, opponentNames: ["Amanda"])
+        game.opponents[0].primaryCommanderDamage = 20
+        initial.activeGame = game
+        let id = game.opponents[0].id
+        let repository = ScriptedAppStateRepository()
+        let store = AppStateStore(
+            environment: environment(repository: repository),
+            initialState: initial
+        )
+
+        let lethal = await store.changePrimaryCommanderDamage(for: id, by: 1)
+        var zeroInitial = PersistedAppState.default
+        zeroInitial.activeGame = activeGame(startingLife: 40, opponentNames: ["Bryn"])
+        let zeroID = try! #require(zeroInitial.activeGame?.opponents[0].id)
+        let zeroRepository = ScriptedAppStateRepository()
+        let zeroStore = AppStateStore(
+            environment: environment(repository: zeroRepository),
+            initialState: zeroInitial
+        )
+        let zeroFloor = await zeroStore.changePrimaryCommanderDamage(
+            for: zeroID,
+            by: -1
+        )
+
+        #expect(lethal == CommanderDamageChange(
+            previousDamage: 20,
+            currentDamage: 21,
+            previousLife: 40,
+            currentLife: 39
+        ))
+        #expect(zeroFloor == nil)
+        #expect(zeroStore.state.activeGame?.currentLife == 40)
+        #expect(await repository.savedSnapshots().count == 1)
+        #expect(await zeroRepository.savedSnapshots().isEmpty)
+    }
+
     @MainActor @Test func primaryDamageDoesNothingForMissingOpponentOrGame() async {
         var initial = PersistedAppState.default
         initial.activeGame = activeGame(startingLife: 40, opponentNames: ["Amanda"])
