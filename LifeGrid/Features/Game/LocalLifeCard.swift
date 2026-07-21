@@ -315,6 +315,11 @@ struct LocalLifeCard: View {
         }
         .buttonStyle(.plain)
         .accessibilityLabel(accessibilityLabel)
+        .accessibilityHint(
+            amount < 0
+                ? "Keeps commander tax at zero or decreases it by two"
+                : "Increases commander tax by two"
+        )
         .accessibilityIdentifier(identifier)
     }
 }
