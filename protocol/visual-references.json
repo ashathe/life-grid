@@ -1,0 +1,392 @@
+[
+  {
+    "id": "new-game",
+    "approved_source": "docs/approved/Life_Grid_Approved_Designs.pdf",
+    "pdf_page": 2,
+    "required_devices": [
+      "iPhone"
+    ],
+    "required_orientations": [
+      "portrait"
+    ],
+    "required_appearances": [
+      "dark",
+      "system",
+      "light"
+    ],
+    "required_app_scales": [
+      "compact",
+      "balanced",
+      "large"
+    ],
+    "related_requirement_ids": [
+      "NEW-001",
+      "NEW-002",
+      "NEW-003",
+      "NEW-004",
+      "NEW-005",
+      "NEW-006",
+      "NEW-007",
+      "NEW-008"
+    ],
+    "review_directory": "reviews/visuals/new-game",
+    "current_approval_status": "in_review"
+  },
+  {
+    "id": "game-iphone",
+    "approved_source": "docs/approved/Life_Grid_Approved_Designs.pdf",
+    "pdf_page": 3,
+    "required_devices": [
+      "iPhone"
+    ],
+    "required_orientations": [
+      "portrait",
+      "landscape"
+    ],
+    "required_appearances": [
+      "dark",
+      "system",
+      "light"
+    ],
+    "required_app_scales": [
+      "compact",
+      "balanced",
+      "large"
+    ],
+    "related_requirement_ids": [
+      "LIFE-001",
+      "LIFE-002",
+      "LIFE-003",
+      "LIFE-004",
+      "LIFE-005",
+      "LIFE-006",
+      "LIFE-007",
+      "CMD-001",
+      "CMD-002",
+      "CMD-003",
+      "CMD-004",
+      "CMD-005",
+      "CMD-006",
+      "CMD-007",
+      "CMD-008",
+      "CMD-009",
+      "CMD-010",
+      "CMD-011",
+      "OPP-001",
+      "OPP-002",
+      "OPP-003",
+      "OPP-004",
+      "OPP-005",
+      "OPP-006",
+      "OPP-007",
+      "OPP-008",
+      "OPP-009",
+      "OPP-010",
+      "OPP-011",
+      "OPP-012",
+      "OPP-013"
+    ],
+    "review_directory": "reviews/visuals/game-iphone",
+    "current_approval_status": "not_started"
+  },
+  {
+    "id": "counters",
+    "approved_source": "docs/approved/Life_Grid_Approved_Designs.pdf",
+    "pdf_page": 4,
+    "required_devices": [
+      "iPhone",
+      "iPad"
+    ],
+    "required_orientations": [
+      "portrait",
+      "landscape"
+    ],
+    "required_appearances": [
+      "dark",
+      "system",
+      "light"
+    ],
+    "required_app_scales": [
+      "compact",
+      "balanced",
+      "large"
+    ],
+    "related_requirement_ids": [
+      "CTR-001",
+      "CTR-002",
+      "CTR-003",
+      "CTR-004",
+      "CTR-005",
+      "CTR-006",
+      "CTR-007",
+      "CTR-008",
+      "CTR-009",
+      "CTR-010",
+      "CTR-011",
+      "CTR-012",
+      "CTR-013",
+      "CTR-014",
+      "CST-001",
+      "CST-002",
+      "CST-003",
+      "CST-004",
+      "CST-005",
+      "CST-006",
+      "CST-007"
+    ],
+    "review_directory": "reviews/visuals/counters",
+    "current_approval_status": "not_started"
+  },
+  {
+    "id": "dice",
+    "approved_source": "docs/approved/Life_Grid_Approved_Designs.pdf",
+    "pdf_page": 5,
+    "required_devices": [
+      "iPhone",
+      "iPad"
+    ],
+    "required_orientations": [
+      "portrait",
+      "landscape"
+    ],
+    "required_appearances": [
+      "dark",
+      "system",
+      "light"
+    ],
+    "required_app_scales": [
+      "compact",
+      "balanced",
+      "large"
+    ],
+    "related_requirement_ids": [
+      "DICE-001",
+      "DICE-002",
+      "DICE-003",
+      "DICE-004",
+      "DICE-005",
+      "DICE-006",
+      "DICE-007",
+      "DICE-008",
+      "DICE-009",
+      "DICE-010",
+      "DICE-011",
+      "DICE-012",
+      "DICE-013",
+      "DICE-014",
+      "DICE-015",
+      "DICE-016"
+    ],
+    "review_directory": "reviews/visuals/dice",
+    "current_approval_status": "not_started"
+  },
+  {
+    "id": "settings",
+    "approved_source": "docs/approved/Life_Grid_Approved_Designs.pdf",
+    "pdf_page": 6,
+    "required_devices": [
+      "iPhone",
+      "iPad"
+    ],
+    "required_orientations": [
+      "portrait",
+      "landscape"
+    ],
+    "required_appearances": [
+      "dark",
+      "system",
+      "light"
+    ],
+    "required_app_scales": [
+      "compact",
+      "balanced",
+      "large"
+    ],
+    "related_requirement_ids": [
+      "SET-001",
+      "SET-002",
+      "SET-003",
+      "SET-004",
+      "SET-005",
+      "SET-006",
+      "SET-007",
+      "SET-008",
+      "SET-009",
+      "SET-010",
+      "SET-011",
+      "SET-012"
+    ],
+    "review_directory": "reviews/visuals/settings",
+    "current_approval_status": "not_started"
+  },
+  {
+    "id": "status-player-sheets",
+    "approved_source": "docs/approved/Life_Grid_Approved_Designs.pdf",
+    "pdf_page": 7,
+    "required_devices": [
+      "iPhone",
+      "iPad"
+    ],
+    "required_orientations": [
+      "portrait",
+      "landscape"
+    ],
+    "required_appearances": [
+      "dark",
+      "system",
+      "light"
+    ],
+    "required_app_scales": [
+      "compact",
+      "balanced",
+      "large"
+    ],
+    "related_requirement_ids": [
+      "STS-001",
+      "STS-002",
+      "STS-003",
+      "STS-004",
+      "STS-005",
+      "STS-006",
+      "STS-007",
+      "OPP-001",
+      "OPP-002",
+      "OPP-003",
+      "OPP-004",
+      "OPP-005",
+      "OPP-006",
+      "OPP-007",
+      "OPP-008",
+      "OPP-009",
+      "OPP-010",
+      "OPP-011",
+      "OPP-012",
+      "OPP-013"
+    ],
+    "review_directory": "reviews/visuals/status-player-sheets",
+    "current_approval_status": "not_started"
+  },
+  {
+    "id": "quick-restart",
+    "approved_source": "docs/approved/Life_Grid_Approved_Designs.pdf",
+    "pdf_page": 8,
+    "required_devices": [
+      "iPhone",
+      "iPad"
+    ],
+    "required_orientations": [
+      "portrait",
+      "landscape"
+    ],
+    "required_appearances": [
+      "dark",
+      "system",
+      "light"
+    ],
+    "required_app_scales": [
+      "compact",
+      "balanced",
+      "large"
+    ],
+    "related_requirement_ids": [
+      "RST-001",
+      "RST-002",
+      "RST-003",
+      "RST-004",
+      "RST-005",
+      "RST-006",
+      "RST-007",
+      "RST-008",
+      "RST-009"
+    ],
+    "review_directory": "reviews/visuals/quick-restart",
+    "current_approval_status": "not_started"
+  },
+  {
+    "id": "game-ipad",
+    "approved_source": "docs/approved/Life_Grid_Approved_Designs.pdf",
+    "pdf_page": 9,
+    "required_devices": [
+      "iPad"
+    ],
+    "required_orientations": [
+      "portrait",
+      "landscape"
+    ],
+    "required_appearances": [
+      "dark",
+      "system",
+      "light"
+    ],
+    "required_app_scales": [
+      "compact",
+      "balanced",
+      "large"
+    ],
+    "related_requirement_ids": [
+      "LIFE-001",
+      "LIFE-002",
+      "LIFE-003",
+      "LIFE-004",
+      "LIFE-005",
+      "LIFE-006",
+      "LIFE-007",
+      "CMD-001",
+      "CMD-002",
+      "CMD-003",
+      "CMD-004",
+      "CMD-005",
+      "CMD-006",
+      "CMD-007",
+      "CMD-008",
+      "CMD-009",
+      "CMD-010",
+      "CMD-011",
+      "OPP-001",
+      "OPP-002",
+      "OPP-003",
+      "OPP-004",
+      "OPP-005",
+      "OPP-006",
+      "OPP-007",
+      "OPP-008",
+      "OPP-009",
+      "OPP-010",
+      "OPP-011",
+      "OPP-012",
+      "OPP-013",
+      "VIS-002",
+      "VIS-003"
+    ],
+    "review_directory": "reviews/visuals/game-ipad",
+    "current_approval_status": "not_started"
+  },
+  {
+    "id": "approved-icon",
+    "approved_source": "docs/approved/Life_Grid_Selected_Icon_Reference.png",
+    "pdf_page": 10,
+    "required_devices": [
+      "iPhone",
+      "iPad"
+    ],
+    "required_orientations": [
+      "portrait",
+      "landscape"
+    ],
+    "required_appearances": [
+      "dark",
+      "system",
+      "light"
+    ],
+    "required_app_scales": [
+      "compact",
+      "balanced",
+      "large"
+    ],
+    "related_requirement_ids": [
+      "VIS-009"
+    ],
+    "review_directory": "reviews/visuals/approved-icon",
+    "current_approval_status": "not_started"
+  }
+]

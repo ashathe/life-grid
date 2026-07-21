@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Life Grid Requirements",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "id",
+      "title",
+      "spec_section",
+      "visual_references",
+      "implementation_files",
+      "test_files",
+      "evidence_files",
+      "status",
+      "architecture_relevant",
+      "planned_implementation",
+      "planned_tests",
+      "approved_variance",
+      "change_request"
+    ],
+    "properties": {
+      "id": { "type": "string", "pattern": "^[A-Z][A-Z0-9]*-[0-9]{3}$" },
+      "title": { "type": "string", "minLength": 1 },
+      "spec_section": { "type": "string", "minLength": 1 },
+      "visual_references": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+      "implementation_files": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+      "test_files": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+      "evidence_files": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+      "status": {
+        "enum": ["not_started", "in_progress", "implemented", "verified", "blocked", "deferred_by_approval"]
+      },
+      "architecture_relevant": { "type": "boolean" },
+      "planned_implementation": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+      "planned_tests": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+      "approved_variance": { "type": ["string", "null"] },
+      "change_request": { "type": ["string", "null"] }
+    }
+  }
+}
