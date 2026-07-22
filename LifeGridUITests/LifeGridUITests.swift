@@ -254,6 +254,7 @@ final class LifeGridUITests: XCTestCase {
         app.terminate()
         let restored = launchPreservingApp()
         XCTAssertTrue(element("game-screen", in: restored).waitForExistence(timeout: 3))
+        XCTAssertTrue(restored.staticTexts["Opponent 4"].waitForExistence(timeout: 2))
         assertValue("1", for: restored.buttons["Set Opponent 1's commander damage"])
         assertValue("39", for: restored.buttons["life-total"])
     }
@@ -279,7 +280,8 @@ final class LifeGridUITests: XCTestCase {
         XCTAssertTrue(app.staticTexts[
             "Enter a non-negative whole-number commander damage value."
         ].waitForExistence(timeout: 2))
-        XCTAssertTrue(element("opponent-damage-exact-entry", in: app).exists)
+        XCTAssertTrue(entry.exists)
+        XCTAssertTrue(app.navigationBars["Set Commander Damage"].exists)
         app.buttons["Cancel"].tap()
         assertValue("21, commander lethal", for: total)
     }
