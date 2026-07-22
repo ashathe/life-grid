@@ -844,7 +844,8 @@
       "LifeGrid/Models/AppPreferences.swift",
       "LifeGrid/App/AppEnvironment.swift",
       "LifeGrid/App/AppStateStore.swift",
-      "LifeGrid/Features/Game/LocalLifeCard.swift"
+      "LifeGrid/Features/Game/LocalLifeCard.swift",
+      "LifeGrid/Features/Game/ActiveGameSummaryScreen.swift"
     ],
     "test_files": [
       "LifeGridTests/Models/PersistedAppStateTests.swift",
@@ -856,13 +857,18 @@
       "reports/test-results/phase3a-iphone-build.xcresult",
       "reports/test-results/phase3a-game-iphone.png",
       "reports/test-results/phase3a-verification.md",
-      "reviews/visuals/game/phase3a-local-life-comparison.md"
+      "reviews/visuals/game/phase3a-local-life-comparison.md",
+      "reports/test-results/phase3b-tests.xcresult",
+      "reports/test-results/phase3b-iphone-build.xcresult",
+      "reports/test-results/phase3b-game-iphone.png",
+      "reports/test-results/phase3b-verification.md",
+      "reviews/visuals/game/phase3b-primary-opponents-comparison.md"
     ],
     "status": "verified",
     "architecture_relevant": false,
     "planned_implementation": [],
     "planned_tests": [],
-    "approved_variance": "changes/CR-002-iphone-primary-delivery.md confines Phase 3A verification to respecting the default-on commander preference on iPhone portrait; the game-ipad reference remains historical and iPad implementation/verification is deferred. The production Settings toggle remains deferred, so this does not verify user-facing commander-mode configuration.",
+    "approved_variance": "changes/CR-002-iphone-primary-delivery.md confines Phase 3A and Phase 3B verification to respecting the default-on commander preference and hiding local tax/opponent commander UI under the disabled test fixture on iPhone portrait; the game-ipad reference remains historical and iPad implementation/verification is deferred. The production Settings toggle remains deferred, so this does not verify user-facing commander-mode configuration.",
     "change_request": null
   },
   {
@@ -931,14 +937,30 @@
       "game-ipad",
       "settings"
     ],
-    "implementation_files": [],
-    "test_files": [],
-    "evidence_files": [],
-    "status": "not_started",
+    "implementation_files": [
+      "LifeGrid/Models/AppPreferences.swift",
+      "LifeGrid/App/AppStateStore.swift",
+      "LifeGrid/Features/Game/CommanderDamageChange.swift",
+      "LifeGrid/Features/Game/OpponentCard.swift"
+    ],
+    "test_files": [
+      "LifeGridTests/App/AppStateStoreTests.swift",
+      "LifeGridTests/Features/Game/CommanderDamageChangeTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "evidence_files": [
+      "reports/test-results/phase3b-task3-focused-tests.md",
+      "reports/test-results/phase3b-tests.xcresult",
+      "reports/test-results/phase3b-iphone-build.xcresult",
+      "reports/test-results/phase3b-game-iphone.png",
+      "reports/test-results/phase3b-verification.md",
+      "reviews/visuals/game/phase3b-primary-opponents-comparison.md"
+    ],
+    "status": "verified",
     "architecture_relevant": false,
     "planned_implementation": [],
     "planned_tests": [],
-    "approved_variance": null,
+    "approved_variance": "changes/CR-002-iphone-primary-delivery.md confines Phase 3B verification to the persisted default-on preference and injected link-off state on iPhone portrait; iPad implementation/verification is deferred. The production Settings toggle for commander damage linking is not implemented, so only future damage changes under the stored setting are verified.",
     "change_request": null
   },
   {
@@ -950,14 +972,31 @@
       "game-ipad",
       "settings"
     ],
-    "implementation_files": [],
-    "test_files": [],
-    "evidence_files": [],
-    "status": "not_started",
+    "implementation_files": [
+      "LifeGrid/Models/OpponentState.swift",
+      "LifeGrid/App/AppStateStore.swift",
+      "LifeGrid/Features/Game/CommanderDamageChange.swift",
+      "LifeGrid/Features/Game/OpponentCard.swift"
+    ],
+    "test_files": [
+      "LifeGridTests/Models/OpponentStateTests.swift",
+      "LifeGridTests/App/AppStateStoreTests.swift",
+      "LifeGridTests/Features/Game/CommanderDamageChangeTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "evidence_files": [
+      "reports/test-results/phase3b-task3-focused-tests.md",
+      "reports/test-results/phase3b-tests.xcresult",
+      "reports/test-results/phase3b-iphone-build.xcresult",
+      "reports/test-results/phase3b-game-iphone.png",
+      "reports/test-results/phase3b-verification.md",
+      "reviews/visuals/game/phase3b-primary-opponents-comparison.md"
+    ],
+    "status": "verified",
     "architecture_relevant": false,
     "planned_implementation": [],
     "planned_tests": [],
-    "approved_variance": null,
+    "approved_variance": "changes/CR-002-iphone-primary-delivery.md confines Phase 3B per-opponent primary commander-damage verification to iPhone portrait; iPad implementation/verification is deferred. Partner commander damage, partner naming, and partner configuration remain unimplemented.",
     "change_request": null
   },
   {
@@ -988,14 +1027,28 @@
       "game-ipad",
       "settings"
     ],
-    "implementation_files": [],
-    "test_files": [],
-    "evidence_files": [],
-    "status": "not_started",
+    "implementation_files": [
+      "LifeGrid/Features/Game/CommanderDamageChange.swift",
+      "LifeGrid/Features/Game/OpponentCard.swift"
+    ],
+    "test_files": [
+      "LifeGridTests/App/AppStateStoreTests.swift",
+      "LifeGridTests/Features/Game/CommanderDamageChangeTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "evidence_files": [
+      "reports/test-results/phase3b-task3-focused-tests.md",
+      "reports/test-results/phase3b-tests.xcresult",
+      "reports/test-results/phase3b-iphone-build.xcresult",
+      "reports/test-results/phase3b-game-iphone.png",
+      "reports/test-results/phase3b-verification.md",
+      "reviews/visuals/game/phase3b-primary-opponents-comparison.md"
+    ],
+    "status": "verified",
     "architecture_relevant": false,
     "planned_implementation": [],
     "planned_tests": [],
-    "approved_variance": null,
+    "approved_variance": "changes/CR-002-iphone-primary-delivery.md confines Phase 3B primary commander lethal-threshold verification to the persistent red value and semantic commander-lethal accessibility value on iPhone portrait; iPad implementation/verification is deferred. The later nonblocking banner and broader warning subsystem remain unimplemented.",
     "change_request": null
   },
   {
@@ -1007,14 +1060,32 @@
       "game-ipad",
       "settings"
     ],
-    "implementation_files": [],
-    "test_files": [],
-    "evidence_files": [],
-    "status": "not_started",
+    "implementation_files": [
+      "LifeGrid/Models/OpponentState.swift",
+      "LifeGrid/App/AppStateStore.swift",
+      "LifeGrid/Features/Game/CommanderDamageChange.swift",
+      "LifeGrid/Features/Game/ActiveGameSummaryScreen.swift",
+      "LifeGrid/Features/Game/OpponentCard.swift"
+    ],
+    "test_files": [
+      "LifeGridTests/Models/OpponentStateTests.swift",
+      "LifeGridTests/App/AppStateStoreTests.swift",
+      "LifeGridTests/Features/Game/CommanderDamageChangeTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "evidence_files": [
+      "reports/test-results/phase3b-task3-focused-tests.md",
+      "reports/test-results/phase3b-tests.xcresult",
+      "reports/test-results/phase3b-iphone-build.xcresult",
+      "reports/test-results/phase3b-game-iphone.png",
+      "reports/test-results/phase3b-verification.md",
+      "reviews/visuals/game/phase3b-primary-opponents-comparison.md"
+    ],
+    "status": "verified",
     "architecture_relevant": false,
     "planned_implementation": [],
     "planned_tests": [],
-    "approved_variance": null,
+    "approved_variance": "changes/CR-002-iphone-primary-delivery.md confines Phase 3B commander acceptance verification to iPhone portrait primary damage: tap/hold/exact entry, floor zero, atomic optional life linking, link-off future changes, overflow rejection, persistence, haptics only on repeat mutation, and no Phase 3A life Undo. iPad, partner damage, Settings controls, and the later warning-banner subsystem remain unimplemented.",
     "change_request": null
   },
   {
@@ -1026,14 +1097,29 @@
       "game-ipad",
       "status-player-sheets"
     ],
-    "implementation_files": [],
-    "test_files": [],
-    "evidence_files": [],
-    "status": "not_started",
+    "implementation_files": [
+      "LifeGrid/Models/ActiveGame.swift",
+      "LifeGrid/Models/OpponentState.swift",
+      "LifeGrid/Features/Game/ActiveGameSummaryScreen.swift",
+      "LifeGrid/Features/Game/OpponentCard.swift"
+    ],
+    "test_files": [
+      "LifeGridTests/Models/OpponentStateTests.swift",
+      "LifeGridTests/App/AppStateStoreTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "evidence_files": [
+      "reports/test-results/phase3b-tests.xcresult",
+      "reports/test-results/phase3b-iphone-build.xcresult",
+      "reports/test-results/phase3b-game-iphone.png",
+      "reports/test-results/phase3b-verification.md",
+      "reviews/visuals/game/phase3b-primary-opponents-comparison.md"
+    ],
+    "status": "verified",
     "architecture_relevant": false,
     "planned_implementation": [],
     "planned_tests": [],
-    "approved_variance": null,
+    "approved_variance": "changes/CR-002-iphone-primary-delivery.md confines Phase 3B verification to the Commander-only visible opponent-card list below the local card on iPhone portrait; iPad implementation/verification is deferred. Pinned counters, hidden-player handling, Out of Game, partner rows, overflow menus, statuses, and opponent life remain absent or unimplemented.",
     "change_request": null
   },
   {
@@ -1045,14 +1131,28 @@
       "game-ipad",
       "status-player-sheets"
     ],
-    "implementation_files": [],
-    "test_files": [],
-    "evidence_files": [],
-    "status": "not_started",
+    "implementation_files": [
+      "LifeGrid/Models/OpponentState.swift",
+      "LifeGrid/App/AppStateStore.swift",
+      "LifeGrid/Features/Game/ActiveGameSummaryScreen.swift"
+    ],
+    "test_files": [
+      "LifeGridTests/Models/OpponentStateTests.swift",
+      "LifeGridTests/App/AppStateStoreTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "evidence_files": [
+      "reports/test-results/phase3b-tests.xcresult",
+      "reports/test-results/phase3b-iphone-build.xcresult",
+      "reports/test-results/phase3b-game-iphone.png",
+      "reports/test-results/phase3b-verification.md",
+      "reviews/visuals/game/phase3b-primary-opponents-comparison.md"
+    ],
+    "status": "verified",
     "architecture_relevant": false,
     "planned_implementation": [],
     "planned_tests": [],
-    "approved_variance": null,
+    "approved_variance": "changes/CR-002-iphone-primary-delivery.md confines Phase 3B Add Opponent verification to iPhone portrait: the Game-screen action appends one visible default opponent, persists it, and hides at five. iPad implementation/verification is deferred. Quick Restart setup synchronization and later Settings behavior remain unimplemented.",
     "change_request": null
   },
   {
@@ -1064,14 +1164,31 @@
       "game-ipad",
       "status-player-sheets"
     ],
-    "implementation_files": [],
-    "test_files": [],
-    "evidence_files": [],
-    "status": "not_started",
+    "implementation_files": [
+      "LifeGrid/Models/OpponentState.swift",
+      "LifeGrid/Features/NewGame/ActiveGameFactory.swift",
+      "LifeGrid/App/AppStateStore.swift",
+      "LifeGrid/Features/Game/ActiveGameSummaryScreen.swift",
+      "LifeGrid/Features/Game/OpponentCard.swift"
+    ],
+    "test_files": [
+      "LifeGridTests/Models/OpponentStateTests.swift",
+      "LifeGridTests/Features/NewGame/ActiveGameFactoryTests.swift",
+      "LifeGridTests/App/AppStateStoreTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "evidence_files": [
+      "reports/test-results/phase3b-tests.xcresult",
+      "reports/test-results/phase3b-iphone-build.xcresult",
+      "reports/test-results/phase3b-game-iphone.png",
+      "reports/test-results/phase3b-verification.md",
+      "reviews/visuals/game/phase3b-primary-opponents-comparison.md"
+    ],
+    "status": "verified",
     "architecture_relevant": false,
     "planned_implementation": [],
     "planned_tests": [],
-    "approved_variance": null,
+    "approved_variance": "changes/CR-002-iphone-primary-delivery.md confines Phase 3B stable-identity and ordering verification to primary opponent cards on iPhone portrait; iPad implementation/verification is deferred. Rename, hide/restore, partner, status, and random-selection consumers of the stable UUID remain unimplemented.",
     "change_request": null
   },
   {
@@ -1083,14 +1200,30 @@
       "game-ipad",
       "status-player-sheets"
     ],
-    "implementation_files": [],
-    "test_files": [],
-    "evidence_files": [],
-    "status": "not_started",
+    "implementation_files": [
+      "LifeGrid/Models/OpponentState.swift",
+      "LifeGrid/Features/NewGame/ActiveGameFactory.swift",
+      "LifeGrid/App/AppStateStore.swift",
+      "LifeGrid/Features/Game/OpponentCard.swift"
+    ],
+    "test_files": [
+      "LifeGridTests/Models/OpponentStateTests.swift",
+      "LifeGridTests/Features/NewGame/ActiveGameFactoryTests.swift",
+      "LifeGridTests/App/AppStateStoreTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "evidence_files": [
+      "reports/test-results/phase3b-tests.xcresult",
+      "reports/test-results/phase3b-iphone-build.xcresult",
+      "reports/test-results/phase3b-game-iphone.png",
+      "reports/test-results/phase3b-verification.md",
+      "reviews/visuals/game/phase3b-primary-opponents-comparison.md"
+    ],
+    "status": "verified",
     "architecture_relevant": false,
     "planned_implementation": [],
     "planned_tests": [],
-    "approved_variance": null,
+    "approved_variance": "changes/CR-002-iphone-primary-delivery.md confines Phase 3B display-name verification to persisted New Game names, stable Opponent N defaults, and an accessible fallback on iPhone portrait; iPad implementation/verification is deferred. Rename Player UI and opponent menus are not implemented.",
     "change_request": null
   },
   {
@@ -1102,14 +1235,32 @@
       "game-ipad",
       "status-player-sheets"
     ],
-    "implementation_files": [],
-    "test_files": [],
-    "evidence_files": [],
-    "status": "not_started",
+    "implementation_files": [
+      "LifeGrid/Models/OpponentState.swift",
+      "LifeGrid/App/AppStateStore.swift",
+      "LifeGrid/Features/Game/CommanderDamageChange.swift",
+      "LifeGrid/Features/Game/ActiveGameSummaryScreen.swift",
+      "LifeGrid/Features/Game/OpponentCard.swift"
+    ],
+    "test_files": [
+      "LifeGridTests/Models/OpponentStateTests.swift",
+      "LifeGridTests/App/AppStateStoreTests.swift",
+      "LifeGridTests/Features/Game/CommanderDamageChangeTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "evidence_files": [
+      "reports/test-results/phase3b-task3-focused-tests.md",
+      "reports/test-results/phase3b-tests.xcresult",
+      "reports/test-results/phase3b-iphone-build.xcresult",
+      "reports/test-results/phase3b-game-iphone.png",
+      "reports/test-results/phase3b-verification.md",
+      "reviews/visuals/game/phase3b-primary-opponents-comparison.md"
+    ],
+    "status": "verified",
     "architecture_relevant": false,
     "planned_implementation": [],
     "planned_tests": [],
-    "approved_variance": null,
+    "approved_variance": "changes/CR-002-iphone-primary-delivery.md confines Phase 3B primary commander-row verification to iPhone portrait: a single primary row with tap/hold/exact controls, minimum zero, linked life, lethal text/color, persistence, and no opponent life. iPad implementation/verification is deferred. Partner/menu/status content and primary commander naming remain unimplemented.",
     "change_request": null
   },
   {
