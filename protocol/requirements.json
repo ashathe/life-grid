@@ -986,6 +986,7 @@
     ],
     "evidence_files": [
       "reports/test-results/phase3b-task3-focused-tests.md",
+      "reports/test-results/phase3b-final-fixes-focused-tests.md",
       "reports/test-results/phase3b-tests.xcresult",
       "reports/test-results/phase3b-iphone-build.xcresult",
       "reports/test-results/phase3b-game-iphone.png",
@@ -1075,6 +1076,7 @@
     ],
     "evidence_files": [
       "reports/test-results/phase3b-task3-focused-tests.md",
+      "reports/test-results/phase3b-final-fixes-focused-tests.md",
       "reports/test-results/phase3b-tests.xcresult",
       "reports/test-results/phase3b-iphone-build.xcresult",
       "reports/test-results/phase3b-game-iphone.png",
@@ -1085,7 +1087,7 @@
     "architecture_relevant": false,
     "planned_implementation": [],
     "planned_tests": [],
-    "approved_variance": "changes/CR-002-iphone-primary-delivery.md confines Phase 3B commander acceptance verification to iPhone portrait primary damage: tap/hold/exact entry, floor zero, atomic optional life linking, link-off future changes, overflow rejection, persistence, haptics only on repeat mutation, and no Phase 3A life Undo. iPad, partner damage, Settings controls, and the later warning-banner subsystem remain unimplemented.",
+    "approved_variance": "changes/CR-002-iphone-primary-delivery.md confines Phase 3B commander acceptance verification to iPhone portrait primary damage: tap/hold/exact entry, floor zero, atomic optional life linking, link-off future changes, overflow rejection, persistence-aware saved/retained/rejected results, production-path repeat timing and mutation-only haptics, and no Phase 3A life Undo. iPad, partner damage, Settings controls, and the later warning-banner subsystem remain unimplemented.",
     "change_request": null
   },
   {
@@ -1142,6 +1144,7 @@
       "LifeGridUITests/LifeGridUITests.swift"
     ],
     "evidence_files": [
+      "reports/test-results/phase3b-final-fixes-focused-tests.md",
       "reports/test-results/phase3b-tests.xcresult",
       "reports/test-results/phase3b-iphone-build.xcresult",
       "reports/test-results/phase3b-game-iphone.png",
@@ -1152,7 +1155,7 @@
     "architecture_relevant": false,
     "planned_implementation": [],
     "planned_tests": [],
-    "approved_variance": "changes/CR-002-iphone-primary-delivery.md confines Phase 3B Add Opponent verification to iPhone portrait: the Game-screen action appends one visible default opponent, persists it, and hides at five. iPad implementation/verification is deferred. Quick Restart setup synchronization and later Settings behavior remain unimplemented.",
+    "approved_variance": "changes/CR-002-iphone-primary-delivery.md confines Phase 3B Add Opponent verification to iPhone portrait: the Game-screen action appends one visible default opponent, distinguishes a durable save from a retained-in-memory save failure, restores the added opponent after relaunch, and hides at five. iPad implementation/verification is deferred. Quick Restart setup synchronization and later Settings behavior remain unimplemented.",
     "change_request": null
   },
   {
@@ -1178,6 +1181,7 @@
       "LifeGridUITests/LifeGridUITests.swift"
     ],
     "evidence_files": [
+      "reports/test-results/phase3b-final-fixes-focused-tests.md",
       "reports/test-results/phase3b-tests.xcresult",
       "reports/test-results/phase3b-iphone-build.xcresult",
       "reports/test-results/phase3b-game-iphone.png",
@@ -1188,7 +1192,7 @@
     "architecture_relevant": false,
     "planned_implementation": [],
     "planned_tests": [],
-    "approved_variance": "changes/CR-002-iphone-primary-delivery.md confines Phase 3B stable-identity and ordering verification to primary opponent cards on iPhone portrait; iPad implementation/verification is deferred. Rename, hide/restore, partner, status, and random-selection consumers of the stable UUID remain unimplemented.",
+    "approved_variance": "changes/CR-002-iphone-primary-delivery.md confines Phase 3B stable-identity and ordering verification to primary opponent cards on iPhone portrait, including saved-snapshot append order, relaunch retention, and UUID-derived exact-sheet identity; iPad implementation/verification is deferred. Rename, hide/restore, partner, status, and random-selection consumers of the stable UUID remain unimplemented.",
     "change_request": null
   },
   {
@@ -1250,6 +1254,7 @@
     ],
     "evidence_files": [
       "reports/test-results/phase3b-task3-focused-tests.md",
+      "reports/test-results/phase3b-final-fixes-focused-tests.md",
       "reports/test-results/phase3b-tests.xcresult",
       "reports/test-results/phase3b-iphone-build.xcresult",
       "reports/test-results/phase3b-game-iphone.png",
@@ -1260,7 +1265,7 @@
     "architecture_relevant": false,
     "planned_implementation": [],
     "planned_tests": [],
-    "approved_variance": "changes/CR-002-iphone-primary-delivery.md confines Phase 3B primary commander-row verification to iPhone portrait: a single primary row with tap/hold/exact controls, minimum zero, linked life, lethal text/color, persistence, and no opponent life. iPad implementation/verification is deferred. Partner/menu/status content and primary commander naming remain unimplemented.",
+    "approved_variance": "changes/CR-002-iphone-primary-delivery.md confines Phase 3B primary commander-row verification to iPhone portrait: a single primary row with tap/hold/exact controls, minimum zero, linked life, lethal text/color, stable exact-sheet identity, accurate rejection/save-failure feedback, persistence-aware results, and no opponent life. iPad implementation/verification is deferred. Partner/menu/status content and primary commander naming remain unimplemented.",
     "change_request": null
   },
   {
@@ -2771,7 +2776,10 @@
       "reviews/architecture/state-model.md",
       "reviews/architecture/persistence-plan.md",
       "reports/test-results/phase1-unit-tests.xcresult",
-      "reports/test-results/phase1-verification.md"
+      "reports/test-results/phase1-verification.md",
+      "reports/test-results/phase3b-final-fixes-focused-tests.md",
+      "reports/test-results/phase3b-tests.xcresult",
+      "reports/test-results/phase3b-verification.md"
     ],
     "status": "verified",
     "architecture_relevant": true,
@@ -2807,7 +2815,10 @@
       "reviews/architecture/state-model.md",
       "reviews/architecture/persistence-plan.md",
       "reports/test-results/phase1-unit-tests.xcresult",
-      "reports/test-results/phase1-verification.md"
+      "reports/test-results/phase1-verification.md",
+      "reports/test-results/phase3b-final-fixes-focused-tests.md",
+      "reports/test-results/phase3b-tests.xcresult",
+      "reports/test-results/phase3b-verification.md"
     ],
     "status": "verified",
     "architecture_relevant": true,
@@ -3492,7 +3503,10 @@
       "reviews/architecture/test-strategy.md",
       "reports/test-results/phase1-unit-tests.xcresult",
       "reports/test-results/phase1-ui-smoke.xcresult",
-      "reports/test-results/phase1-verification.md"
+      "reports/test-results/phase1-verification.md",
+      "reports/test-results/phase3b-final-fixes-focused-tests.md",
+      "reports/test-results/phase3b-tests.xcresult",
+      "reports/test-results/phase3b-verification.md"
     ],
     "status": "verified",
     "architecture_relevant": true,
@@ -3586,14 +3600,24 @@
     "title": "Commander life-link test",
     "spec_section": "Section 28",
     "visual_references": [],
-    "implementation_files": [],
-    "test_files": [],
-    "evidence_files": [],
-    "status": "not_started",
+    "implementation_files": [
+      "LifeGridTests"
+    ],
+    "test_files": [
+      "LifeGridTests/App/AppStateStoreTests.swift",
+      "LifeGridTests/Features/Game/CommanderDamageChangeTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "evidence_files": [
+      "reports/test-results/phase3b-final-fixes-focused-tests.md",
+      "reports/test-results/phase3b-tests.xcresult",
+      "reports/test-results/phase3b-verification.md"
+    ],
+    "status": "verified",
     "architecture_relevant": false,
     "planned_implementation": [],
     "planned_tests": [],
-    "approved_variance": null,
+    "approved_variance": "changes/CR-002-iphone-primary-delivery.md confines Phase 3B commander life-link UI/relaunch verification to iPhone portrait; iPad implementation/verification is deferred. Primary commander damage is verified; partner commander damage remains unimplemented.",
     "change_request": null
   },
   {
@@ -3616,14 +3640,26 @@
     "title": "Opponent identity test",
     "spec_section": "Section 28",
     "visual_references": [],
-    "implementation_files": [],
-    "test_files": [],
-    "evidence_files": [],
-    "status": "not_started",
+    "implementation_files": [
+      "LifeGridTests"
+    ],
+    "test_files": [
+      "LifeGridTests/Models/OpponentStateTests.swift",
+      "LifeGridTests/Features/NewGame/ActiveGameFactoryTests.swift",
+      "LifeGridTests/App/AppStateStoreTests.swift",
+      "LifeGridTests/Features/Game/CommanderDamageChangeTests.swift",
+      "LifeGridUITests/LifeGridUITests.swift"
+    ],
+    "evidence_files": [
+      "reports/test-results/phase3b-final-fixes-focused-tests.md",
+      "reports/test-results/phase3b-tests.xcresult",
+      "reports/test-results/phase3b-verification.md"
+    ],
+    "status": "verified",
     "architecture_relevant": false,
     "planned_implementation": [],
     "planned_tests": [],
-    "approved_variance": null,
+    "approved_variance": "changes/CR-002-iphone-primary-delivery.md confines Phase 3B opponent-identity UI/relaunch verification to iPhone portrait; iPad implementation/verification is deferred. Stable UUID targeting, saved append order, relaunch retention, and per-opponent exact-sheet identity are verified; later rename/hide/status/random consumers remain unimplemented.",
     "change_request": null
   },
   {

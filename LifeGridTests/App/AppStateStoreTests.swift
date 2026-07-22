@@ -434,10 +434,40 @@ struct AppStateStoreTests {
 
         let added = await store.addOpponent()
         let blocked = await store.addOpponent()
+        let snapshots = await repository.savedSnapshots()
+        let addedOpponent = try! #require(store.state.activeGame?.opponents.last)
 
-        #expect(added?.displayName == "Opponent 2")
+        #expect(added == .persisted(addedOpponent))
+        #expect(addedOpponent.displayName == "Opponent 2")
         #expect(store.state.activeGame?.opponents.count == 5)
-        #expect(blocked == nil)
+        #expect(blocked == .rejected)
+        #expect(snapshots.count == 1)
+        let initialIDs = try! #require(initial.activeGame?.opponents.map(\.id))
+        #expect(snapshots[0].activeGame?.opponents.map(\.id) ==
+                initialIDs + [addedOpponent.id])
+        #expect(snapshots[0].activeGame?.opponents.last == addedOpponent)
+    }
+
+    @MainActor @Test func addOpponentReportsRetainedInMemoryWhenRepositorySaveFails() async {
+        var initial = PersistedAppState.default
+        initial.activeGame = activeGame(
+            startingLife: 40,
+            opponentNames: ["Opponent 1"]
+        )
+        let repository = ScriptedAppStateRepository(failingSaveCalls: [1])
+        let store = AppStateStore(
+            environment: environment(repository: repository),
+            initialState: initial
+        )
+
+        let result = await store.addOpponent()
+        let appended = try! #require(store.state.activeGame?.opponents.last)
+
+        #expect(result == .retainedInMemory(appended))
+        #expect(store.state.activeGame?.opponents.map(\.displayName) == [
+            "Opponent 1", "Opponent 2",
+        ])
+        #expect(store.persistenceErrorDescription != nil)
         #expect(await repository.savedSnapshots().count == 1)
     }
 
@@ -454,18 +484,18 @@ struct AppStateStoreTests {
         let up = await store.changePrimaryCommanderDamage(for: id, by: 3)
         let down = await store.changePrimaryCommanderDamage(for: id, by: -2)
 
-        #expect(up == CommanderDamageChange(
+        #expect(up == .persisted(CommanderDamageChange(
             previousDamage: 0,
             currentDamage: 3,
             previousLife: 40,
             currentLife: 37
-        ))
-        #expect(down == CommanderDamageChange(
+        )))
+        #expect(down == .persisted(CommanderDamageChange(
             previousDamage: 3,
             currentDamage: 1,
             previousLife: 37,
             currentLife: 39
-        ))
+        )))
         #expect(store.state.activeGame?.opponents[0].primaryCommanderDamage == 1)
         #expect(store.state.activeGame?.currentLife == 39)
         #expect(await repository.savedSnapshots().count == 2)
@@ -484,18 +514,18 @@ struct AppStateStoreTests {
         let increased = await store.setPrimaryCommanderDamage(for: id, to: 8)
         let decreased = await store.setPrimaryCommanderDamage(for: id, to: 3)
 
-        #expect(increased == CommanderDamageChange(
+        #expect(increased == .persisted(CommanderDamageChange(
             previousDamage: 0,
             currentDamage: 8,
             previousLife: 40,
             currentLife: 32
-        ))
-        #expect(decreased == CommanderDamageChange(
+        )))
+        #expect(decreased == .persisted(CommanderDamageChange(
             previousDamage: 8,
             currentDamage: 3,
             previousLife: 32,
             currentLife: 37
-        ))
+        )))
     }
 
     @MainActor @Test func primaryDamageDoesNotChangeLifeWhenLinkIsOff() async {
@@ -511,12 +541,12 @@ struct AppStateStoreTests {
 
         let change = await store.changePrimaryCommanderDamage(for: id, by: 4)
 
-        #expect(change == CommanderDamageChange(
+        #expect(change == .persisted(CommanderDamageChange(
             previousDamage: 0,
             currentDamage: 4,
             previousLife: 40,
             currentLife: 40
-        ))
+        )))
         #expect(store.state.activeGame?.currentLife == 40)
         #expect(await repository.savedSnapshots().count == 1)
     }
@@ -536,10 +566,10 @@ struct AppStateStoreTests {
         let unchanged = await store.setPrimaryCommanderDamage(for: id, to: 0)
         let negativeExact = await store.setPrimaryCommanderDamage(for: id, to: -1)
 
-        #expect(decremented == nil)
-        #expect(zeroDelta == nil)
-        #expect(unchanged == nil)
-        #expect(negativeExact == nil)
+        #expect(decremented == .rejected)
+        #expect(zeroDelta == .rejected)
+        #expect(unchanged == .rejected)
+        #expect(negativeExact == .rejected)
         #expect(store.state == initial)
         #expect(await repository.savedSnapshots().isEmpty)
     }
@@ -570,13 +600,13 @@ struct AppStateStoreTests {
             by: -1
         )
 
-        #expect(lethal == CommanderDamageChange(
+        #expect(lethal == .persisted(CommanderDamageChange(
             previousDamage: 20,
             currentDamage: 21,
             previousLife: 40,
             currentLife: 39
-        ))
-        #expect(zeroFloor == nil)
+        )))
+        #expect(zeroFloor == .rejected)
         #expect(zeroStore.state.activeGame?.currentLife == 40)
         #expect(await repository.savedSnapshots().count == 1)
         #expect(await zeroRepository.savedSnapshots().isEmpty)
@@ -596,8 +626,8 @@ struct AppStateStoreTests {
         let noGameStore = AppStateStore(environment: environment(repository: noGameRepository))
         let noGame = await noGameStore.setPrimaryCommanderDamage(for: UUID(), to: 1)
 
-        #expect(missing == nil)
-        #expect(noGame == nil)
+        #expect(missing == .rejected)
+        #expect(noGame == .rejected)
         #expect(store.state == initial)
         #expect(await repository.savedSnapshots().isEmpty)
         #expect(await noGameRepository.savedSnapshots().isEmpty)
@@ -617,7 +647,7 @@ struct AppStateStoreTests {
 
         let change = await store.changePrimaryCommanderDamage(for: id, by: 1)
 
-        #expect(change == nil)
+        #expect(change == .rejected)
         #expect(store.state == initial)
         #expect(await repository.savedSnapshots().isEmpty)
     }
@@ -636,7 +666,7 @@ struct AppStateStoreTests {
 
         let change = await store.changePrimaryCommanderDamage(for: id, by: 1)
 
-        #expect(change == nil)
+        #expect(change == .rejected)
         #expect(store.state == initial)
         #expect(await repository.savedSnapshots().isEmpty)
     }
@@ -658,6 +688,36 @@ struct AppStateStoreTests {
         #expect(store.state.activeGame?.opponents.map(\.primaryCommanderDamage) == [2, 3])
         #expect(store.state.activeGame?.currentLife == 35)
         #expect(await repository.savedSnapshots().count == 2)
+    }
+
+    @MainActor @Test func primaryDamageReportsRetainedInMemoryWhenRepositorySaveFails() async {
+        var initial = PersistedAppState.default
+        initial.activeGame = activeGame(
+            startingLife: 40,
+            opponentNames: ["Amanda"]
+        )
+        let opponentID = try! #require(initial.activeGame?.opponents[0].id)
+        let repository = ScriptedAppStateRepository(failingSaveCalls: [1])
+        let store = AppStateStore(
+            environment: environment(repository: repository),
+            initialState: initial
+        )
+
+        let result = await store.changePrimaryCommanderDamage(
+            for: opponentID,
+            by: 2
+        )
+
+        #expect(result == .retainedInMemory(CommanderDamageChange(
+            previousDamage: 0,
+            currentDamage: 2,
+            previousLife: 40,
+            currentLife: 38
+        )))
+        #expect(store.state.activeGame?.opponents[0].primaryCommanderDamage == 2)
+        #expect(store.state.activeGame?.currentLife == 38)
+        #expect(store.persistenceErrorDescription != nil)
+        #expect(await repository.savedSnapshots().count == 1)
     }
 
     @MainActor @Test func hapticsPlayOnlyWhenEnabledWithoutPersisting() async {

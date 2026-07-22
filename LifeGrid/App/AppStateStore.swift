@@ -164,9 +164,9 @@ final class AppStateStore {
     }
 
     @discardableResult
-    func addOpponent() async -> OpponentState? {
+    func addOpponent() async -> OpponentMutationResult<OpponentState> {
         var added: OpponentState?
-        let didMutate = await mutateAndPersist(onlyIf: { state in
+        let outcome = await mutateAndPersistWithOutcome(onlyIf: { state in
             guard var game = state.activeGame,
                   game.opponents.count < OpponentState.maximumCount else { return false }
             let opponent = OpponentState.newDefault(
@@ -177,15 +177,15 @@ final class AppStateStore {
             added = opponent
             return true
         })
-        return didMutate ? added : nil
+        return opponentMutationResult(for: added, outcome: outcome)
     }
 
     @discardableResult
     func changePrimaryCommanderDamage(
         for opponentID: UUID,
         by amount: Int
-    ) async -> CommanderDamageChange? {
-        guard amount != 0 else { return nil }
+    ) async -> OpponentMutationResult<CommanderDamageChange> {
+        guard amount != 0 else { return .rejected }
         return await updatePrimaryCommanderDamage(for: opponentID) { current in
             let result = current.addingReportingOverflow(amount)
             guard !result.overflow else { return nil }
@@ -197,23 +197,20 @@ final class AppStateStore {
     func setPrimaryCommanderDamage(
         for opponentID: UUID,
         to value: Int
-    ) async -> CommanderDamageChange? {
-        guard value >= 0 else { return nil }
+    ) async -> OpponentMutationResult<CommanderDamageChange> {
+        guard value >= 0 else { return .rejected }
         return await updatePrimaryCommanderDamage(for: opponentID) { _ in value }
     }
 
     func saveForLifecycle() async {
         guard hasLoaded else { return }
-        await persistCurrentState()
+        _ = await persistCurrentState()
     }
 
     private func mutateAndPersist(
         onlyIf mutation: (inout PersistedAppState) -> Bool
     ) async -> Bool {
-        guard await recoverPersistenceIfNeeded() else { return false }
-        guard mutation(&state) else { return false }
-        await persistCurrentState()
-        return true
+        await mutateAndPersistWithOutcome(onlyIf: mutation).didMutate
     }
 
     private func mutateAndPersist(
@@ -228,9 +225,9 @@ final class AppStateStore {
     private func updatePrimaryCommanderDamage(
         for opponentID: UUID,
         transform: (Int) -> Int?
-    ) async -> CommanderDamageChange? {
+    ) async -> OpponentMutationResult<CommanderDamageChange> {
         var change: CommanderDamageChange?
-        let didMutate = await mutateAndPersist(onlyIf: { state in
+        let outcome = await mutateAndPersistWithOutcome(onlyIf: { state in
             guard var game = state.activeGame,
                   let opponentIndex = game.opponents.firstIndex(where: { $0.id == opponentID }) else {
                 return false
@@ -265,7 +262,35 @@ final class AppStateStore {
             )
             return true
         })
-        return didMutate ? change : nil
+        return opponentMutationResult(for: change, outcome: outcome)
+    }
+
+    private func mutateAndPersistWithOutcome(
+        onlyIf mutation: (inout PersistedAppState) -> Bool
+    ) async -> MutationPersistenceOutcome {
+        guard await recoverPersistenceIfNeeded() else { return .rejected }
+        guard mutation(&state) else { return .rejected }
+        switch await persistCurrentState() {
+        case .success:
+            return .persisted
+        case .failure:
+            return .retainedInMemory
+        }
+    }
+
+    private func opponentMutationResult<Value>(
+        for value: Value?,
+        outcome: MutationPersistenceOutcome
+    ) -> OpponentMutationResult<Value> where Value: Equatable & Sendable {
+        guard let value else { return .rejected }
+        switch outcome {
+        case .persisted:
+            return .persisted(value)
+        case .retainedInMemory:
+            return .retainedInMemory(value)
+        case .rejected:
+            return .rejected
+        }
     }
 
     private func recoverPersistenceIfNeeded() async -> Bool {
@@ -292,8 +317,12 @@ final class AppStateStore {
         return recovered
     }
 
-    private func persistCurrentState() async {
-        guard !persistenceIsBlocked else { return }
+    private func persistCurrentState() async -> PersistenceOutcome {
+        guard !persistenceIsBlocked else {
+            return .failure(
+                persistenceErrorDescription ?? "Persistence is unavailable."
+            )
+        }
 
         let snapshot = state
         let predecessor = persistenceTail
@@ -314,13 +343,25 @@ final class AppStateStore {
         persistenceTail = operation
 
         let outcome = await operation.value
-        guard revision == persistenceRevision else { return }
-        switch outcome {
-        case .success:
-            persistenceErrorDescription = nil
-        case .failure(let description):
-            persistenceErrorDescription = description
+        if revision == persistenceRevision {
+            switch outcome {
+            case .success:
+                persistenceErrorDescription = nil
+            case .failure(let description):
+                persistenceErrorDescription = description
+            }
         }
+        return outcome
+    }
+}
+
+private enum MutationPersistenceOutcome: Sendable {
+    case rejected
+    case persisted
+    case retainedInMemory
+
+    var didMutate: Bool {
+        self != .rejected
     }
 }
 
