@@ -29,3 +29,30 @@ struct CustomCounterDefinition: Codable, Identifiable, Equatable, Sendable {
     var name: String
     var createdAt: Date
 }
+
+// MARK: - Display Helpers
+
+extension BuiltInCounterID {
+    var displayName: String {
+        switch self {
+        case .poison: return "Poison"
+        case .energy: return "Energy"
+        case .experience: return "Experience"
+        case .treasure: return "Treasure"
+        case .radiation: return "Radiation"
+        case .storm: return "Storm"
+        case .charge: return "Charge"
+        case .doom: return "Doom"
+        case .tickets: return "Tickets"
+        case .dayNight: return "Day / Night"
+        }
+    }
+
+    var isDayNight: Bool { self == .dayNight }
+}
+
+extension CustomCounterDefinition {
+    func hasNameCollision(with other: String) -> Bool {
+        name.caseInsensitiveCompare(other.trimmingCharacters(in: .whitespaces)) == .orderedSame
+    }
+}

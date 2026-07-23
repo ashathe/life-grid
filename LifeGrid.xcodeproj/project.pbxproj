@@ -57,6 +57,13 @@
 		A20000000000000000000052 /* CommanderDamageChangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000052 /* CommanderDamageChangeTests.swift */; };
 		A20000000000000000000053 /* CommanderDamageChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000053 /* CommanderDamageChange.swift */; };
 		A20000000000000000000054 /* OpponentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000054 /* OpponentCard.swift */; };
+		A20000000000000000000055 /* CounterCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000055 /* CounterCard.swift */; };
+		A20000000000000000000056 /* DayNightCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000056 /* DayNightCard.swift */; };
+		A20000000000000000000057 /* PinCounterSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000057 /* PinCounterSheet.swift */; };
+		A20000000000000000000058 /* CustomCounterEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000058 /* CustomCounterEditor.swift */; };
+		A20000000000000000000059 /* PinnedCountersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000059 /* PinnedCountersView.swift */; };
+		A2000000000000000000005A /* CountersScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3000000000000000000005A /* CountersScreen.swift */; };
+		A2000000000000000000005C /* CounterBehaviorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3000000000000000000005C /* CounterBehaviorTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,6 +137,13 @@
 		A30000000000000000000010 /* Life Grid.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Life Grid.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A30000000000000000000020 /* LifeGridTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LifeGridTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A30000000000000000000030 /* LifeGridUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LifeGridUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A30000000000000000000055 /* CounterCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterCard.swift; sourceTree = "<group>"; };
+		A30000000000000000000056 /* DayNightCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayNightCard.swift; sourceTree = "<group>"; };
+		A30000000000000000000057 /* PinCounterSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinCounterSheet.swift; sourceTree = "<group>"; };
+		A30000000000000000000058 /* CustomCounterEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCounterEditor.swift; sourceTree = "<group>"; };
+		A30000000000000000000059 /* PinnedCountersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinnedCountersView.swift; sourceTree = "<group>"; };
+		A3000000000000000000005A /* CountersScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountersScreen.swift; sourceTree = "<group>"; };
+		A3000000000000000000005C /* CounterBehaviorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterBehaviorTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,7 +232,7 @@
 		};
 		A10000000000000000000005 /* LifeGridTests */ = {
 			isa = PBXGroup;
-			children = (A30000000000000000000003 /* FoundationSmokeTests.swift */, A30000000000000000000005 /* PersistedAppStateTests.swift */, A30000000000000000000051 /* OpponentStateTests.swift */, A3000000000000000000000D /* JSONAppStateRepositoryTests.swift */, A30000000000000000000012 /* TestDoubles.swift */, A30000000000000000000013 /* AppEnvironmentTests.swift */, A30000000000000000000019 /* AppStateStoreTests.swift */, A3000000000000000000001B /* LayoutFoundationTests.swift */, A1000000000000000000000B /* NewGame Feature Tests */, A10000000000000000000012 /* Game Feature Tests */);
+			children = (A30000000000000000000003 /* FoundationSmokeTests.swift */, A30000000000000000000005 /* PersistedAppStateTests.swift */, A30000000000000000000051 /* OpponentStateTests.swift */, A3000000000000000000000D /* JSONAppStateRepositoryTests.swift */, A30000000000000000000012 /* TestDoubles.swift */, A30000000000000000000013 /* AppEnvironmentTests.swift */, A30000000000000000000019 /* AppStateStoreTests.swift */, A3000000000000000000001B /* LayoutFoundationTests.swift */, A1000000000000000000000B /* NewGame Feature Tests */, A10000000000000000000012 /* Game Feature Tests */, A1000000000000000000005D /* Counters Feature Tests */);
 			path = LifeGridTests;
 			sourceTree = "<group>";
 		};
@@ -236,7 +250,8 @@
 		};
 		A1000000000000000000000C /* Features */ = {
 			isa = PBXGroup;
-			children = (A1000000000000000000000D /* NewGame */, A1000000000000000000000F /* Game */, A10000000000000000000011 /* Settings */);
+			children = (A1000000000000000000000D /* NewGame */, A1000000000000000000000F /* Game */,
+				A1000000000000000000005B /* Counters */, A10000000000000000000011 /* Settings */);
 			path = Features;
 			sourceTree = "<group>";
 		};
@@ -270,6 +285,29 @@
 			path = Features/Game;
 			sourceTree = "<group>";
 		};
+		A1000000000000000000005D /* Counters Feature Tests */ = {
+			isa = PBXGroup;
+			children = (
+				A3000000000000000000005C /* CounterBehaviorTests.swift */,
+			);
+			path = Features/Counters;
+			sourceTree = "<group>";
+		};
+
+		A1000000000000000000005B /* Counters */ = {
+			isa = PBXGroup;
+			children = (
+				A30000000000000000000055 /* CounterCard.swift */,
+				A30000000000000000000056 /* DayNightCard.swift */,
+				A30000000000000000000057 /* PinCounterSheet.swift */,
+				A30000000000000000000058 /* CustomCounterEditor.swift */,
+				A30000000000000000000059 /* PinnedCountersView.swift */,
+				A3000000000000000000005A /* CountersScreen.swift */,
+			);
+			path = Counters;
+			sourceTree = "<group>";
+		};
+
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -341,8 +379,8 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		A50000000000000000000010 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A20000000000000000000001, A20000000000000000000006, A20000000000000000000007, A20000000000000000000008, A20000000000000000000009, A2000000000000000000000A, A2000000000000000000000B, A2000000000000000000000C, A2000000000000000000000E, A2000000000000000000000F, A20000000000000000000011, A20000000000000000000014, A20000000000000000000015, A20000000000000000000016, A20000000000000000000017, A20000000000000000000018, A2000000000000000000001A, A2000000000000000000001C, A2000000000000000000001D, A2000000000000000000001E, A2000000000000000000001F, A20000000000000000000042, A20000000000000000000043, A20000000000000000000045, A20000000000000000000046, A20000000000000000000047, A20000000000000000000048, A20000000000000000000049, A2000000000000000000004A, A2000000000000000000004B, A2000000000000000000004C, A2000000000000000000004F, A20000000000000000000050, A20000000000000000000053, A20000000000000000000054); runOnlyForDeploymentPostprocessing = 0; };
-		A50000000000000000000020 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A20000000000000000000003, A20000000000000000000005, A2000000000000000000000D, A20000000000000000000012, A20000000000000000000013, A20000000000000000000019, A2000000000000000000001B, A20000000000000000000040, A20000000000000000000041, A20000000000000000000044, A2000000000000000000004D, A2000000000000000000004E, A20000000000000000000051, A20000000000000000000052); runOnlyForDeploymentPostprocessing = 0; };
+		A50000000000000000000010 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A20000000000000000000001, A20000000000000000000006, A20000000000000000000007, A20000000000000000000008, A20000000000000000000009, A2000000000000000000000A, A2000000000000000000000B, A2000000000000000000000C, A2000000000000000000000E, A2000000000000000000000F, A20000000000000000000011, A20000000000000000000014, A20000000000000000000015, A20000000000000000000016, A20000000000000000000017, A20000000000000000000018, A2000000000000000000001A, A2000000000000000000001C, A2000000000000000000001D, A2000000000000000000001E, A2000000000000000000001F, A20000000000000000000042, A20000000000000000000043, A20000000000000000000045, A20000000000000000000046, A20000000000000000000047, A20000000000000000000048, A20000000000000000000049, A2000000000000000000004A, A2000000000000000000004B, A2000000000000000000004C, A2000000000000000000004F, A20000000000000000000050, A20000000000000000000053, A20000000000000000000054, A20000000000000000000055, A20000000000000000000056, A20000000000000000000057, A20000000000000000000058, A20000000000000000000059, A2000000000000000000005A); runOnlyForDeploymentPostprocessing = 0; };
+		A50000000000000000000020 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A20000000000000000000003, A20000000000000000000005, A2000000000000000000000D, A20000000000000000000012, A20000000000000000000013, A20000000000000000000019, A2000000000000000000001B, A20000000000000000000040, A20000000000000000000041, A20000000000000000000044, A2000000000000000000004D, A2000000000000000000004E, A20000000000000000000051, A20000000000000000000052, A2000000000000000000005C); runOnlyForDeploymentPostprocessing = 0; };
 		A50000000000000000000030 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A20000000000000000000004); runOnlyForDeploymentPostprocessing = 0; };
 /* End PBXSourcesBuildPhase section */
 
