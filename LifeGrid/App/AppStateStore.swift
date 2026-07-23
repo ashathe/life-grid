@@ -202,6 +202,121 @@ final class AppStateStore {
         return await updatePrimaryCommanderDamage(for: opponentID) { _ in value }
     }
 
+    // MARK: Counters
+
+    func changeCounterValue(
+        _ counterID: CounterID,
+        by amount: Int
+    ) async {
+        guard state.activeGame != nil else { return }
+        _ = await mutateAndPersist(onlyIf: { state in
+            guard var game = state.activeGame else { return false }
+            let current = game.counterValues[counterID, default: 0]
+            let result = current.addingReportingOverflow(amount)
+            guard !result.overflow else { return false }
+            game.counterValues[counterID] = max(0, result.partialValue)
+            state.activeGame = game
+            return true
+        })
+    }
+
+    func setCounterValue(
+        _ counterID: CounterID,
+        to value: Int
+    ) async {
+        guard state.activeGame != nil, value >= 0 else { return }
+        _ = await mutateAndPersist(onlyIf: { state in
+            guard var game = state.activeGame else { return false }
+            game.counterValues[counterID] = value
+            state.activeGame = game
+            return true
+        })
+    }
+
+    func toggleDayNight() async {
+        guard state.activeGame != nil else { return }
+        _ = await mutateAndPersist(onlyIf: { state in
+            guard var game = state.activeGame else { return false }
+            switch game.dayNightState {
+            case .notSet:
+                game.dayNightState = .day
+            case .day:
+                game.dayNightState = .night
+            case .night:
+                game.dayNightState = .day
+            }
+            state.activeGame = game
+            return true
+        })
+    }
+
+    func pinCounter(_ counterID: CounterID) async {
+        guard state.activeGame != nil else { return }
+        _ = await mutateAndPersist(onlyIf: { state in
+            guard var game = state.activeGame,
+                  game.pinnedCounterIDs.count < 4,
+                  !game.pinnedCounterIDs.contains(counterID) else { return false }
+            game.pinnedCounterIDs.append(counterID)
+            state.activeGame = game
+            return true
+        })
+    }
+
+    func unpinCounter(_ counterID: CounterID) async {
+        guard state.activeGame != nil else { return }
+        _ = await mutateAndPersist(onlyIf: { state in
+            guard var game = state.activeGame,
+                  let index = game.pinnedCounterIDs.firstIndex(of: counterID) else { return false }
+            game.pinnedCounterIDs.remove(at: index)
+            state.activeGame = game
+            return true
+        })
+    }
+
+    func addCustomCounter(name: String) async {
+        let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return }
+        await mutateAndPersist({ state in
+            let counter = CustomCounterDefinition(
+                id: UUID(),
+                name: trimmed,
+                createdAt: Date()
+            )
+            state.customCounters.append(counter)
+        })
+    }
+
+    func renameCustomCounter(
+        _ counterID: UUID,
+        to name: String
+    ) async {
+        let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return }
+        _ = await mutateAndPersist(onlyIf: { state in
+            guard let index = state.customCounters.firstIndex(where: { $0.id == counterID }) else {
+                return false
+            }
+            state.customCounters[index].name = trimmed
+            return true
+        })
+    }
+
+    func deleteCustomCounter(_ counterID: UUID) async {
+        _ = await mutateAndPersist(onlyIf: { state in
+            guard let index = state.customCounters.firstIndex(where: { $0.id == counterID }) else {
+                return false
+            }
+            state.customCounters.remove(at: index)
+            let customCase = CounterID.custom(counterID)
+            if var game = state.activeGame {
+                game.counterValues.removeValue(forKey: customCase)
+                game.pinnedCounterIDs.removeAll { $0 == customCase }
+                state.activeGame = game
+            }
+            return true
+        })
+    }
+
     func saveForLifecycle() async {
         guard hasLoaded else { return }
         _ = await persistCurrentState()
