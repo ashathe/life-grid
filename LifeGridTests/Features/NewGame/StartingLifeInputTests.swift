@@ -1,7 +1,7 @@
 import Testing
 @testable import LifeGrid
 
-struct StartingLifeInputTests {
+@Suite(.serialized) struct StartingLifeInputTests {
     @Test(arguments: [20, 25, 30, 40, 60])
     func approvedPresetProducesValue(_ value: Int) {
         let input = StartingLifeInput(value: value)

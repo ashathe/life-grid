@@ -1,7 +1,7 @@
 import Testing
 @testable import LifeGrid
 
-struct NewGameDraftTests {
+@Suite(.serialized) struct NewGameDraftTests {
     @Test func rememberedSetupSeedsEveryField() {
         var state = PersistedAppState.default
         state.lastSetup = GameSetup(

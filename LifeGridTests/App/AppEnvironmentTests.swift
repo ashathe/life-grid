@@ -2,7 +2,7 @@ import Foundation
 import Testing
 @testable import LifeGrid
 
-struct AppEnvironmentTests {
+@Suite(.serialized) struct AppEnvironmentTests {
     @Test func liveEnvironmentUsesUIKitHaptics() {
         let environment = AppEnvironment.live()
 

@@ -2,7 +2,7 @@ import SwiftUI
 import Testing
 @testable import LifeGrid
 
-struct FoundationSmokeTests {
+@Suite(.serialized) struct FoundationSmokeTests {
     @Test func setupComponentsLoadApplicationModule() {
         _ = StartingLifePicker(
             input: .constant(StartingLifeInput(value: 40))

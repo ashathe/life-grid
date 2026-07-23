@@ -2,7 +2,7 @@ import Foundation
 import Testing
 @testable import LifeGrid
 
-struct ManualLifeChangeTests {
+@Suite(.serialized) struct ManualLifeChangeTests {
     @Test func equalityIncludesNegativeCurrentValue() {
         let change = ManualLifeChange(previousValue: 40, currentValue: -1)
 

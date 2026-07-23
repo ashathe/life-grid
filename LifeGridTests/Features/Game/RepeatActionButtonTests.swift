@@ -3,7 +3,7 @@ import Testing
 @testable import LifeGrid
 
 @MainActor
-struct RepeatActionButtonTests {
+@Suite(.serialized) struct RepeatActionButtonTests {
     @Test func localLifeScheduleUsesSpecifiedTiming() {
         #expect(RepeatActionSchedule.localLife == RepeatActionSchedule(
             initialDelay: .milliseconds(350),

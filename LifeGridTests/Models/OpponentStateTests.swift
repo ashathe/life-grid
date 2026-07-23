@@ -1,7 +1,7 @@
 import Testing
 @testable import LifeGrid
 
-struct OpponentStateTests {
+@Suite(.serialized) struct OpponentStateTests {
     @Test func nextDefaultNameUsesFirstUnusedCanonicalLabel() {
         let opponents = [
             OpponentState.newDefault(displayName: "Opponent 1"),

@@ -2,7 +2,7 @@ import Foundation
 import Testing
 @testable import LifeGrid
 
-struct JSONAppStateRepositoryTests {
+@Suite(.serialized) struct JSONAppStateRepositoryTests {
     @Test func missingFileLoadsApprovedDefaults() async throws {
         let directory = try makeTemporaryDirectory()
         defer { try? FileManager.default.removeItem(at: directory) }

@@ -2,7 +2,7 @@ import Foundation
 import Testing
 @testable import LifeGrid
 
-struct ActiveGameFactoryTests {
+@Suite(.serialized) struct ActiveGameFactoryTests {
     @Test func createsCompleteApprovedInitialState() {
         let gameID = UUID(uuidString: "11111111-1111-1111-1111-111111111111")!
         let opponentIDs = [
