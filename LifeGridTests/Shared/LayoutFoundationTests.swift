@@ -1,7 +1,7 @@
 import Testing
 @testable import LifeGrid
 
-struct LayoutFoundationTests {
+@Suite(.serialized) struct LayoutFoundationTests {
     @Test func portraitPhoneUsesSingleColumn() {
         let context = GameLayoutContext(
             width: 390,

@@ -2,7 +2,7 @@ import Foundation
 import Testing
 @testable import LifeGrid
 
-struct PersistedAppStateTests {
+@Suite(.serialized) struct PersistedAppStateTests {
     @Test func approvedDefaultsAreStable() {
         let state = PersistedAppState.default
 

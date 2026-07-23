@@ -2,7 +2,7 @@ import Foundation
 import Testing
 @testable import LifeGrid
 
-struct CommanderDamageChangeTests {
+@Suite(.serialized) struct CommanderDamageChangeTests {
     @Test func valuePreservesDamageAndLifeBoundaries() {
         let change = CommanderDamageChange(
             previousDamage: 20,
@@ -46,7 +46,7 @@ struct CommanderDamageChangeTests {
 }
 
 @MainActor
-struct OpponentDamageInteractionTests {
+@Suite(.serialized) struct OpponentDamageInteractionTests {
     @Test func productionRepeatMutatesAndHapticsExactlyOnceAfterApprovedDelay() async {
         let fixture = makeFixture(startingDamage: 0)
         let sleeper = ControlledOpponentRepeatSleeper()

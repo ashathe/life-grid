@@ -22,7 +22,7 @@ struct CounterBehaviorTests {
     private func makeGameStore(repository: any AppStateRepository) async -> AppStateStore {
         let store = AppStateStore(environment: environment(repository: repository))
         await store.load()
-        await store.startGame(using: GameSetup(totalPlayers: 2, startingLife: 40, opponentNames: []), rememberLastSetup: false)
+        await store.startGame(using: GameSetup(totalPlayers: 2, startingLife: 40, opponentNames: ["O1"]), rememberLastSetup: false)
         return store
     }
 

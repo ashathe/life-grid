@@ -2,7 +2,7 @@ import Foundation
 import Testing
 @testable import LifeGrid
 
-struct AppStateStoreTests {
+@Suite(.serialized) struct AppStateStoreTests {
     @MainActor @Test func loadPublishesPersistedState() async {
         var loaded = PersistedAppState.default
         loaded.preferences.playerName = "Michi"
