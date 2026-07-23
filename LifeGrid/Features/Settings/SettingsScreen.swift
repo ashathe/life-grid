@@ -4,11 +4,7 @@ struct SettingsScreen: View {
     @Bindable var store: AppStateStore
     @State private var input: StartingLifeInput
     @State private var playerName: String
-    @State private var appearance: AppearanceMode
-    @State private var appScale: AppScale
-    @State private var showsResetConfirmation = false
     @State private var commanderEnabled: Bool
-    @State private var partnerEnabled: Bool
     @State private var damageLinkEnabled: Bool
     @State private var screenAwake: Bool
     @State private var haptics: Bool
@@ -19,17 +15,12 @@ struct SettingsScreen: View {
         let prefs = store.state.preferences
         _input = State(initialValue: StartingLifeInput(value: prefs.defaultStartingLife))
         _playerName = State(initialValue: prefs.playerName)
-        _appearance = State(initialValue: prefs.appearance)
-        _appScale = State(initialValue: prefs.appScale)
         _commanderEnabled = State(initialValue: prefs.commanderEnabled)
-        _partnerEnabled = State(initialValue: prefs.ownPartnerCommanderEnabled)
         _damageLinkEnabled = State(initialValue: prefs.commanderDamageChangesLife)
         _screenAwake = State(initialValue: prefs.keepScreenAwakeDuringGames)
         _haptics = State(initialValue: prefs.hapticsEnabled)
         _sound = State(initialValue: prefs.soundEffectsEnabled)
     }
-
-    private var prefs: AppPreferences { store.state.preferences }
 
     var body: some View {
         NavigationStack {
@@ -40,7 +31,6 @@ struct SettingsScreen: View {
                     commanderSection
                     displaySection
                     feedbackSection
-                    resetSection
                 }
                 .frame(maxWidth: 560)
                 .padding(12)
@@ -57,30 +47,17 @@ struct SettingsScreen: View {
                 guard input.value != value else { return }
                 input = StartingLifeInput(value: value)
             }
-            .alert("Reset Game?", isPresented: $showsResetConfirmation) {
-                Button("Reset", role: .destructive) {
-                    Task { await store.resetGame() }
-                }
-                Button("Cancel", role: .cancel) {}
-            } message: {
-                Text("Life, commander damage, counters, Day/Night, Monarch, and City's Blessing will reset. Player names, pins, and preferences are preserved.")
-            }
         }
     }
 
-    // MARK: - Sections
-
     private var playerSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Player")
-                .font(.headline)
+            Text("Player").font(.headline)
             TextField("Your name", text: $playerName, prompt: Text("You").foregroundStyle(LifeGridPalette.secondaryText))
                 .foregroundStyle(LifeGridPalette.primaryText)
                 .padding(10)
                 .background(LifeGridPalette.field, in: RoundedRectangle(cornerRadius: 8))
-                .overlay {
-                    RoundedRectangle(cornerRadius: 8).stroke(LifeGridPalette.border)
-                }
+                .overlay { RoundedRectangle(cornerRadius: 8).stroke(LifeGridPalette.border) }
                 .onSubmit { persistPlayerName() }
         }
         .lifeGridCard()
@@ -88,19 +65,13 @@ struct SettingsScreen: View {
 
     private var startingLifeSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Default Starting Life")
-                .font(.headline)
-            Text("Used for your next New Game")
-                .font(.caption)
-                .foregroundStyle(LifeGridPalette.secondaryText)
+            Text("Default Starting Life").font(.headline)
+            Text("Used for your next New Game").font(.caption).foregroundStyle(LifeGridPalette.secondaryText)
             StartingLifePicker(input: $input)
             if input.choice == .custom {
                 Button("Set Default") { persistCurrentValue() }
                     .font(.subheadline).frame(maxWidth: .infinity, minHeight: 40)
-                    .background(
-                        input.value == nil ? LifeGridPalette.control : LifeGridPalette.accent,
-                        in: RoundedRectangle(cornerRadius: 8)
-                    )
+                    .background(input.value == nil ? LifeGridPalette.control : LifeGridPalette.accent, in: RoundedRectangle(cornerRadius: 8))
                     .disabled(input.value == nil)
             }
         }
@@ -112,22 +83,12 @@ struct SettingsScreen: View {
             Text("Gameplay").font(.headline)
             Toggle("Commander", isOn: $commanderEnabled)
                 .tint(LifeGridPalette.accent)
-                .onChange(of: commanderEnabled) { _, v in
-                    Task { await store.setCommanderEnabled(v) }
-                }
+                .onChange(of: commanderEnabled) { _, v in Task { await store.setCommanderEnabled(v) } }
             if commanderEnabled {
-                Divider().overlay(LifeGridPalette.border)
-                Toggle("Own Partner Commander", isOn: $partnerEnabled)
-                    .tint(LifeGridPalette.accent)
-                    .onChange(of: partnerEnabled) { _, v in
-                        Task { await store.setPartnerCommanderEnabled(v) }
-                    }
                 Divider().overlay(LifeGridPalette.border)
                 Toggle("Commander Damage Changes Life", isOn: $damageLinkEnabled)
                     .tint(LifeGridPalette.accent)
-                    .onChange(of: damageLinkEnabled) { _, v in
-                        Task { await store.setCommanderDamageLink(v) }
-                    }
+                    .onChange(of: damageLinkEnabled) { _, v in Task { await store.setCommanderDamageLink(v) } }
             }
         }
         .lifeGridCard()
@@ -138,9 +99,7 @@ struct SettingsScreen: View {
             Text("Display").font(.headline)
             Toggle("Keep Screen Awake During Games", isOn: $screenAwake)
                 .tint(LifeGridPalette.accent)
-                .onChange(of: screenAwake) { _, v in
-                    Task { await store.setKeepScreenAwake(v) }
-                }
+                .onChange(of: screenAwake) { _, v in Task { await store.setKeepScreenAwake(v) } }
         }
         .lifeGridCard()
     }
@@ -150,31 +109,13 @@ struct SettingsScreen: View {
             Text("Feedback").font(.headline)
             Toggle("Haptics", isOn: $haptics)
                 .tint(LifeGridPalette.accent)
-                .onChange(of: haptics) { _, v in
-                    Task { await store.setHapticsEnabled(v) }
-                }
+                .onChange(of: haptics) { _, v in Task { await store.setHapticsEnabled(v) } }
             Divider().overlay(LifeGridPalette.border)
             Toggle("Sound Effects", isOn: $sound)
                 .tint(LifeGridPalette.accent)
-                .onChange(of: sound) { _, v in
-                    Task { await store.setSoundEffectsEnabled(v) }
-                }
+                .onChange(of: sound) { _, v in Task { await store.setSoundEffectsEnabled(v) } }
         }
         .lifeGridCard()
-    }
-
-    private var resetSection: some View {
-        Button {
-            showsResetConfirmation = true
-        } label: {
-            HStack {
-                Image(systemName: "arrow.counterclockwise")
-                Text("Reset Game")
-            }
-            .frame(maxWidth: .infinity, minHeight: 44)
-        }
-        .buttonStyle(.borderedProminent)
-        .tint(LifeGridPalette.destructive)
     }
 
     private func persistCurrentValue() {
@@ -184,27 +125,5 @@ struct SettingsScreen: View {
 
     private func persistPlayerName() {
         Task { await store.setPlayerName(playerName) }
-    }
-}
-
-// MARK: - Labels
-
-private extension AppearanceMode {
-    var label: String {
-        switch self {
-        case .dark: "Dark"
-        case .system: "System"
-        case .light: "Light"
-        }
-    }
-}
-
-private extension AppScale {
-    var label: String {
-        switch self {
-        case .compact: "Sm"
-        case .balanced: "Md"
-        case .large: "Lg"
-        }
     }
 }

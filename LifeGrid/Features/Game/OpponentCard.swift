@@ -132,6 +132,7 @@ struct OpponentCard: View {
     @State private var exactDamageText = ""
     @State private var exactDamageError: String?
     @State private var showsExactDamageEntry = false
+    @State private var exactDamageIsPartner = false
     @State private var showsEditor = false
 
     var body: some View {
@@ -184,6 +185,34 @@ struct OpponentCard: View {
                     .font(.caption)
                     .foregroundStyle(LifeGridPalette.secondaryText)
                 damageControls(for: opponent)
+
+                if let partner = opponent.partner {
+                    Divider().overlay(LifeGridPalette.border)
+                    HStack {
+                        Text(partner.name ?? "Partner")
+                            .font(.caption)
+                            .foregroundStyle(LifeGridPalette.secondaryText)
+                        Spacer()
+                        Button {
+                            Task { await store.removeOpponentPartner(opponent.id) }
+                        } label: {
+                            Image(systemName: "xmark.circle.fill")
+                                .font(.caption)
+                                .foregroundStyle(LifeGridPalette.destructive)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                    partnerDamageControls(for: opponent, partner: partner)
+                } else {
+                    Button {
+                        Task { await store.addOpponentPartner(opponent.id) }
+                    } label: {
+                        Label("Add Partner", systemImage: "person.badge.plus")
+                            .font(.caption)
+                    }
+                    .buttonStyle(.plain)
+                    .foregroundStyle(LifeGridPalette.accent)
+                }
             }
             .foregroundStyle(LifeGridPalette.primaryText)
             .lifeGridCard()
@@ -288,7 +317,7 @@ struct OpponentCard: View {
             .accessibilityIdentifier(
                 Self.exactDamageEntryIdentifier(for: opponentID)
             )
-            .navigationTitle("Set Commander Damage")
+            .navigationTitle(exactDamageIsPartner ? "Set Partner Damage" : "Set Commander Damage")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
@@ -310,6 +339,7 @@ struct OpponentCard: View {
     }
 
     private func openExactDamageEntry(for opponent: OpponentState) {
+        exactDamageIsPartner = false
         exactDamageText = "\(opponent.primaryCommanderDamage)"
         exactDamageError = nil
         showsExactDamageEntry = true
@@ -321,19 +351,24 @@ struct OpponentCard: View {
             exactDamageError = "Enter a non-negative whole-number commander damage value."
             return
         }
-        guard let opponentBeforeUpdate = currentOpponent else {
+        guard let opponent = currentOpponent else {
             exactDamageError = "Opponent is no longer in this game."
             return
         }
-        guard opponentBeforeUpdate.primaryCommanderDamage != value else {
+        let currentDamage = exactDamageIsPartner
+            ? opponent.partner?.damage ?? 0
+            : opponent.primaryCommanderDamage
+        guard currentDamage != value else {
             exactDamageError = nil
             showsExactDamageEntry = false
             return
         }
-        let result = await store.setPrimaryCommanderDamage(
-            for: opponentID,
-            to: value
-        )
+        let result: OpponentMutationResult<CommanderDamageChange>
+        if exactDamageIsPartner {
+            result = await store.setPartnerCommanderDamage(for: opponentID, to: value)
+        } else {
+            result = await store.setPrimaryCommanderDamage(for: opponentID, to: value)
+        }
         switch result {
         case .persisted:
             exactDamageError = nil
@@ -369,5 +404,58 @@ struct OpponentCard: View {
             in: .whitespacesAndNewlines
         )
         return trimmed.isEmpty ? "Opponent" : trimmed
+    }
+
+    private func partnerDamageControls(for opponent: OpponentState, partner: PartnerCommanderState) -> some View {
+        let name = partner.name ?? "Partner"
+        let damage = partner.damage
+
+        return HStack(spacing: 0) {
+            Button {
+                Task { await store.changePartnerCommanderDamage(for: opponentID, by: -1) }
+            } label: {
+                Text("−")
+                    .font(.title2)
+                    .frame(maxWidth: .infinity, minHeight: 60)
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel("Remove one partner damage from \(name)")
+
+            Divider().overlay(LifeGridPalette.border).frame(height: 60)
+
+            Button {
+                exactDamageIsPartner = true
+                exactDamageText = "\(damage)"
+                exactDamageError = nil
+                showsExactDamageEntry = true
+            } label: {
+                Text("\(damage)")
+                    .font(.title2.bold().monospacedDigit())
+                    .foregroundStyle(
+                        damage >= 21 ? LifeGridPalette.destructive : LifeGridPalette.primaryText
+                    )
+                    .frame(minWidth: 72, minHeight: 60)
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel("Set \(name)'s partner damage")
+            .accessibilityValue(damage >= 21 ? "\(damage), lethal" : "\(damage)")
+
+            Divider().overlay(LifeGridPalette.border).frame(height: 60)
+
+            Button {
+                Task { await store.changePartnerCommanderDamage(for: opponentID, by: 1) }
+            } label: {
+                Text("+")
+                    .font(.title2)
+                    .frame(maxWidth: .infinity, minHeight: 60)
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel("Add one partner damage from \(name)")
+        }
+        .background(LifeGridPalette.field, in: RoundedRectangle(cornerRadius: 9))
+        .overlay {
+            RoundedRectangle(cornerRadius: 9).stroke(LifeGridPalette.border)
+        }
+        .clipShape(RoundedRectangle(cornerRadius: 9))
     }
 }

@@ -73,6 +73,8 @@ struct LocalLifeCard: View {
                 if store.state.preferences.ownPartnerCommanderEnabled {
                     partnerTaxRow
                 }
+
+                partnerToggle
             }
         }
         .foregroundStyle(LifeGridPalette.primaryText)
@@ -317,6 +319,31 @@ struct LocalLifeCard: View {
     @MainActor
     private func finishHeldOperation() {
         lifeInteraction.finishHeldOperation()
+    }
+
+    private var partnerToggle: some View {
+        HStack {
+            if store.state.preferences.ownPartnerCommanderEnabled {
+                Button {
+                    Task { await store.setPartnerCommanderEnabled(false) }
+                } label: {
+                    Label("Remove Partner", systemImage: "xmark.circle.fill")
+                        .font(.caption)
+                }
+                .buttonStyle(.plain)
+                .foregroundStyle(LifeGridPalette.destructive)
+            } else {
+                Button {
+                    Task { await store.setPartnerCommanderEnabled(true) }
+                } label: {
+                    Label("Add Partner", systemImage: "person.badge.plus")
+                        .font(.caption)
+                }
+                .buttonStyle(.plain)
+                .foregroundStyle(LifeGridPalette.accent)
+            }
+        }
+        .padding(.top, 4)
     }
 
     private func taxButton(
