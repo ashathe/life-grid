@@ -11,6 +11,8 @@ struct ActiveGameSummaryScreen: View {
                     LocalLifeCard(store: store, game: game)
                         .id(game.id)
 
+                    PinnedCountersView(store: store)
+
                     if store.state.preferences.commanderEnabled {
                         opponentsSection
                     }
