@@ -5,6 +5,19 @@ struct LifeGridApp: App {
     @Environment(\.scenePhase) private var scenePhase
     @State private var store = AppStateStore(environment: .live())
 
+    init() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor(
+            red: 0.035, green: 0.03, blue: 0.05, alpha: 1.0
+        )
+        appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+        appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        UINavigationBar.appearance().compactAppearance = appearance
+    }
+
     var body: some Scene {
         WindowGroup {
             LifeGridRootView(store: store)

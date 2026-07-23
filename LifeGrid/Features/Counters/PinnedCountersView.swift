@@ -5,6 +5,11 @@ struct PinnedCountersView: View {
     @State private var editMode = false
     @State private var showsPinPicker = false
 
+    private let columns = [
+        GridItem(.flexible(), spacing: 12),
+        GridItem(.flexible(), spacing: 12)
+    ]
+
     private var pinnedIDs: [CounterID] {
         store.state.activeGame?.pinnedCounterIDs ?? []
     }
@@ -26,7 +31,7 @@ struct PinnedCountersView: View {
                     .font(.subheadline)
                     .accessibilityIdentifier("edit-pins")
                 }
-                if canPinMore, !editMode {
+                if canPinMore, !editMode, !pinnedIDs.isEmpty {
                     Button {
                         showsPinPicker = true
                     } label: {
@@ -40,12 +45,25 @@ struct PinnedCountersView: View {
             }
 
             if pinnedIDs.isEmpty {
-                Text("Tap + to pin up to four counters to this screen.")
-                    .font(.caption)
-                    .foregroundStyle(LifeGridPalette.secondaryText)
+                Button {
+                    showsPinPicker = true
+                } label: {
+                    HStack {
+                        Image(systemName: "plus.circle.fill")
+                            .font(.title3)
+                        Text("Pin a Counter")
+                            .font(.subheadline)
+                    }
+                    .frame(maxWidth: .infinity, minHeight: 44)
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("Add a pinned counter")
+                .accessibilityIdentifier("add-pin-counter-empty")
             } else {
-                ForEach(pinnedIDs, id: \.self) { counterID in
-                    pinnedCounterRow(counterID)
+                LazyVGrid(columns: columns, spacing: 12) {
+                    ForEach(pinnedIDs, id: \.self) { counterID in
+                        pinnedTile(counterID)
+                    }
                 }
             }
         }
@@ -56,69 +74,78 @@ struct PinnedCountersView: View {
         }
     }
 
-    private func pinnedCounterRow(_ counterID: CounterID) -> some View {
-        HStack(spacing: 0) {
+    private func pinnedTile(_ counterID: CounterID) -> some View {
+        VStack(spacing: 6) {
             Text(displayName(for: counterID))
-                .font(.subheadline.bold())
+                .font(.caption.bold())
                 .lineLimit(1)
-
-            Spacer()
-
-            RepeatActionButton(
-                accessibilityLabel: "Remove one \(displayName(for: counterID))",
-                accessibilityHint: "Hold to repeatedly remove counters",
-                onInitial: {
-                    await store.adjustCounter(counterID, by: -1)
-                },
-                onRepeat: {
-                    await store.adjustCounter(counterID, by: -1)
-                    await store.playHaptic(.adjustment)
-                },
-                onEnd: {}
-            ) {
-                Text("−")
-                    .font(.title3)
-                    .frame(width: 44, height: 44)
-            }
-            .accessibilityIdentifier("pin-decrement-\(displayName(for: counterID))")
+                .foregroundStyle(LifeGridPalette.secondaryText)
 
             Text("\(currentValue(for: counterID))")
-                .font(.headline.monospacedDigit())
-                .frame(minWidth: 36)
+                .font(.title2.bold().monospacedDigit())
                 .accessibilityLabel(displayName(for: counterID))
                 .accessibilityValue("\(currentValue(for: counterID))")
 
-            RepeatActionButton(
-                accessibilityLabel: "Add one \(displayName(for: counterID))",
-                accessibilityHint: "Hold to repeatedly add counters",
-                onInitial: {
-                    await store.adjustCounter(counterID, by: 1)
-                },
-                onRepeat: {
-                    await store.adjustCounter(counterID, by: 1)
-                    await store.playHaptic(.adjustment)
-                },
-                onEnd: {}
-            ) {
-                Text("+")
-                    .font(.title3)
-                    .frame(width: 44, height: 44)
+            HStack(spacing: 12) {
+                RepeatActionButton(
+                    accessibilityLabel: "Remove one \(displayName(for: counterID))",
+                    accessibilityHint: "Hold to repeatedly remove counters",
+                    onInitial: {
+                        await store.adjustCounter(counterID, by: -1)
+                    },
+                    onRepeat: {
+                        await store.adjustCounter(counterID, by: -1)
+                        await store.playHaptic(.adjustment)
+                    },
+                    onEnd: {}
+                ) {
+                    Text("−")
+                        .font(.title3)
+                        .frame(width: 44, height: 44)
+                }
+                .accessibilityIdentifier("pin-decrement-\(displayName(for: counterID))")
+
+                RepeatActionButton(
+                    accessibilityLabel: "Add one \(displayName(for: counterID))",
+                    accessibilityHint: "Hold to repeatedly add counters",
+                    onInitial: {
+                        await store.adjustCounter(counterID, by: 1)
+                    },
+                    onRepeat: {
+                        await store.adjustCounter(counterID, by: 1)
+                        await store.playHaptic(.adjustment)
+                    },
+                    onEnd: {}
+                ) {
+                    Text("+")
+                        .font(.title3)
+                        .frame(width: 44, height: 44)
+                }
+                .accessibilityIdentifier("pin-increment-\(displayName(for: counterID))")
             }
-            .accessibilityIdentifier("pin-increment-\(displayName(for: counterID))")
 
             if editMode {
                 Button {
                     Task { await store.unpinCounter(counterID) }
                 } label: {
                     Image(systemName: "xmark.circle.fill")
-                        .font(.title3)
+                        .font(.caption)
                         .foregroundStyle(LifeGridPalette.destructive)
                 }
                 .buttonStyle(.plain)
-                .frame(width: 44, height: 44)
+                .frame(height: 28)
                 .accessibilityLabel("Unpin \(displayName(for: counterID))")
-                .accessibilityIdentifier("unpin-\(displayName(for: counterID))")
             }
+        }
+        .padding(12)
+        .frame(maxWidth: .infinity)
+        .background(
+            LifeGridPalette.field,
+            in: RoundedRectangle(cornerRadius: 10)
+        )
+        .overlay {
+            RoundedRectangle(cornerRadius: 10)
+                .stroke(LifeGridPalette.border)
         }
     }
 

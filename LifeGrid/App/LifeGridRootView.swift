@@ -37,11 +37,8 @@ struct LifeGridRootView: View {
             CountersScreen(store: store)
                 .tabItem { Label("Counters", systemImage: "number") }
 
-            neutralDestination(
-                title: "Dice",
-                symbol: "die.face.6.fill"
-            )
-            .tabItem { Label("Dice", systemImage: "die.face.6.fill") }
+            DiceScreen(store: store)
+                .tabItem { Label("Dice", systemImage: "die.face.6.fill") }
 
             SettingsScreen(store: store)
                 .tabItem { Label("Settings", systemImage: "gearshape.fill") }

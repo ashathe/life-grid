@@ -238,6 +238,9 @@ struct OpponentCard: View {
                         .accessibilityLabel(exactDamageError)
                 }
             }
+            .scrollContentBackground(.hidden)
+            .background(LifeGridPalette.background)
+            .preferredColorScheme(.dark)
             .accessibilityIdentifier(
                 Self.exactDamageEntryIdentifier(for: opponentID)
             )
