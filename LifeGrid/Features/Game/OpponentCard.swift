@@ -132,13 +132,54 @@ struct OpponentCard: View {
     @State private var exactDamageText = ""
     @State private var exactDamageError: String?
     @State private var showsExactDamageEntry = false
+    @State private var showsEditor = false
 
     var body: some View {
         if let opponent = currentOpponent {
             VStack(alignment: .leading, spacing: 12) {
-                Text(Self.displayName(for: opponent))
-                    .font(.headline)
-                    .lineLimit(2)
+                HStack {
+                    Text(Self.displayName(for: opponent))
+                        .font(.headline)
+                        .lineLimit(2)
+
+                    Spacer()
+
+                    Button {
+                        showsEditor = true
+                    } label: {
+                        Image(systemName: "pencil")
+                            .font(.caption)
+                            .frame(width: 32, height: 32)
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel("Edit \(Self.displayName(for: opponent))")
+                }
+
+                HStack(spacing: 6) {
+                    let isMonarch = store.state.activeGame?.currentMonarchPlayerID == PlayerID.opponent(opponent.id)
+                    Button {
+                        Task { await store.assignMonarch(to: isMonarch ? nil : PlayerID.opponent(opponent.id)) }
+                    } label: {
+                        StatusBadge(
+                            label: "Monarch",
+                            color: Color(red: 0.95, green: 0.75, blue: 0.25),
+                            active: isMonarch
+                        )
+                    }
+                    .buttonStyle(.plain)
+
+                    Button {
+                        Task { await store.toggleCitysBlessing(for: PlayerID.opponent(opponent.id)) }
+                    } label: {
+                        StatusBadge(
+                            label: "City's Blessing",
+                            color: LifeGridPalette.accent,
+                            active: opponent.hasCitysBlessing
+                        )
+                    }
+                    .buttonStyle(.plain)
+                }
+
                 Text("Commander Damage")
                     .font(.caption)
                     .foregroundStyle(LifeGridPalette.secondaryText)
@@ -148,6 +189,9 @@ struct OpponentCard: View {
             .lifeGridCard()
             .sheet(isPresented: $showsExactDamageEntry) {
                 exactDamageSheet(for: opponent)
+            }
+            .sheet(isPresented: $showsEditor) {
+                OpponentEditor(store: store, opponent: opponent)
             }
         }
     }

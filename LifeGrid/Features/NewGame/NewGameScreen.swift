@@ -126,6 +126,8 @@ struct NewGameScreen: View {
                     "Opponent \(index + 1)",
                     text: $draft.opponentNames[index]
                 )
+                .foregroundStyle(LifeGridPalette.primaryText)
+                .colorScheme(.dark)
                 .textInputAutocapitalization(.words)
                 .textFieldStyle(.plain)
                 .padding(.horizontal, 12)
@@ -187,8 +189,11 @@ struct NewGameScreen: View {
             .font(.headline)
             .frame(width: 44, height: 44)
             .background(
-                LifeGridPalette.control,
+                disabled ? LifeGridPalette.field : LifeGridPalette.control,
                 in: RoundedRectangle(cornerRadius: 8)
+            )
+            .foregroundStyle(
+                disabled ? LifeGridPalette.secondaryText : LifeGridPalette.primaryText
             )
             .disabled(disabled)
             .accessibilityIdentifier(identifier)

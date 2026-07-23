@@ -3,73 +3,208 @@ import SwiftUI
 struct SettingsScreen: View {
     @Bindable var store: AppStateStore
     @State private var input: StartingLifeInput
+    @State private var playerName: String
+    @State private var appearance: AppearanceMode
+    @State private var appScale: AppScale
+    @State private var showsResetConfirmation = false
+    @State private var commanderEnabled: Bool
+    @State private var partnerEnabled: Bool
+    @State private var damageLinkEnabled: Bool
+    @State private var screenAwake: Bool
+    @State private var haptics: Bool
+    @State private var sound: Bool
 
     init(store: AppStateStore) {
         self.store = store
-        _input = State(initialValue: StartingLifeInput(
-            value: store.state.preferences.defaultStartingLife
-        ))
+        let prefs = store.state.preferences
+        _input = State(initialValue: StartingLifeInput(value: prefs.defaultStartingLife))
+        _playerName = State(initialValue: prefs.playerName)
+        _appearance = State(initialValue: prefs.appearance)
+        _appScale = State(initialValue: prefs.appScale)
+        _commanderEnabled = State(initialValue: prefs.commanderEnabled)
+        _partnerEnabled = State(initialValue: prefs.ownPartnerCommanderEnabled)
+        _damageLinkEnabled = State(initialValue: prefs.commanderDamageChangesLife)
+        _screenAwake = State(initialValue: prefs.keepScreenAwakeDuringGames)
+        _haptics = State(initialValue: prefs.hapticsEnabled)
+        _sound = State(initialValue: prefs.soundEffectsEnabled)
     }
+
+    private var prefs: AppPreferences { store.state.preferences }
 
     var body: some View {
         NavigationStack {
             ScrollView {
-                VStack(alignment: .leading, spacing: 14) {
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text("Settings")
-                            .font(.title2.bold())
-                        Text("Saved locally on this device")
-                            .font(.caption)
-                            .foregroundStyle(LifeGridPalette.secondaryText)
-                    }
-
-                    VStack(alignment: .leading, spacing: 10) {
-                        Text("Default Starting Life")
-                            .font(.headline)
-                        Text("Used for your next New Game")
-                            .font(.caption)
-                            .foregroundStyle(LifeGridPalette.secondaryText)
-                        StartingLifePicker(input: $input)
-
-                        if input.choice == .custom {
-                            Button("Set Default") {
-                                persistCurrentValue()
-                            }
-                            .font(.headline)
-                            .frame(maxWidth: .infinity, minHeight: 44)
-                            .background(
-                                input.value == nil
-                                    ? LifeGridPalette.control
-                                    : LifeGridPalette.accent,
-                                in: RoundedRectangle(cornerRadius: 8)
-                            )
-                            .disabled(input.value == nil)
-                            .accessibilityIdentifier("set-default-life")
-                        }
-                    }
-                    .lifeGridCard()
-                    .accessibilityIdentifier("settings-default-life")
+                VStack(alignment: .leading, spacing: 12) {
+                    playerSection
+                    startingLifeSection
+                    commanderSection
+                    displaySection
+                    feedbackSection
+                    resetSection
                 }
                 .frame(maxWidth: 560)
-                .padding(16)
+                .padding(12)
                 .frame(maxWidth: .infinity)
             }
             .background(LifeGridPalette.background.ignoresSafeArea())
             .foregroundStyle(LifeGridPalette.primaryText)
+            .navigationTitle("Settings")
+            .navigationBarTitleDisplayMode(.inline)
             .onChange(of: input.choice) { _, choice in
-                if case .preset = choice {
-                    persistCurrentValue()
-                }
+                if case .preset = choice { persistCurrentValue() }
             }
             .onChange(of: store.state.preferences.defaultStartingLife) { _, value in
                 guard input.value != value else { return }
                 input = StartingLifeInput(value: value)
             }
+            .alert("Reset Game?", isPresented: $showsResetConfirmation) {
+                Button("Reset", role: .destructive) {
+                    Task { await store.resetGame() }
+                }
+                Button("Cancel", role: .cancel) {}
+            } message: {
+                Text("Life, commander damage, counters, Day/Night, Monarch, and City's Blessing will reset. Player names, pins, and preferences are preserved.")
+            }
         }
+    }
+
+    // MARK: - Sections
+
+    private var playerSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Player")
+                .font(.headline)
+            TextField("Your name", text: $playerName, prompt: Text("You").foregroundStyle(LifeGridPalette.secondaryText))
+                .foregroundStyle(LifeGridPalette.primaryText)
+                .padding(10)
+                .background(LifeGridPalette.field, in: RoundedRectangle(cornerRadius: 8))
+                .overlay {
+                    RoundedRectangle(cornerRadius: 8).stroke(LifeGridPalette.border)
+                }
+                .onSubmit { persistPlayerName() }
+        }
+        .lifeGridCard()
+    }
+
+    private var startingLifeSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Default Starting Life")
+                .font(.headline)
+            Text("Used for your next New Game")
+                .font(.caption)
+                .foregroundStyle(LifeGridPalette.secondaryText)
+            StartingLifePicker(input: $input)
+            if input.choice == .custom {
+                Button("Set Default") { persistCurrentValue() }
+                    .font(.subheadline).frame(maxWidth: .infinity, minHeight: 40)
+                    .background(
+                        input.value == nil ? LifeGridPalette.control : LifeGridPalette.accent,
+                        in: RoundedRectangle(cornerRadius: 8)
+                    )
+                    .disabled(input.value == nil)
+            }
+        }
+        .lifeGridCard()
+    }
+
+    private var commanderSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Gameplay").font(.headline)
+            Toggle("Commander", isOn: $commanderEnabled)
+                .tint(LifeGridPalette.accent)
+                .onChange(of: commanderEnabled) { _, v in
+                    Task { await store.setCommanderEnabled(v) }
+                }
+            if commanderEnabled {
+                Divider().overlay(LifeGridPalette.border)
+                Toggle("Own Partner Commander", isOn: $partnerEnabled)
+                    .tint(LifeGridPalette.accent)
+                    .onChange(of: partnerEnabled) { _, v in
+                        Task { await store.setPartnerCommanderEnabled(v) }
+                    }
+                Divider().overlay(LifeGridPalette.border)
+                Toggle("Commander Damage Changes Life", isOn: $damageLinkEnabled)
+                    .tint(LifeGridPalette.accent)
+                    .onChange(of: damageLinkEnabled) { _, v in
+                        Task { await store.setCommanderDamageLink(v) }
+                    }
+            }
+        }
+        .lifeGridCard()
+    }
+
+    private var displaySection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Display").font(.headline)
+            Toggle("Keep Screen Awake During Games", isOn: $screenAwake)
+                .tint(LifeGridPalette.accent)
+                .onChange(of: screenAwake) { _, v in
+                    Task { await store.setKeepScreenAwake(v) }
+                }
+        }
+        .lifeGridCard()
+    }
+
+    private var feedbackSection: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("Feedback").font(.headline)
+            Toggle("Haptics", isOn: $haptics)
+                .tint(LifeGridPalette.accent)
+                .onChange(of: haptics) { _, v in
+                    Task { await store.setHapticsEnabled(v) }
+                }
+            Divider().overlay(LifeGridPalette.border)
+            Toggle("Sound Effects", isOn: $sound)
+                .tint(LifeGridPalette.accent)
+                .onChange(of: sound) { _, v in
+                    Task { await store.setSoundEffectsEnabled(v) }
+                }
+        }
+        .lifeGridCard()
+    }
+
+    private var resetSection: some View {
+        Button {
+            showsResetConfirmation = true
+        } label: {
+            HStack {
+                Image(systemName: "arrow.counterclockwise")
+                Text("Reset Game")
+            }
+            .frame(maxWidth: .infinity, minHeight: 44)
+        }
+        .buttonStyle(.borderedProminent)
+        .tint(LifeGridPalette.destructive)
     }
 
     private func persistCurrentValue() {
         guard let value = input.value else { return }
         Task { await store.setDefaultStartingLife(value) }
+    }
+
+    private func persistPlayerName() {
+        Task { await store.setPlayerName(playerName) }
+    }
+}
+
+// MARK: - Labels
+
+private extension AppearanceMode {
+    var label: String {
+        switch self {
+        case .dark: "Dark"
+        case .system: "System"
+        case .light: "Light"
+        }
+    }
+}
+
+private extension AppScale {
+    var label: String {
+        switch self {
+        case .compact: "Sm"
+        case .balanced: "Md"
+        case .large: "Lg"
+        }
     }
 }

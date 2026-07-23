@@ -17,6 +17,32 @@ struct LocalLifeCard: View {
                     .lineLimit(2)
                     .accessibilityLabel(localPlayerName)
 
+                if game.currentMonarchPlayerID == .local {
+                    StatusBadge(label: "Monarch", color: Color(red: 0.95, green: 0.75, blue: 0.25))
+                } else {
+                    Button {
+                        Task { await store.assignMonarch(to: .local) }
+                    } label: {
+                        StatusBadge(label: "Monarch", color: Color(red: 0.95, green: 0.75, blue: 0.25), active: false)
+                    }
+                    .buttonStyle(.plain)
+                }
+                if game.playerHasCitysBlessing {
+                    Button {
+                        Task { await store.toggleCitysBlessing(for: .local) }
+                    } label: {
+                        StatusBadge(label: "City's Blessing", color: LifeGridPalette.accent)
+                    }
+                    .buttonStyle(.plain)
+                } else {
+                    Button {
+                        Task { await store.toggleCitysBlessing(for: .local) }
+                    } label: {
+                        StatusBadge(label: "City's Blessing", color: LifeGridPalette.accent, active: false)
+                    }
+                    .buttonStyle(.plain)
+                }
+
                 Spacer()
 
                 if lifeInteraction.undoState != nil {
@@ -43,6 +69,10 @@ struct LocalLifeCard: View {
             if store.state.preferences.commanderEnabled {
                 Divider().overlay(LifeGridPalette.border)
                 commanderTaxRow
+
+                if store.state.preferences.ownPartnerCommanderEnabled {
+                    partnerTaxRow
+                }
             }
         }
         .foregroundStyle(LifeGridPalette.primaryText)
@@ -225,6 +255,45 @@ struct LocalLifeCard: View {
             ?? game.ownCommanderTaxA
     }
 
+    private var partnerCommanderTax: Int {
+        guard store.state.activeGame?.id == game.id else {
+            return game.ownCommanderTaxB
+        }
+        return store.state.activeGame?.ownCommanderTaxB
+            ?? game.ownCommanderTaxB
+    }
+
+    private var partnerTaxRow: some View {
+        HStack(spacing: 10) {
+            Text("Partner Tax")
+                .font(.subheadline.bold())
+
+            Spacer()
+
+            taxButton(
+                title: "−2",
+                identifier: "partner-tax-decrement",
+                accessibilityLabel: "Decrease partner commander tax by two",
+                amount: -2,
+                slot: .partner
+            )
+
+            Text("\(partnerCommanderTax)")
+                .font(.headline.monospacedDigit())
+                .frame(minWidth: 32)
+                .accessibilityLabel("Partner commander tax")
+                .accessibilityValue("\(partnerCommanderTax)")
+
+            taxButton(
+                title: "+2",
+                identifier: "partner-tax-increment",
+                accessibilityLabel: "Increase partner commander tax by two",
+                amount: 2,
+                slot: .partner
+            )
+        }
+    }
+
     @MainActor
     private func applyManualDelta(_ amount: Int) async {
         await lifeInteraction.applyManualDelta(amount, to: store)
@@ -254,11 +323,12 @@ struct LocalLifeCard: View {
         title: String,
         identifier: String,
         accessibilityLabel: String,
-        amount: Int
+        amount: Int,
+        slot: LocalCommanderTaxSlot = .primary
     ) -> some View {
         Button {
             Task {
-                await store.adjustLocalCommanderTax(.primary, by: amount)
+                await store.adjustLocalCommanderTax(slot, by: amount)
             }
         } label: {
             Text(title)
@@ -277,5 +347,25 @@ struct LocalLifeCard: View {
                 : "Increases commander tax by two"
         )
         .accessibilityIdentifier(identifier)
+    }
+}
+
+struct StatusBadge: View {
+    let label: String
+    let color: Color
+    var active: Bool = true
+
+    var body: some View {
+        Text(label)
+            .font(.caption2.bold())
+            .padding(.horizontal, 6)
+            .padding(.vertical, 2)
+            .background(active ? color.opacity(0.25) : LifeGridPalette.control)
+            .foregroundStyle(active ? color : LifeGridPalette.secondaryText)
+            .clipShape(RoundedRectangle(cornerRadius: 4))
+            .overlay {
+                RoundedRectangle(cornerRadius: 4)
+                    .stroke(active ? color.opacity(0.5) : Color.clear)
+            }
     }
 }
