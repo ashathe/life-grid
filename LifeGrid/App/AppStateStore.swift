@@ -336,6 +336,87 @@ final class AppStateStore {
         return didMutate
     }
 
+    @discardableResult
+    func rollDice(sides: Int, count: Int) async -> DiceRollEntry? {
+        guard (2...999).contains(sides), (1...100).contains(count) else { return nil }
+
+        var results: [Int] = []
+        for _ in 0..<count {
+            results.append(await environment.randomSource.nextInt(in: 1...sides))
+        }
+        let total = results.reduce(0, +)
+        let entry = DiceRollEntry(
+            id: UUID(),
+            timestamp: Date(),
+            sides: sides,
+            diceCount: count,
+            individualResults: results,
+            total: total
+        )
+
+        _ = await mutateAndPersist({ state in
+            state.diceHistory.append(entry)
+            if state.diceHistory.count > 5 {
+                state.diceHistory = Array(state.diceHistory.suffix(5))
+            }
+        })
+        return entry
+    }
+
+    @discardableResult
+    func addCustomDie(sides: Int) async -> SavedDieDefinition? {
+        guard (2...999).contains(sides) else { return nil }
+        guard !state.savedDice.contains(where: { $0.sides == sides }) else { return nil }
+
+        var created: SavedDieDefinition?
+        _ = await mutateAndPersist({ state in
+            let die = SavedDieDefinition(id: UUID(), sides: sides)
+            state.savedDice.append(die)
+            created = die
+        })
+        return created
+    }
+
+    @discardableResult
+    func deleteCustomDie(_ id: UUID) async -> Bool {
+        let didMutate = await mutateAndPersist(onlyIf: { state in
+            guard state.savedDice.contains(where: { $0.id == id }) else { return false }
+            state.savedDice.removeAll(where: { $0.id == id })
+            return true
+        })
+        return didMutate
+    }
+
+    func pickRandomStartingPlayer() async -> String? {
+        guard let game = state.activeGame else { return nil }
+        var candidates: [String] = []
+        let localName = LocalLifeCard.displayName(
+            for: state.preferences.playerName
+        )
+        candidates.append(localName)
+        candidates.append(
+            contentsOf: game.opponents.filter(\.isVisible).map(\.displayName)
+        )
+        guard !candidates.isEmpty else { return nil }
+        let index = await environment.randomSource.nextInt(in: 0...(candidates.count - 1))
+        return candidates[index]
+    }
+
+    func pickRandomOpponent() async -> String? {
+        guard let game = state.activeGame else { return nil }
+        let candidates = game.opponents
+            .filter(\.isVisible)
+            .map(\.displayName)
+        guard !candidates.isEmpty else { return nil }
+        let index = await environment.randomSource.nextInt(in: 0...(candidates.count - 1))
+        return candidates[index]
+    }
+
+    func flipCoin() async -> CoinFlipFace {
+        let value = await environment.randomSource.nextInt(in: 0...1)
+        return value == 0 ? .heads : .tails
+    }
+
     func saveForLifecycle() async {
         guard hasLoaded else { return }
         _ = await persistCurrentState()

@@ -174,6 +174,9 @@ struct LocalLifeCard: View {
                         .accessibilityLabel(exactLifeError)
                 }
             }
+            .scrollContentBackground(.hidden)
+            .background(LifeGridPalette.background)
+            .preferredColorScheme(.dark)
             .accessibilityIdentifier("life-exact-entry")
             .navigationTitle("Set Life Total")
             .navigationBarTitleDisplayMode(.inline)

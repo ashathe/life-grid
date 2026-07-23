@@ -112,6 +112,9 @@ struct CounterCard: View {
                         .accessibilityLabel(exactError)
                 }
             }
+            .scrollContentBackground(.hidden)
+            .background(LifeGridPalette.background)
+            .preferredColorScheme(.dark)
             .accessibilityIdentifier("counter-exact-entry")
             .navigationTitle("Set \(name)")
             .navigationBarTitleDisplayMode(.inline)

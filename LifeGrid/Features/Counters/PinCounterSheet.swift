@@ -73,6 +73,9 @@ struct PinCounterSheet: View {
                     }
                 }
             }
+            .scrollContentBackground(.hidden)
+            .background(LifeGridPalette.background)
+            .preferredColorScheme(.dark)
             .navigationTitle("Pin Counter")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -101,6 +104,7 @@ struct PinCounterSheet: View {
                     .foregroundStyle(LifeGridPalette.secondaryText)
             }
         }
+        .listRowBackground(LifeGridPalette.surface)
     }
 
     private func counterName(_ id: CounterID) -> String {

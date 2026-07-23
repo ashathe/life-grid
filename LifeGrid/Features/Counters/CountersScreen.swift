@@ -27,14 +27,14 @@ struct CountersScreen: View {
                         counterSections
                     }
                 }
-                .padding(16)
+                .padding(12)
                 .frame(maxWidth: 560)
             }
             .frame(maxWidth: .infinity)
             .background(LifeGridPalette.background.ignoresSafeArea())
             .foregroundStyle(LifeGridPalette.primaryText)
             .navigationTitle("Counters")
-            .toolbarTitleDisplayMode(.large)
+            .toolbarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItemGroup(placement: .topBarTrailing) {
                     if store.state.activeGame != nil, pinnedIDs.count < 4 {
@@ -172,21 +172,21 @@ struct CountersScreen: View {
 
                     ForEach(store.state.customCounters) { custom in
                         let counterID = CounterID.custom(custom.id)
-                        HStack {
+                        HStack(alignment: .top) {
                             CounterCard(
                                 name: custom.name,
                                 counterID: counterID,
                                 store: store
                             )
 
-                            VStack(spacing: 0) {
+                            VStack(spacing: 4) {
                                 if pinnedIDs.count < 4, !pinnedIDs.contains(counterID) {
                                     Button {
                                         Task { await store.pinCounter(counterID) }
                                     } label: {
                                         Image(systemName: "pin.fill")
                                             .font(.subheadline)
-                                            .frame(width: 44, height: 44)
+                                            .frame(width: 36, height: 36)
                                     }
                                     .buttonStyle(.plain)
                                     .accessibilityLabel("Pin \(custom.name)")
@@ -196,22 +196,34 @@ struct CountersScreen: View {
                                     } label: {
                                         Image(systemName: "pin.slash.fill")
                                             .font(.subheadline)
-                                            .frame(width: 44, height: 44)
+                                            .frame(width: 36, height: 36)
                                     }
                                     .buttonStyle(.plain)
                                     .accessibilityLabel("Unpin \(custom.name)")
                                 }
+
+                                Button {
+                                    renameTarget = custom
+                                } label: {
+                                    Image(systemName: "pencil")
+                                        .font(.caption)
+                                        .frame(width: 36, height: 36)
+                                }
+                                .buttonStyle(.plain)
+                                .accessibilityLabel("Rename \(custom.name)")
+
+                                Button {
+                                    deleteTarget = custom
+                                    showsDeleteConfirmation = true
+                                } label: {
+                                    Image(systemName: "trash")
+                                        .font(.caption)
+                                        .foregroundStyle(LifeGridPalette.destructive)
+                                        .frame(width: 36, height: 36)
+                                }
+                                .buttonStyle(.plain)
+                                .accessibilityLabel("Delete \(custom.name)")
                             }
-                        }
-                        .swipeActions(edge: .trailing) {
-                            Button("Delete", role: .destructive) {
-                                deleteTarget = custom
-                                showsDeleteConfirmation = true
-                            }
-                            Button("Rename") {
-                                renameTarget = custom
-                            }
-                            .tint(LifeGridPalette.accent)
                         }
                     }
                 }

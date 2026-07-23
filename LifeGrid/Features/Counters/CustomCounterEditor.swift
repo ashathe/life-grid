@@ -42,6 +42,9 @@ struct CustomCounterEditor: View {
                         .accessibilityLabel(error)
                 }
             }
+            .scrollContentBackground(.hidden)
+            .background(LifeGridPalette.background)
+            .preferredColorScheme(.dark)
             .accessibilityIdentifier("custom-counter-editor")
             .navigationTitle(isEditing ? "Rename Counter" : "New Custom Counter")
             .navigationBarTitleDisplayMode(.inline)
