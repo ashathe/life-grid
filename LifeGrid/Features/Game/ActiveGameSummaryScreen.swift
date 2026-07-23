@@ -3,6 +3,7 @@ import SwiftUI
 struct ActiveGameSummaryScreen: View {
     @Bindable var store: AppStateStore
     @State private var showsNewGame = false
+    @State private var showsResetConfirmation = false
 
     var body: some View {
         NavigationStack {
@@ -25,11 +26,26 @@ struct ActiveGameSummaryScreen: View {
             .foregroundStyle(LifeGridPalette.primaryText)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button("New Game") { showsNewGame = true }
-                        .accessibilityIdentifier("new-game-toolbar")
+                    HStack(spacing: 4) {
+                        Button("Reset") {
+                            showsResetConfirmation = true
+                        }
+                        .accessibilityIdentifier("reset-toolbar")
+
+                        Button("New Game") { showsNewGame = true }
+                            .accessibilityIdentifier("new-game-toolbar")
+                    }
                 }
             }
             .accessibilityIdentifier("game-screen")
+            .alert("Reset Game?", isPresented: $showsResetConfirmation) {
+                Button("Reset", role: .destructive) {
+                    Task { await store.resetGame() }
+                }
+                Button("Cancel", role: .cancel) {}
+            } message: {
+                Text("Life, commander damage, counters, Day/Night, Monarch, and City's Blessing will reset. Player names, pins, and preferences are preserved.")
+            }
             .sheet(isPresented: $showsNewGame) {
                 NewGameScreen(store: store) {
                     showsNewGame = false

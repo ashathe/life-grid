@@ -317,6 +317,53 @@ final class AppStateStore {
     }
 
     @discardableResult
+    func changePartnerCommanderDamage(
+        for opponentID: UUID,
+        by amount: Int
+    ) async -> OpponentMutationResult<CommanderDamageChange> {
+        guard amount != 0 else { return .rejected }
+        return await updatePartnerCommanderDamage(for: opponentID) { current in
+            let result = current.addingReportingOverflow(amount)
+            guard !result.overflow else { return nil }
+            return max(0, result.partialValue)
+        }
+    }
+
+    @discardableResult
+    func setPartnerCommanderDamage(
+        for opponentID: UUID,
+        to value: Int
+    ) async -> OpponentMutationResult<CommanderDamageChange> {
+        guard value >= 0 else { return .rejected }
+        return await updatePartnerCommanderDamage(for: opponentID) { _ in value }
+    }
+
+    func addOpponentPartner(_ opponentID: UUID) async {
+        guard state.activeGame != nil else { return }
+        _ = await mutateAndPersist(onlyIf: { state in
+            guard var game = state.activeGame,
+                  let index = game.opponents.firstIndex(where: { $0.id == opponentID }),
+                  game.opponents[index].partner == nil else { return false }
+            game.opponents[index].partner = PartnerCommanderState(name: nil, damage: 0)
+            state.activeGame = game
+            return true
+        })
+    }
+
+    func removeOpponentPartner(_ opponentID: UUID) async {
+        guard state.activeGame != nil else { return }
+        _ = await mutateAndPersist(onlyIf: { state in
+            guard var game = state.activeGame,
+                  let index = game.opponents.firstIndex(where: { $0.id == opponentID }) else {
+                return false
+            }
+            game.opponents[index].partner = nil
+            state.activeGame = game
+            return true
+        })
+    }
+
+    @discardableResult
     func adjustCounter(_ id: CounterID, by amount: Int) async -> Bool {
         guard state.activeGame != nil else { return false }
         let didMutate = await mutateAndPersist(onlyIf: { state in
@@ -625,6 +672,50 @@ final class AppStateStore {
             }
 
             game.opponents[opponentIndex].primaryCommanderDamage = currentDamage
+            game.currentLife = currentLife
+            state.activeGame = game
+            change = CommanderDamageChange(
+                previousDamage: previousDamage,
+                currentDamage: currentDamage,
+                previousLife: previousLife,
+                currentLife: currentLife
+            )
+            return true
+        })
+        return opponentMutationResult(for: change, outcome: outcome)
+    }
+
+    private func updatePartnerCommanderDamage(
+        for opponentID: UUID,
+        transform: (Int) -> Int?
+    ) async -> OpponentMutationResult<CommanderDamageChange> {
+        var change: CommanderDamageChange?
+        let outcome = await mutateAndPersistWithOutcome(onlyIf: { state in
+            guard var game = state.activeGame,
+                  let opponentIndex = game.opponents.firstIndex(where: { $0.id == opponentID }),
+                  let partner = game.opponents[opponentIndex].partner else {
+                return false
+            }
+
+            let previousDamage = partner.damage
+            guard let currentDamage = transform(previousDamage),
+                  currentDamage != previousDamage else {
+                return false
+            }
+            let damageDelta = currentDamage.subtractingReportingOverflow(previousDamage)
+            guard !damageDelta.overflow else { return false }
+
+            let previousLife = game.currentLife
+            let currentLife: Int
+            if state.preferences.commanderDamageChangesLife {
+                let lifeResult = previousLife.subtractingReportingOverflow(damageDelta.partialValue)
+                guard !lifeResult.overflow else { return false }
+                currentLife = lifeResult.partialValue
+            } else {
+                currentLife = previousLife
+            }
+
+            game.opponents[opponentIndex].partner?.damage = currentDamage
             game.currentLife = currentLife
             state.activeGame = game
             change = CommanderDamageChange(

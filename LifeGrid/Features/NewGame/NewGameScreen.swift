@@ -115,8 +115,18 @@ struct NewGameScreen: View {
     private var opponentNamesCard: some View {
         VStack(alignment: .leading, spacing: 10) {
             VStack(alignment: .leading, spacing: 2) {
-                Text("Opponent Names")
-                    .font(.headline)
+                HStack {
+                    Text("Opponent Names")
+                        .font(.headline)
+                    Spacer()
+                    Button("Reset Names") {
+                        for i in draft.opponentNames.indices {
+                            draft.opponentNames[i] = ""
+                        }
+                    }
+                    .font(.caption)
+                    .foregroundStyle(LifeGridPalette.accent)
+                }
                 Text("Optional · Blank names use Opponent 1, 2, 3…")
                     .font(.caption)
                     .foregroundStyle(LifeGridPalette.secondaryText)

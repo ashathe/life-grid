@@ -18,7 +18,7 @@ struct NewGameDraft: Equatable, Sendable {
 
         totalPlayers = min(max(setup.totalPlayers, 2), 6)
         startingLife = StartingLifeInput(value: setup.startingLife)
-        opponentNames = []
+        opponentNames = Array(setup.opponentNames.prefix(totalPlayers - 1))
         while opponentNames.count < totalPlayers - 1 {
             opponentNames.append("")
         }
