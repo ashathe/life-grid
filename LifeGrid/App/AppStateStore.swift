@@ -74,6 +74,70 @@ final class AppStateStore {
         })
     }
 
+    func setPlayerName(_ name: String) async {
+        await mutateAndPersist({ state in
+            state.preferences.playerName = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        })
+    }
+
+    func setCommanderEnabled(_ enabled: Bool) async {
+        await mutateAndPersist({ state in state.preferences.commanderEnabled = enabled })
+    }
+
+    func setPartnerCommanderEnabled(_ enabled: Bool) async {
+        await mutateAndPersist({ state in state.preferences.ownPartnerCommanderEnabled = enabled })
+    }
+
+    func setCommanderDamageLink(_ enabled: Bool) async {
+        await mutateAndPersist({ state in state.preferences.commanderDamageChangesLife = enabled })
+    }
+
+    func setKeepScreenAwake(_ enabled: Bool) async {
+        await mutateAndPersist({ state in state.preferences.keepScreenAwakeDuringGames = enabled })
+    }
+
+    func setHapticsEnabled(_ enabled: Bool) async {
+        await mutateAndPersist({ state in state.preferences.hapticsEnabled = enabled })
+    }
+
+    func setSoundEffectsEnabled(_ enabled: Bool) async {
+        await mutateAndPersist({ state in state.preferences.soundEffectsEnabled = enabled })
+    }
+
+    func setAppearance(_ mode: AppearanceMode) async {
+        await mutateAndPersist({ state in state.preferences.appearance = mode })
+    }
+
+    func setAppScale(_ scale: AppScale) async {
+        await mutateAndPersist({ state in state.preferences.appScale = scale })
+    }
+
+    func resetGame() async {
+        guard let game = state.activeGame else { return }
+        _ = await mutateAndPersist(onlyIf: { state in
+            guard var game = state.activeGame else { return false }
+            game.currentLife = state.lastSetup.startingLife
+            game.ownCommanderTaxA = 0
+            game.ownCommanderTaxB = 0
+            game.counterValues = Dictionary(
+                uniqueKeysWithValues: BuiltInCounterID.allCases
+                    .filter { $0 != .dayNight }
+                    .map { (CounterID.builtIn($0), 0) }
+            )
+            game.dayNightState = .notSet
+            game.currentMonarchPlayerID = nil
+            game.playerHasCitysBlessing = false
+            for i in game.opponents.indices {
+                game.opponents[i].primaryCommanderDamage = 0
+                game.opponents[i].partner?.damage = 0
+                game.opponents[i].hasCitysBlessing = false
+                game.opponents[i].isVisible = true
+            }
+            state.activeGame = game
+            return true
+        })
+    }
+
     @discardableResult
     func changeLocalLife(by amount: Int) async -> ManualLifeChange? {
         guard state.activeGame != nil else { return nil }
@@ -178,6 +242,56 @@ final class AppStateStore {
             return true
         })
         return opponentMutationResult(for: added, outcome: outcome)
+    }
+
+    func removeLastOpponent() async {
+        guard state.activeGame != nil else { return }
+        _ = await mutateAndPersist(onlyIf: { state in
+            guard var game = state.activeGame,
+                  let removed = game.opponents.last else { return false }
+            if game.currentMonarchPlayerID == PlayerID.opponent(removed.id) {
+                game.currentMonarchPlayerID = nil
+            }
+            game.counterValues.removeValue(forKey: CounterID.custom(removed.id))
+            game.opponents.removeLast()
+            state.activeGame = game
+            return true
+        })
+    }
+
+    func renameOpponent(_ id: UUID, to name: String) async {
+        let trimmed = name.trimmingCharacters(in: .whitespaces)
+        guard state.activeGame != nil else { return }
+        _ = await mutateAndPersist(onlyIf: { state in
+            guard var game = state.activeGame,
+                  let index = game.opponents.firstIndex(where: { $0.id == id }) else {
+                return false
+            }
+            game.opponents[index].displayName = trimmed.isEmpty
+                ? "Opponent \(index + 1)"
+                : trimmed
+            state.activeGame = game
+            return true
+        })
+    }
+
+    func setOpponentPartnerName(_ opponentID: UUID, name: String) async {
+        let trimmed = name.trimmingCharacters(in: .whitespaces)
+        guard state.activeGame != nil else { return }
+        _ = await mutateAndPersist(onlyIf: { state in
+            guard var game = state.activeGame,
+                  let index = game.opponents.firstIndex(where: { $0.id == opponentID }) else {
+                return false
+            }
+            let partnerName: String? = trimmed.isEmpty ? nil : trimmed
+            if game.opponents[index].partner != nil {
+                game.opponents[index].partner?.name = partnerName
+            } else {
+                game.opponents[index].partner = PartnerCommanderState(name: partnerName, damage: 0)
+            }
+            state.activeGame = game
+            return true
+        })
     }
 
     @discardableResult
@@ -415,6 +529,50 @@ final class AppStateStore {
     func flipCoin() async -> CoinFlipFace {
         let value = await environment.randomSource.nextInt(in: 0...1)
         return value == 0 ? .heads : .tails
+    }
+
+    func assignMonarch(to playerID: PlayerID?) async {
+        guard state.activeGame != nil else { return }
+        _ = await mutateAndPersist(onlyIf: { state in
+            guard var game = state.activeGame else { return false }
+            game.currentMonarchPlayerID = playerID
+            state.activeGame = game
+            return true
+        })
+    }
+
+    func toggleCitysBlessing(for playerID: PlayerID) async {
+        guard state.activeGame != nil else { return }
+        _ = await mutateAndPersist(onlyIf: { state in
+            guard var game = state.activeGame else { return false }
+            let currentlyActive: Bool = {
+                switch playerID {
+                case .local: return game.playerHasCitysBlessing
+                case .opponent(let id):
+                    return game.opponents.first(where: { $0.id == id })?.hasCitysBlessing ?? false
+                }
+            }()
+            // Clear from all players first
+            game.playerHasCitysBlessing = false
+            for i in game.opponents.indices {
+                game.opponents[i].hasCitysBlessing = false
+            }
+            // If it wasn't already active, assign to the tapped player
+            if !currentlyActive {
+                switch playerID {
+                case .local:
+                    game.playerHasCitysBlessing = true
+                case .opponent(let id):
+                    if let index = game.opponents.firstIndex(where: { $0.id == id }) {
+                        game.opponents[index].hasCitysBlessing = true
+                    } else {
+                        return false
+                    }
+                }
+            }
+            state.activeGame = game
+            return true
+        })
     }
 
     func saveForLifecycle() async {

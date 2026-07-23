@@ -51,18 +51,32 @@ struct ActiveGameSummaryScreen: View {
                 Text("Opponents")
                     .font(.headline)
                 Spacer()
-                if game.opponents.count < OpponentState.maximumCount {
-                    Button("Add Opponent") {
-                        Task { await store.addOpponent() }
+                HStack(spacing: 8) {
+                    Button {
+                        Task { await store.removeLastOpponent() }
+                    } label: {
+                        Image(systemName: "minus.circle.fill")
+                            .font(.title3)
                     }
-                    .buttonStyle(.borderedProminent)
-                    .tint(LifeGridPalette.accent)
-                    .accessibilityHint("Adds a new opponent to this game")
-                    .accessibilityIdentifier("add-opponent")
+                    .buttonStyle(.plain)
+                    .disabled(game.opponents.isEmpty)
+
+                    Text("\(game.opponents.count)")
+                        .font(.headline.monospacedDigit())
+                        .frame(minWidth: 24)
+
+                    Button {
+                        Task { await store.addOpponent() }
+                    } label: {
+                        Image(systemName: "plus.circle.fill")
+                            .font(.title3)
+                    }
+                    .buttonStyle(.plain)
+                    .disabled(game.opponents.count >= OpponentState.maximumCount)
                 }
             }
 
-            ForEach(game.opponents.filter(\.isVisible)) { opponent in
+            ForEach(game.opponents) { opponent in
                 OpponentCard(store: store, opponentID: opponent.id)
             }
         }
