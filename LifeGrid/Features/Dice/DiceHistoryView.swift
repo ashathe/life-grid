@@ -24,16 +24,19 @@ struct DiceHistoryView: View {
                             .font(.subheadline.monospacedDigit().bold())
                             .foregroundStyle(LifeGridPalette.accent)
                             .frame(width: 44, alignment: .leading)
+                            .accessibilityLabel("\(entry.diceCount) d\(entry.sides)")
 
                         Text("= \(entry.total)")
                             .font(.subheadline.monospacedDigit())
                             .foregroundStyle(LifeGridPalette.primaryText)
                             .frame(width: 56, alignment: .leading)
+                            .accessibilityLabel("Total: \(entry.total)")
 
                         Text(entry.individualResults.map(String.init).joined(separator: " "))
                             .font(.caption.monospacedDigit())
                             .foregroundStyle(LifeGridPalette.secondaryText)
                             .lineLimit(1)
+                            .accessibilityLabel("Rolls: \(entry.individualResults.map(String.init).joined(separator: ", "))")
                     }
                 }
             }

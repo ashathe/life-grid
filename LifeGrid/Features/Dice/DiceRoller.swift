@@ -13,15 +13,19 @@ struct DiceRoller: View {
             Text(label)
                 .font(.subheadline.bold())
                 .foregroundStyle(LifeGridPalette.secondaryText)
+                .accessibilityLabel("\(label) die")
 
             if let result = lastResult {
                 Text("\(result.total)")
                     .font(.largeTitle.bold().monospacedDigit())
                     .foregroundStyle(LifeGridPalette.primaryText)
+                    .accessibilityLabel("\(label) result")
+                    .accessibilityValue("\(result.total), from \(result.diceCount) \(label)")
             } else {
                 Text("—")
                     .font(.largeTitle.monospacedDigit())
                     .foregroundStyle(LifeGridPalette.secondaryText)
+                    .accessibilityLabel("\(label), no roll yet")
             }
 
             HStack(spacing: 8) {
@@ -32,10 +36,13 @@ struct DiceRoller: View {
                         .font(.title3)
                 }
                 .buttonStyle(.plain)
+                .accessibilityLabel("Fewer \(label)")
 
                 Text("\(diceCount)")
                     .font(.title3.monospacedDigit().bold())
                     .frame(minWidth: 28)
+                    .accessibilityLabel("Number of dice")
+                    .accessibilityValue("\(diceCount)")
 
                 Button {
                     if diceCount < 100 { diceCount += 1 }
@@ -44,6 +51,7 @@ struct DiceRoller: View {
                         .font(.title3)
                 }
                 .buttonStyle(.plain)
+                .accessibilityLabel("More \(label)")
             }
 
             Button {
@@ -55,6 +63,7 @@ struct DiceRoller: View {
             }
             .buttonStyle(.borderedProminent)
             .tint(LifeGridPalette.accent)
+            .accessibilityLabel("Roll \(diceCount) \(label)")
 
             if let result = lastResult, !result.individualResults.isEmpty {
                 Text(result.individualResults.map(String.init).joined(separator: " "))
@@ -62,6 +71,7 @@ struct DiceRoller: View {
                     .foregroundStyle(LifeGridPalette.secondaryText)
                     .lineLimit(3)
                     .multilineTextAlignment(.center)
+                    .accessibilityLabel("Individual \(label) results: \(result.individualResults.map(String.init).joined(separator: ", "))")
             }
         }
         .padding(12)

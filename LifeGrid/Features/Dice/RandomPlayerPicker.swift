@@ -29,6 +29,8 @@ struct RandomPlayerPicker: View {
                 .buttonStyle(.borderedProminent)
                 .tint(LifeGridPalette.accent)
                 .disabled(isPicking)
+                .accessibilityLabel("Pick random starting player")
+                .accessibilityHint("Selects from all visible players including you")
 
                 Button("Opponent") {
                     Task { await pick(.opponent) }
@@ -36,6 +38,8 @@ struct RandomPlayerPicker: View {
                 .buttonStyle(.borderedProminent)
                 .tint(LifeGridPalette.accent)
                 .disabled(isPicking)
+                .accessibilityLabel("Pick random opponent")
+                .accessibilityHint("Selects from visible opponents only")
             }
         }
         .padding(12)
