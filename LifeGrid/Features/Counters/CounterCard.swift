@@ -13,6 +13,17 @@ struct CounterCard: View {
         store.state.activeGame?.counterValues[counterID, default: 0] ?? 0
     }
 
+    private var valueColor: Color {
+        if counterID == CounterID.builtIn(.poison), currentValue >= 10 {
+            return LifeGridPalette.destructive
+        }
+        return LifeGridPalette.primaryText
+    }
+
+    private var isLethal: Bool {
+        counterID == CounterID.builtIn(.poison) && currentValue >= 10
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(name)
@@ -58,6 +69,7 @@ struct CounterCard: View {
             } label: {
                 Text("\(currentValue)")
                     .font(.title2.bold().monospacedDigit())
+                    .foregroundStyle(valueColor)
                     .frame(minWidth: 72, minHeight: 60)
             }
             .buttonStyle(.plain)

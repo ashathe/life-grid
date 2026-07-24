@@ -113,7 +113,7 @@ final class AppStateStore {
     }
 
     func resetGame() async {
-        guard let game = state.activeGame else { return }
+        guard state.activeGame != nil else { return }
         _ = await mutateAndPersist(onlyIf: { state in
             guard var game = state.activeGame else { return false }
             game.currentLife = state.lastSetup.startingLife

@@ -33,6 +33,9 @@ struct LifeGridApp: App {
                     guard phase != .active else { return }
                     Task { await store.saveForLifecycle() }
                 }
+                .onChange(of: store.state.activeGame != nil && store.state.preferences.keepScreenAwakeDuringGames) { _, keepAwake in
+                    UIApplication.shared.isIdleTimerDisabled = keepAwake
+                }
         }
     }
 }
