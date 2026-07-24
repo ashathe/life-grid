@@ -99,7 +99,7 @@ struct PinCounterSheet: View {
                 Text(counterName(counterID))
                     .foregroundStyle(LifeGridPalette.primaryText)
                 Spacer()
-                Text("\(currentValue(counterID))")
+                counterValueDisplay(for: counterID)
                     .font(.headline.monospacedDigit())
                     .foregroundStyle(LifeGridPalette.secondaryText)
             }
@@ -118,5 +118,14 @@ struct PinCounterSheet: View {
 
     private func currentValue(_ id: CounterID) -> Int {
         store.state.activeGame?.counterValues[id, default: 0] ?? 0
+    }
+
+    @ViewBuilder
+    private func counterValueDisplay(for id: CounterID) -> some View {
+        if case .builtIn(let builtIn) = id, builtIn.isDayNight {
+            Text(store.state.activeGame?.dayNightState.displayString ?? "Not Set")
+        } else {
+            Text("\(currentValue(id))")
+        }
     }
 }

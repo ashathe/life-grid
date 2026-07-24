@@ -25,14 +25,17 @@ struct CounterCard: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 4) {
             Text(name)
-                .font(.headline)
+                .font(.subheadline.bold())
+                .foregroundStyle(LifeGridPalette.secondaryText)
 
             counterControls
         }
         .foregroundStyle(LifeGridPalette.primaryText)
-        .lifeGridCard()
+        .padding(10)
+        .background(LifeGridPalette.field, in: RoundedRectangle(cornerRadius: 10))
+        .overlay { RoundedRectangle(cornerRadius: 10).stroke(LifeGridPalette.border) }
         .sheet(isPresented: $showsExactEntry) {
             exactEntrySheet
         }
@@ -53,14 +56,14 @@ struct CounterCard: View {
                 onEnd: {}
             ) {
                 Text("−")
-                    .font(.title2)
-                    .frame(maxWidth: .infinity, minHeight: 60)
+                    .font(.title3)
+                    .frame(maxWidth: .infinity, minHeight: 48)
             }
             .accessibilityIdentifier("counter-decrement-\(name)")
 
             Divider()
                 .overlay(LifeGridPalette.border)
-                .frame(height: 60)
+                .frame(height: 48)
 
             Button {
                 exactText = "\(currentValue)"
@@ -68,9 +71,9 @@ struct CounterCard: View {
                 showsExactEntry = true
             } label: {
                 Text("\(currentValue)")
-                    .font(.title2.bold().monospacedDigit())
+                    .font(.title3.bold().monospacedDigit())
                     .foregroundStyle(valueColor)
-                    .frame(minWidth: 72, minHeight: 60)
+                    .frame(minWidth: 56, minHeight: 48)
             }
             .buttonStyle(.plain)
             .accessibilityLabel("Set \(name) counter value")
@@ -80,7 +83,7 @@ struct CounterCard: View {
 
             Divider()
                 .overlay(LifeGridPalette.border)
-                .frame(height: 60)
+                .frame(height: 48)
 
             RepeatActionButton(
                 accessibilityLabel: "Add one \(name) counter",
@@ -95,8 +98,8 @@ struct CounterCard: View {
                 onEnd: {}
             ) {
                 Text("+")
-                    .font(.title2)
-                    .frame(maxWidth: .infinity, minHeight: 60)
+                    .font(.title3)
+                    .frame(maxWidth: .infinity, minHeight: 48)
             }
             .accessibilityIdentifier("counter-increment-\(name)")
         }
