@@ -8,13 +8,13 @@ struct DayNightCard: View {
     }
 
     var body: some View {
-        VStack(spacing: 6) {
+        VStack(spacing: 4) {
             Text("Day / Night")
-                .font(.caption.bold())
+                .font(.subheadline.bold())
                 .foregroundStyle(LifeGridPalette.secondaryText)
 
             Text(currentState.displayString)
-                .font(.subheadline.bold())
+                .font(.title3.bold())
                 .foregroundStyle(stateColor)
                 .accessibilityLabel("Day/Night state")
                 .accessibilityValue(currentState.displayString)
@@ -23,8 +23,8 @@ struct DayNightCard: View {
                 Task { await store.toggleDayNight() }
             } label: {
                 Image(systemName: "arrow.trianglehead.2.clockwise.rotate.90")
-                    .font(.subheadline)
-                    .frame(width: 36, height: 36)
+                    .font(.title3)
+                    .frame(width: 44, height: 44)
                     .background(LifeGridPalette.accent, in: RoundedRectangle(cornerRadius: 8))
             }
             .buttonStyle(.plain)
