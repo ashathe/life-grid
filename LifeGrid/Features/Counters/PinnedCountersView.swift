@@ -74,7 +74,68 @@ struct PinnedCountersView: View {
         }
     }
 
+    @ViewBuilder
     private func pinnedTile(_ counterID: CounterID) -> some View {
+        if case .builtIn(let builtIn) = counterID, builtIn.isDayNight {
+            dayNightTile(counterID)
+        } else {
+            numericTile(counterID)
+        }
+    }
+
+    @ViewBuilder
+    private func dayNightTile(_ counterID: CounterID) -> some View {
+        let state = store.state.activeGame?.dayNightState ?? .notSet
+        VStack(spacing: 6) {
+            Text("Day / Night")
+                .font(.caption.bold())
+                .foregroundStyle(LifeGridPalette.secondaryText)
+            Text(state.displayString)
+                .font(.title2.bold())
+                .foregroundStyle(stateColor(state))
+                .accessibilityLabel("Day/Night")
+                .accessibilityValue(state.displayString)
+            Button {
+                Task {
+                    await store.toggleDayNight()
+                    await store.playHaptic(.statusChange)
+                }
+            } label: {
+                Image(systemName: "arrow.trianglehead.2.clockwise.rotate.90")
+                    .font(.title3)
+                    .frame(width: 44, height: 44)
+                    .background(LifeGridPalette.accent, in: RoundedRectangle(cornerRadius: 8))
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel("Toggle Day/Night")
+            if editMode {
+                Button {
+                    Task { await store.unpinCounter(counterID) }
+                } label: {
+                    Image(systemName: "xmark.circle.fill")
+                        .font(.caption)
+                        .foregroundStyle(LifeGridPalette.destructive)
+                }
+                .buttonStyle(.plain)
+                .frame(height: 28)
+            }
+        }
+        .padding(12)
+        .frame(maxWidth: .infinity)
+        .background(LifeGridPalette.field, in: RoundedRectangle(cornerRadius: 10))
+        .overlay { RoundedRectangle(cornerRadius: 10).stroke(LifeGridPalette.border) }
+    }
+
+    private func stateColor(_ state: DayNightState) -> Color {
+        switch state {
+        case .notSet: return LifeGridPalette.secondaryText
+        case .day: return Color(red: 0.95, green: 0.75, blue: 0.25)
+        case .night: return Color(red: 0.35, green: 0.40, blue: 0.95)
+        }
+    }
+
+    @ViewBuilder
+    private func numericTile(_ counterID: CounterID) -> some View {
         VStack(spacing: 6) {
             Text(displayName(for: counterID))
                 .font(.caption.bold())
