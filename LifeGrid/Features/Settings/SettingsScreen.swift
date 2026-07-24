@@ -123,7 +123,7 @@ struct SettingsScreen: View {
         VStack(spacing: 8) {
             Link(destination: URL(string: "https://ashathe.github.io/life-grid/")!) {
                 HStack {
-                    Text("Terms of Service & Privacy Policy")
+                    Text("Terms of Service, Privacy Policy, and Support")
                         .font(.subheadline)
                     Spacer()
                     Image(systemName: "arrow.up.forward")
