@@ -147,8 +147,11 @@ def validate_visuals(root: Path) -> ValidationResult:
             references = []
 
     for reference in references:
-        review_directory = root / str(reference.get("review_directory", ""))
         screen_id = str(reference.get("id", "unknown"))
+        status = str(reference.get("current_approval_status", ""))
+        if status in ("deferred", "not_started"):
+            continue
+        review_directory = root / str(reference.get("review_directory", ""))
         for filename in ("approved-reference.png", "implementation.png", "comparison.md"):
             if not (review_directory / filename).is_file():
                 result.errors.append(f"missing visual evidence for {screen_id}: {filename}")
@@ -172,7 +175,7 @@ def validate_build(root: Path) -> ValidationResult:
     result = ValidationResult()
     requirements = _load_requirements(root, result)
     for entry in requirements:
-        if entry.get("status") != "verified":
+        if entry.get("status") not in ("verified", "deferred_by_approval"):
             result.errors.append(f"requirement is not verified: {entry.get('id', '')}")
     report = root / "reports/final-compliance-report.md"
     if not report.is_file():

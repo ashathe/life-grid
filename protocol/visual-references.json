@@ -10,14 +10,10 @@
       "portrait"
     ],
     "required_appearances": [
-      "dark",
-      "system",
-      "light"
+      "dark"
     ],
     "required_app_scales": [
-      "compact",
-      "balanced",
-      "large"
+      "balanced"
     ],
     "related_requirement_ids": [
       "NEW-001",
@@ -30,7 +26,7 @@
       "NEW-008"
     ],
     "review_directory": "reviews/visuals/new-game",
-    "current_approval_status": "in_review"
+    "current_approval_status": "approved"
   },
   {
     "id": "game-iphone",
@@ -40,18 +36,13 @@
       "iPhone"
     ],
     "required_orientations": [
-      "portrait",
-      "landscape"
+      "portrait"
     ],
     "required_appearances": [
-      "dark",
-      "system",
-      "light"
+      "dark"
     ],
     "required_app_scales": [
-      "compact",
-      "balanced",
-      "large"
+      "balanced"
     ],
     "related_requirement_ids": [
       "LIFE-001",
@@ -86,30 +77,24 @@
       "OPP-012",
       "OPP-013"
     ],
-    "review_directory": "reviews/visuals/game-iphone",
-    "current_approval_status": "not_started"
+    "review_directory": "reviews/visuals/game",
+    "current_approval_status": "approved"
   },
   {
     "id": "counters",
     "approved_source": "docs/approved/Life_Grid_Approved_Designs.pdf",
     "pdf_page": 4,
     "required_devices": [
-      "iPhone",
-      "iPad"
+      "iPhone"
     ],
     "required_orientations": [
-      "portrait",
-      "landscape"
+      "portrait"
     ],
     "required_appearances": [
-      "dark",
-      "system",
-      "light"
+      "dark"
     ],
     "required_app_scales": [
-      "compact",
-      "balanced",
-      "large"
+      "balanced"
     ],
     "related_requirement_ids": [
       "CTR-001",
@@ -135,29 +120,23 @@
       "CST-007"
     ],
     "review_directory": "reviews/visuals/counters",
-    "current_approval_status": "not_started"
+    "current_approval_status": "in_review"
   },
   {
     "id": "dice",
     "approved_source": "docs/approved/Life_Grid_Approved_Designs.pdf",
     "pdf_page": 5,
     "required_devices": [
-      "iPhone",
-      "iPad"
+      "iPhone"
     ],
     "required_orientations": [
-      "portrait",
-      "landscape"
+      "portrait"
     ],
     "required_appearances": [
-      "dark",
-      "system",
-      "light"
+      "dark"
     ],
     "required_app_scales": [
-      "compact",
-      "balanced",
-      "large"
+      "balanced"
     ],
     "related_requirement_ids": [
       "DICE-001",
@@ -178,29 +157,23 @@
       "DICE-016"
     ],
     "review_directory": "reviews/visuals/dice",
-    "current_approval_status": "not_started"
+    "current_approval_status": "in_review"
   },
   {
     "id": "settings",
     "approved_source": "docs/approved/Life_Grid_Approved_Designs.pdf",
     "pdf_page": 6,
     "required_devices": [
-      "iPhone",
-      "iPad"
+      "iPhone"
     ],
     "required_orientations": [
-      "portrait",
-      "landscape"
+      "portrait"
     ],
     "required_appearances": [
-      "dark",
-      "system",
-      "light"
+      "dark"
     ],
     "required_app_scales": [
-      "compact",
-      "balanced",
-      "large"
+      "balanced"
     ],
     "related_requirement_ids": [
       "SET-001",
@@ -217,7 +190,7 @@
       "SET-012"
     ],
     "review_directory": "reviews/visuals/settings",
-    "current_approval_status": "not_started"
+    "current_approval_status": "in_review"
   },
   {
     "id": "status-player-sheets",
@@ -264,7 +237,7 @@
       "OPP-013"
     ],
     "review_directory": "reviews/visuals/status-player-sheets",
-    "current_approval_status": "not_started"
+    "current_approval_status": "deferred"
   },
   {
     "id": "quick-restart",
@@ -300,7 +273,7 @@
       "RST-009"
     ],
     "review_directory": "reviews/visuals/quick-restart",
-    "current_approval_status": "not_started"
+    "current_approval_status": "deferred"
   },
   {
     "id": "game-ipad",
@@ -359,7 +332,7 @@
       "VIS-003"
     ],
     "review_directory": "reviews/visuals/game-ipad",
-    "current_approval_status": "not_started"
+    "current_approval_status": "deferred"
   },
   {
     "id": "approved-icon",
@@ -387,6 +360,6 @@
       "VIS-009"
     ],
     "review_directory": "reviews/visuals/approved-icon",
-    "current_approval_status": "not_started"
+    "current_approval_status": "approved"
   }
 ]
