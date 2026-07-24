@@ -411,15 +411,22 @@ struct OpponentCard: View {
         let damage = partner.damage
 
         return HStack(spacing: 0) {
-            Button {
-                Task { await store.changePartnerCommanderDamage(for: opponentID, by: -1) }
-            } label: {
+            RepeatActionButton(
+                accessibilityLabel: "Remove one partner damage from \(name)",
+                accessibilityHint: "Hold to repeatedly remove partner damage",
+                onInitial: {
+                    await store.changePartnerCommanderDamage(for: opponentID, by: -1)
+                },
+                onRepeat: {
+                    await store.changePartnerCommanderDamage(for: opponentID, by: -1)
+                    await store.playHaptic(.adjustment)
+                },
+                onEnd: {}
+            ) {
                 Text("−")
                     .font(.title2)
                     .frame(maxWidth: .infinity, minHeight: 60)
             }
-            .buttonStyle(.plain)
-            .accessibilityLabel("Remove one partner damage from \(name)")
 
             Divider().overlay(LifeGridPalette.border).frame(height: 60)
 
@@ -442,15 +449,22 @@ struct OpponentCard: View {
 
             Divider().overlay(LifeGridPalette.border).frame(height: 60)
 
-            Button {
-                Task { await store.changePartnerCommanderDamage(for: opponentID, by: 1) }
-            } label: {
+            RepeatActionButton(
+                accessibilityLabel: "Add one partner damage from \(name)",
+                accessibilityHint: "Hold to repeatedly add partner damage",
+                onInitial: {
+                    await store.changePartnerCommanderDamage(for: opponentID, by: 1)
+                },
+                onRepeat: {
+                    await store.changePartnerCommanderDamage(for: opponentID, by: 1)
+                    await store.playHaptic(.adjustment)
+                },
+                onEnd: {}
+            ) {
                 Text("+")
                     .font(.title2)
                     .frame(maxWidth: .infinity, minHeight: 60)
             }
-            .buttonStyle(.plain)
-            .accessibilityLabel("Add one partner damage from \(name)")
         }
         .background(LifeGridPalette.field, in: RoundedRectangle(cornerRadius: 9))
         .overlay {
