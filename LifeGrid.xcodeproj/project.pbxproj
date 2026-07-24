@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		97C61ACB3012FAF80019AB26 /* LifeGrid/Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000066 /* LifeGrid/Assets.xcassets */; };
 		A20000000000000000000001 /* LifeGridApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000001 /* LifeGridApp.swift */; };
 		A20000000000000000000003 /* FoundationSmokeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000003 /* FoundationSmokeTests.swift */; };
 		A20000000000000000000004 /* LifeGridUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000004 /* LifeGridUITests.swift */; };
-		A20000000000000000000005 /* PersistedAppStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000005 /* PersistedAppStateTests.swift */; };
+		A20000000000000000000005 /* Models/PersistedAppStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000005 /* Models/PersistedAppStateTests.swift */; };
 		A20000000000000000000006 /* AppPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000006 /* AppPreferences.swift */; };
 		A20000000000000000000007 /* GameSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000007 /* GameSetup.swift */; };
 		A20000000000000000000008 /* CounterModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000008 /* CounterModels.swift */; };
@@ -18,24 +19,24 @@
 		A2000000000000000000000A /* ActiveGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3000000000000000000000A /* ActiveGame.swift */; };
 		A2000000000000000000000B /* DiceModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3000000000000000000000B /* DiceModels.swift */; };
 		A2000000000000000000000C /* PersistedAppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3000000000000000000000C /* PersistedAppState.swift */; };
-		A2000000000000000000000D /* JSONAppStateRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3000000000000000000000D /* JSONAppStateRepositoryTests.swift */; };
+		A2000000000000000000000D /* Persistence/JSONAppStateRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3000000000000000000000D /* Persistence/JSONAppStateRepositoryTests.swift */; };
 		A2000000000000000000000E /* AppStateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3000000000000000000000E /* AppStateRepository.swift */; };
 		A2000000000000000000000F /* JSONAppStateRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3000000000000000000000F /* JSONAppStateRepository.swift */; };
 		A20000000000000000000011 /* StateMigration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000011 /* StateMigration.swift */; };
-		A20000000000000000000012 /* TestDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000012 /* TestDoubles.swift */; };
-		A20000000000000000000013 /* AppEnvironmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000013 /* AppEnvironmentTests.swift */; };
+		A20000000000000000000012 /* Support/TestDoubles.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000012 /* Support/TestDoubles.swift */; };
+		A20000000000000000000013 /* App/AppEnvironmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000013 /* App/AppEnvironmentTests.swift */; };
 		A20000000000000000000014 /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000014 /* AppEnvironment.swift */; };
-		A20000000000000000000015 /* RandomSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000015 /* RandomSource.swift */; };
-		A20000000000000000000016 /* ClockClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000016 /* ClockClient.swift */; };
-		A20000000000000000000017 /* HapticsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000017 /* HapticsClient.swift */; };
-		A20000000000000000000018 /* SoundClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000018 /* SoundClient.swift */; };
-		A20000000000000000000019 /* AppStateStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000019 /* AppStateStoreTests.swift */; };
+		A20000000000000000000015 /* Randomness/RandomSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000015 /* Randomness/RandomSource.swift */; };
+		A20000000000000000000016 /* Time/ClockClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000016 /* Time/ClockClient.swift */; };
+		A20000000000000000000017 /* Feedback/HapticsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000017 /* Feedback/HapticsClient.swift */; };
+		A20000000000000000000018 /* Feedback/SoundClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000018 /* Feedback/SoundClient.swift */; };
+		A20000000000000000000019 /* App/AppStateStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000019 /* App/AppStateStoreTests.swift */; };
 		A2000000000000000000001A /* AppStateStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3000000000000000000001A /* AppStateStore.swift */; };
-		A2000000000000000000001B /* LayoutFoundationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3000000000000000000001B /* LayoutFoundationTests.swift */; };
-		A2000000000000000000001C /* GameLayoutMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3000000000000000000001C /* GameLayoutMode.swift */; };
-		A2000000000000000000001D /* AppearanceTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3000000000000000000001D /* AppearanceTokens.swift */; };
-		A2000000000000000000001E /* AppScaleTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3000000000000000000001E /* AppScaleTokens.swift */; };
-		A2000000000000000000001F /* AccessibilityValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3000000000000000000001F /* AccessibilityValues.swift */; };
+		A2000000000000000000001B /* Shared/LayoutFoundationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3000000000000000000001B /* Shared/LayoutFoundationTests.swift */; };
+		A2000000000000000000001C /* Layout/GameLayoutMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3000000000000000000001C /* Layout/GameLayoutMode.swift */; };
+		A2000000000000000000001D /* Theme/AppearanceTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3000000000000000000001D /* Theme/AppearanceTokens.swift */; };
+		A2000000000000000000001E /* Theme/AppScaleTokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3000000000000000000001E /* Theme/AppScaleTokens.swift */; };
+		A2000000000000000000001F /* Accessibility/AccessibilityValues.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3000000000000000000001F /* Accessibility/AccessibilityValues.swift */; };
 		A20000000000000000000040 /* StartingLifeInputTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000040 /* StartingLifeInputTests.swift */; };
 		A20000000000000000000041 /* NewGameDraftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000041 /* NewGameDraftTests.swift */; };
 		A20000000000000000000042 /* StartingLifeInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000042 /* StartingLifeInput.swift */; };
@@ -53,7 +54,7 @@
 		A2000000000000000000004E /* RepeatActionButtonTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3000000000000000000004E /* RepeatActionButtonTests.swift */; };
 		A2000000000000000000004F /* RepeatActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3000000000000000000004F /* RepeatActionButton.swift */; };
 		A20000000000000000000050 /* LocalLifeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000050 /* LocalLifeCard.swift */; };
-		A20000000000000000000051 /* OpponentStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000051 /* OpponentStateTests.swift */; };
+		A20000000000000000000051 /* Models/OpponentStateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000051 /* Models/OpponentStateTests.swift */; };
 		A20000000000000000000052 /* CommanderDamageChangeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000052 /* CommanderDamageChangeTests.swift */; };
 		A20000000000000000000053 /* CommanderDamageChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000053 /* CommanderDamageChange.swift */; };
 		A20000000000000000000054 /* OpponentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000054 /* OpponentCard.swift */; };
@@ -71,7 +72,7 @@
 		A20000000000000000000062 /* CoinFlipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000062 /* CoinFlipView.swift */; };
 		A20000000000000000000063 /* SavedDieEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000063 /* SavedDieEditor.swift */; };
 		A20000000000000000000065 /* OpponentEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000065 /* OpponentEditor.swift */; };
-		A20000000000000000000066 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A30000000000000000000066 /* Assets.xcassets */; };
+		A20000000000000000000066 /* LifeGrid/Assets.xcassets in Frameworks */ = {isa = PBXBuildFile; fileRef = A30000000000000000000066 /* LifeGrid/Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,7 +96,7 @@
 		A30000000000000000000001 /* LifeGridApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeGridApp.swift; sourceTree = "<group>"; };
 		A30000000000000000000003 /* FoundationSmokeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundationSmokeTests.swift; sourceTree = "<group>"; };
 		A30000000000000000000004 /* LifeGridUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeGridUITests.swift; sourceTree = "<group>"; };
-		A30000000000000000000005 /* PersistedAppStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models/PersistedAppStateTests.swift; sourceTree = "<group>"; };
+		A30000000000000000000005 /* Models/PersistedAppStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models/PersistedAppStateTests.swift; sourceTree = "<group>"; };
 		A30000000000000000000006 /* AppPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreferences.swift; sourceTree = "<group>"; };
 		A30000000000000000000007 /* GameSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSetup.swift; sourceTree = "<group>"; };
 		A30000000000000000000008 /* CounterModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterModels.swift; sourceTree = "<group>"; };
@@ -103,24 +104,27 @@
 		A3000000000000000000000A /* ActiveGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveGame.swift; sourceTree = "<group>"; };
 		A3000000000000000000000B /* DiceModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiceModels.swift; sourceTree = "<group>"; };
 		A3000000000000000000000C /* PersistedAppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistedAppState.swift; sourceTree = "<group>"; };
-		A3000000000000000000000D /* JSONAppStateRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence/JSONAppStateRepositoryTests.swift; sourceTree = "<group>"; };
+		A3000000000000000000000D /* Persistence/JSONAppStateRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence/JSONAppStateRepositoryTests.swift; sourceTree = "<group>"; };
 		A3000000000000000000000E /* AppStateRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateRepository.swift; sourceTree = "<group>"; };
 		A3000000000000000000000F /* JSONAppStateRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONAppStateRepository.swift; sourceTree = "<group>"; };
+		A30000000000000000000010 /* Life Grid.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Life Grid.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A30000000000000000000011 /* StateMigration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StateMigration.swift; sourceTree = "<group>"; };
-		A30000000000000000000012 /* TestDoubles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Support/TestDoubles.swift; sourceTree = "<group>"; };
-		A30000000000000000000013 /* AppEnvironmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/AppEnvironmentTests.swift; sourceTree = "<group>"; };
+		A30000000000000000000012 /* Support/TestDoubles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Support/TestDoubles.swift; sourceTree = "<group>"; };
+		A30000000000000000000013 /* App/AppEnvironmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/AppEnvironmentTests.swift; sourceTree = "<group>"; };
 		A30000000000000000000014 /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
-		A30000000000000000000015 /* RandomSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Randomness/RandomSource.swift; sourceTree = "<group>"; };
-		A30000000000000000000016 /* ClockClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time/ClockClient.swift; sourceTree = "<group>"; };
-		A30000000000000000000017 /* HapticsClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback/HapticsClient.swift; sourceTree = "<group>"; };
-		A30000000000000000000018 /* SoundClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback/SoundClient.swift; sourceTree = "<group>"; };
-		A30000000000000000000019 /* AppStateStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/AppStateStoreTests.swift; sourceTree = "<group>"; };
+		A30000000000000000000015 /* Randomness/RandomSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Randomness/RandomSource.swift; sourceTree = "<group>"; };
+		A30000000000000000000016 /* Time/ClockClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time/ClockClient.swift; sourceTree = "<group>"; };
+		A30000000000000000000017 /* Feedback/HapticsClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback/HapticsClient.swift; sourceTree = "<group>"; };
+		A30000000000000000000018 /* Feedback/SoundClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback/SoundClient.swift; sourceTree = "<group>"; };
+		A30000000000000000000019 /* App/AppStateStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App/AppStateStoreTests.swift; sourceTree = "<group>"; };
 		A3000000000000000000001A /* AppStateStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateStore.swift; sourceTree = "<group>"; };
-		A3000000000000000000001B /* LayoutFoundationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared/LayoutFoundationTests.swift; sourceTree = "<group>"; };
-		A3000000000000000000001C /* GameLayoutMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout/GameLayoutMode.swift; sourceTree = "<group>"; };
-		A3000000000000000000001D /* AppearanceTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme/AppearanceTokens.swift; sourceTree = "<group>"; };
-		A3000000000000000000001E /* AppScaleTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme/AppScaleTokens.swift; sourceTree = "<group>"; };
-		A3000000000000000000001F /* AccessibilityValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accessibility/AccessibilityValues.swift; sourceTree = "<group>"; };
+		A3000000000000000000001B /* Shared/LayoutFoundationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shared/LayoutFoundationTests.swift; sourceTree = "<group>"; };
+		A3000000000000000000001C /* Layout/GameLayoutMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Layout/GameLayoutMode.swift; sourceTree = "<group>"; };
+		A3000000000000000000001D /* Theme/AppearanceTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme/AppearanceTokens.swift; sourceTree = "<group>"; };
+		A3000000000000000000001E /* Theme/AppScaleTokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme/AppScaleTokens.swift; sourceTree = "<group>"; };
+		A3000000000000000000001F /* Accessibility/AccessibilityValues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Accessibility/AccessibilityValues.swift; sourceTree = "<group>"; };
+		A30000000000000000000020 /* LifeGridTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LifeGridTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A30000000000000000000030 /* LifeGridUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LifeGridUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A30000000000000000000040 /* StartingLifeInputTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartingLifeInputTests.swift; sourceTree = "<group>"; };
 		A30000000000000000000041 /* NewGameDraftTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGameDraftTests.swift; sourceTree = "<group>"; };
 		A30000000000000000000042 /* StartingLifeInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartingLifeInput.swift; sourceTree = "<group>"; };
@@ -138,13 +142,10 @@
 		A3000000000000000000004E /* RepeatActionButtonTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatActionButtonTests.swift; sourceTree = "<group>"; };
 		A3000000000000000000004F /* RepeatActionButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatActionButton.swift; sourceTree = "<group>"; };
 		A30000000000000000000050 /* LocalLifeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalLifeCard.swift; sourceTree = "<group>"; };
-		A30000000000000000000051 /* OpponentStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models/OpponentStateTests.swift; sourceTree = "<group>"; };
+		A30000000000000000000051 /* Models/OpponentStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models/OpponentStateTests.swift; sourceTree = "<group>"; };
 		A30000000000000000000052 /* CommanderDamageChangeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommanderDamageChangeTests.swift; sourceTree = "<group>"; };
 		A30000000000000000000053 /* CommanderDamageChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommanderDamageChange.swift; sourceTree = "<group>"; };
 		A30000000000000000000054 /* OpponentCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpponentCard.swift; sourceTree = "<group>"; };
-		A30000000000000000000010 /* Life Grid.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Life Grid.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A30000000000000000000020 /* LifeGridTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LifeGridTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		A30000000000000000000030 /* LifeGridUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LifeGridUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A30000000000000000000055 /* CounterCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterCard.swift; sourceTree = "<group>"; };
 		A30000000000000000000056 /* DayNightCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayNightCard.swift; sourceTree = "<group>"; };
 		A30000000000000000000057 /* PinCounterSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinCounterSheet.swift; sourceTree = "<group>"; };
@@ -159,16 +160,43 @@
 		A30000000000000000000062 /* CoinFlipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinFlipView.swift; sourceTree = "<group>"; };
 		A30000000000000000000063 /* SavedDieEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedDieEditor.swift; sourceTree = "<group>"; };
 		A30000000000000000000065 /* OpponentEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpponentEditor.swift; sourceTree = "<group>"; };
-		A30000000000000000000066 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = LifeGrid/Assets.xcassets; sourceTree = SOURCE_ROOT; };
+		A30000000000000000000066 /* LifeGrid/Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = LifeGrid/Assets.xcassets; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		A50000000000000000000011 /* Frameworks */ = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (A20000000000000000000066 /* Assets.xcassets in Resources */); runOnlyForDeploymentPostprocessing = 0; };
-		A50000000000000000000021 /* Frameworks */ = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
-		A50000000000000000000031 /* Frameworks */ = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+		A50000000000000000000011 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A20000000000000000000066 /* LifeGrid/Assets.xcassets in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A50000000000000000000021 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A50000000000000000000031 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		97C61ACC3012FAF80019AB26 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				A30000000000000000000066 /* LifeGrid/Assets.xcassets */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		A10000000000000000000002 = {
 			isa = PBXGroup;
 			children = (
@@ -176,6 +204,7 @@
 				A10000000000000000000005 /* LifeGridTests */,
 				A10000000000000000000006 /* LifeGridUITests */,
 				A10000000000000000000003 /* Products */,
+				97C61ACC3012FAF80019AB26 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -191,8 +220,40 @@
 		};
 		A10000000000000000000004 /* LifeGrid */ = {
 			isa = PBXGroup;
-			children = (A10000000000000000000007 /* App */, A10000000000000000000008 /* Models */, A10000000000000000000009 /* Persistence */, A1000000000000000000000A /* Shared */, A1000000000000000000000C /* Features */);
+			children = (
+				A10000000000000000000007 /* App */,
+				A10000000000000000000008 /* Models */,
+				A10000000000000000000009 /* Persistence */,
+				A1000000000000000000000A /* Shared */,
+				A1000000000000000000000C /* Features */,
+			);
 			path = LifeGrid;
+			sourceTree = "<group>";
+		};
+		A10000000000000000000005 /* LifeGridTests */ = {
+			isa = PBXGroup;
+			children = (
+				A30000000000000000000003 /* FoundationSmokeTests.swift */,
+				A30000000000000000000005 /* Models/PersistedAppStateTests.swift */,
+				A30000000000000000000051 /* Models/OpponentStateTests.swift */,
+				A3000000000000000000000D /* Persistence/JSONAppStateRepositoryTests.swift */,
+				A30000000000000000000012 /* Support/TestDoubles.swift */,
+				A30000000000000000000013 /* App/AppEnvironmentTests.swift */,
+				A30000000000000000000019 /* App/AppStateStoreTests.swift */,
+				A3000000000000000000001B /* Shared/LayoutFoundationTests.swift */,
+				A1000000000000000000000B /* Features/NewGame */,
+				A10000000000000000000012 /* Features/Game */,
+				A1000000000000000000005D /* Features/Counters */,
+			);
+			path = LifeGridTests;
+			sourceTree = "<group>";
+		};
+		A10000000000000000000006 /* LifeGridUITests */ = {
+			isa = PBXGroup;
+			children = (
+				A30000000000000000000004 /* LifeGridUITests.swift */,
+			);
+			path = LifeGridUITests;
 			sourceTree = "<group>";
 		};
 		A10000000000000000000007 /* App */ = {
@@ -233,77 +294,107 @@
 		A1000000000000000000000A /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				A30000000000000000000015 /* RandomSource.swift */,
-				A30000000000000000000016 /* ClockClient.swift */,
-				A30000000000000000000017 /* HapticsClient.swift */,
-				A30000000000000000000018 /* SoundClient.swift */,
-				A3000000000000000000001C /* GameLayoutMode.swift */,
-				A3000000000000000000001D /* AppearanceTokens.swift */,
-				A3000000000000000000001E /* AppScaleTokens.swift */,
-				A3000000000000000000001F /* AccessibilityValues.swift */,
+				A30000000000000000000015 /* Randomness/RandomSource.swift */,
+				A30000000000000000000016 /* Time/ClockClient.swift */,
+				A30000000000000000000017 /* Feedback/HapticsClient.swift */,
+				A30000000000000000000018 /* Feedback/SoundClient.swift */,
+				A3000000000000000000001C /* Layout/GameLayoutMode.swift */,
+				A3000000000000000000001D /* Theme/AppearanceTokens.swift */,
+				A3000000000000000000001E /* Theme/AppScaleTokens.swift */,
+				A3000000000000000000001F /* Accessibility/AccessibilityValues.swift */,
 				A1000000000000000000000E /* Components */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
 		};
-		A10000000000000000000005 /* LifeGridTests */ = {
+		A1000000000000000000000B /* Features/NewGame */ = {
 			isa = PBXGroup;
-			children = (A30000000000000000000003 /* FoundationSmokeTests.swift */, A30000000000000000000005 /* PersistedAppStateTests.swift */, A30000000000000000000051 /* OpponentStateTests.swift */, A3000000000000000000000D /* JSONAppStateRepositoryTests.swift */, A30000000000000000000012 /* TestDoubles.swift */, A30000000000000000000013 /* AppEnvironmentTests.swift */, A30000000000000000000019 /* AppStateStoreTests.swift */, A3000000000000000000001B /* LayoutFoundationTests.swift */, A1000000000000000000000B /* NewGame Feature Tests */, A10000000000000000000012 /* Game Feature Tests */, A1000000000000000000005D /* Counters Feature Tests */);
-			path = LifeGridTests;
-			sourceTree = "<group>";
-		};
-		A10000000000000000000006 /* LifeGridUITests */ = {
-			isa = PBXGroup;
-			children = (A30000000000000000000004 /* LifeGridUITests.swift */);
-			path = LifeGridUITests;
-			sourceTree = "<group>";
-		};
-		A1000000000000000000000B /* NewGame Feature Tests */ = {
-			isa = PBXGroup;
-			children = (A30000000000000000000040 /* StartingLifeInputTests.swift */, A30000000000000000000041 /* NewGameDraftTests.swift */, A30000000000000000000044 /* ActiveGameFactoryTests.swift */);
+			children = (
+				A30000000000000000000040 /* StartingLifeInputTests.swift */,
+				A30000000000000000000041 /* NewGameDraftTests.swift */,
+				A30000000000000000000044 /* ActiveGameFactoryTests.swift */,
+			);
 			path = Features/NewGame;
 			sourceTree = "<group>";
 		};
 		A1000000000000000000000C /* Features */ = {
 			isa = PBXGroup;
-			children = (A1000000000000000000000D /* NewGame */, A1000000000000000000000F /* Game */,
+			children = (
+				A1000000000000000000000D /* NewGame */,
+				A1000000000000000000000F /* Game */,
 				A1000000000000000000005B /* Counters */,
-				A10000000000000000000064 /* Dice */, A10000000000000000000011 /* Settings */);
+				A10000000000000000000064 /* Dice */,
+				A10000000000000000000011 /* Settings */,
+			);
 			path = Features;
 			sourceTree = "<group>";
 		};
 		A1000000000000000000000D /* NewGame */ = {
 			isa = PBXGroup;
-			children = (A30000000000000000000042 /* StartingLifeInput.swift */, A30000000000000000000043 /* NewGameDraft.swift */, A30000000000000000000045 /* ActiveGameFactory.swift */, A30000000000000000000048 /* NewGameScreen.swift */);
+			children = (
+				A30000000000000000000042 /* StartingLifeInput.swift */,
+				A30000000000000000000043 /* NewGameDraft.swift */,
+				A30000000000000000000045 /* ActiveGameFactory.swift */,
+				A30000000000000000000048 /* NewGameScreen.swift */,
+			);
 			path = NewGame;
 			sourceTree = "<group>";
 		};
 		A1000000000000000000000E /* Components */ = {
 			isa = PBXGroup;
-			children = (A30000000000000000000046 /* LifeGridCard.swift */, A30000000000000000000047 /* StartingLifePicker.swift */);
+			children = (
+				A30000000000000000000046 /* LifeGridCard.swift */,
+				A30000000000000000000047 /* StartingLifePicker.swift */,
+			);
 			path = Components;
 			sourceTree = "<group>";
 		};
 		A1000000000000000000000F /* Game */ = {
 			isa = PBXGroup;
-			children = (A3000000000000000000004A /* ActiveGameSummaryScreen.swift */, A3000000000000000000004C /* ManualLifeChange.swift */, A3000000000000000000004F /* RepeatActionButton.swift */, A30000000000000000000050 /* LocalLifeCard.swift */, A30000000000000000000053 /* CommanderDamageChange.swift */, A30000000000000000000054 /* OpponentCard.swift */,
-				A30000000000000000000065 /* OpponentEditor.swift */);
+			children = (
+				A3000000000000000000004A /* ActiveGameSummaryScreen.swift */,
+				A3000000000000000000004C /* ManualLifeChange.swift */,
+				A3000000000000000000004F /* RepeatActionButton.swift */,
+				A30000000000000000000050 /* LocalLifeCard.swift */,
+				A30000000000000000000053 /* CommanderDamageChange.swift */,
+				A30000000000000000000054 /* OpponentCard.swift */,
+				A30000000000000000000065 /* OpponentEditor.swift */,
+			);
 			path = Game;
 			sourceTree = "<group>";
 		};
 		A10000000000000000000011 /* Settings */ = {
 			isa = PBXGroup;
-			children = (A3000000000000000000004B /* SettingsScreen.swift */);
+			children = (
+				A3000000000000000000004B /* SettingsScreen.swift */,
+			);
 			path = Settings;
 			sourceTree = "<group>";
 		};
-		A10000000000000000000012 /* Game Feature Tests */ = {
+		A10000000000000000000012 /* Features/Game */ = {
 			isa = PBXGroup;
-			children = (A3000000000000000000004D /* ManualLifeChangeTests.swift */, A3000000000000000000004E /* RepeatActionButtonTests.swift */, A30000000000000000000052 /* CommanderDamageChangeTests.swift */);
+			children = (
+				A3000000000000000000004D /* ManualLifeChangeTests.swift */,
+				A3000000000000000000004E /* RepeatActionButtonTests.swift */,
+				A30000000000000000000052 /* CommanderDamageChangeTests.swift */,
+			);
 			path = Features/Game;
 			sourceTree = "<group>";
 		};
-		A1000000000000000000005D /* Counters Feature Tests */ = {
+		A1000000000000000000005B /* Counters */ = {
+			isa = PBXGroup;
+			children = (
+				A30000000000000000000055 /* CounterCard.swift */,
+				A30000000000000000000056 /* DayNightCard.swift */,
+				A30000000000000000000057 /* PinCounterSheet.swift */,
+				A30000000000000000000058 /* CustomCounterEditor.swift */,
+				A30000000000000000000059 /* PinnedCountersView.swift */,
+				A3000000000000000000005A /* CountersScreen.swift */,
+			);
+			path = Counters;
+			sourceTree = "<group>";
+		};
+		A1000000000000000000005D /* Features/Counters */ = {
 			isa = PBXGroup;
 			children = (
 				A3000000000000000000005C /* CounterBehaviorTests.swift */,
@@ -324,31 +415,21 @@
 			path = Dice;
 			sourceTree = "<group>";
 		};
-
-
-		A1000000000000000000005B /* Counters */ = {
-			isa = PBXGroup;
-			children = (
-				A30000000000000000000055 /* CounterCard.swift */,
-				A30000000000000000000056 /* DayNightCard.swift */,
-				A30000000000000000000057 /* PinCounterSheet.swift */,
-				A30000000000000000000058 /* CustomCounterEditor.swift */,
-				A30000000000000000000059 /* PinnedCountersView.swift */,
-				A3000000000000000000005A /* CountersScreen.swift */,
-			);
-			path = Counters;
-			sourceTree = "<group>";
-		};
-
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
 		A10000000000000000000010 /* LifeGrid */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A70000000000000000000010 /* Build configuration list for PBXNativeTarget "LifeGrid" */;
-			buildPhases = (A50000000000000000000010 /* Sources */, A50000000000000000000011 /* Frameworks */, A50000000000000000000012 /* Resources */);
-			buildRules = ();
-			dependencies = ();
+			buildPhases = (
+				A50000000000000000000010 /* Sources */,
+				A50000000000000000000011 /* Frameworks */,
+				A50000000000000000000012 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
 			name = LifeGrid;
 			productName = "Life Grid";
 			productReference = A30000000000000000000010 /* Life Grid.app */;
@@ -357,9 +438,16 @@
 		A10000000000000000000020 /* LifeGridTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A70000000000000000000020 /* Build configuration list for PBXNativeTarget "LifeGridTests" */;
-			buildPhases = (A50000000000000000000020 /* Sources */, A50000000000000000000021 /* Frameworks */, A50000000000000000000022 /* Resources */);
-			buildRules = ();
-			dependencies = (A60000000000000000000001 /* PBXTargetDependency */);
+			buildPhases = (
+				A50000000000000000000020 /* Sources */,
+				A50000000000000000000021 /* Frameworks */,
+				A50000000000000000000022 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A60000000000000000000001 /* PBXTargetDependency */,
+			);
 			name = LifeGridTests;
 			productName = LifeGridTests;
 			productReference = A30000000000000000000020 /* LifeGridTests.xctest */;
@@ -368,9 +456,16 @@
 		A10000000000000000000030 /* LifeGridUITests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = A70000000000000000000030 /* Build configuration list for PBXNativeTarget "LifeGridUITests" */;
-			buildPhases = (A50000000000000000000030 /* Sources */, A50000000000000000000031 /* Frameworks */, A50000000000000000000032 /* Resources */);
-			buildRules = ();
-			dependencies = (A60000000000000000000002 /* PBXTargetDependency */);
+			buildPhases = (
+				A50000000000000000000030 /* Sources */,
+				A50000000000000000000031 /* Frameworks */,
+				A50000000000000000000032 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A60000000000000000000002 /* PBXTargetDependency */,
+			);
 			name = LifeGridUITests;
 			productName = LifeGridUITests;
 			productReference = A30000000000000000000030 /* LifeGridUITests.xctest */;
@@ -386,57 +481,334 @@
 				LastSwiftUpdateCheck = 2660;
 				LastUpgradeCheck = 2660;
 				TargetAttributes = {
-					A10000000000000000000010 = {CreatedOnToolsVersion = 26.6; };
-					A10000000000000000000020 = {CreatedOnToolsVersion = 26.6; TestTargetID = A10000000000000000000010; };
-					A10000000000000000000030 = {CreatedOnToolsVersion = 26.6; TestTargetID = A10000000000000000000010; };
+					A10000000000000000000010 = {
+						CreatedOnToolsVersion = 26.6;
+					};
+					A10000000000000000000020 = {
+						CreatedOnToolsVersion = 26.6;
+						TestTargetID = A10000000000000000000010;
+					};
+					A10000000000000000000030 = {
+						CreatedOnToolsVersion = 26.6;
+						TestTargetID = A10000000000000000000010;
+					};
 				};
 			};
 			buildConfigurationList = A70000000000000000000001 /* Build configuration list for PBXProject "LifeGrid" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
-			knownRegions = (en, Base);
+			knownRegions = (
+				en,
+				Base,
+			);
 			mainGroup = A10000000000000000000002;
 			productRefGroup = A10000000000000000000003 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
-			targets = (A10000000000000000000010 /* LifeGrid */, A10000000000000000000020 /* LifeGridTests */, A10000000000000000000030 /* LifeGridUITests */);
+			targets = (
+				A10000000000000000000010 /* LifeGrid */,
+				A10000000000000000000020 /* LifeGridTests */,
+				A10000000000000000000030 /* LifeGridUITests */,
+			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		A50000000000000000000012 /* Resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (A20000000000000000000066 /* Assets.xcassets in Resources */); runOnlyForDeploymentPostprocessing = 0; };
-		A50000000000000000000022 /* Resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
-		A50000000000000000000032 /* Resources */ = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0; };
+		A50000000000000000000012 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97C61ACB3012FAF80019AB26 /* LifeGrid/Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A50000000000000000000022 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A50000000000000000000032 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		A50000000000000000000010 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A20000000000000000000001, A20000000000000000000006, A20000000000000000000007, A20000000000000000000008, A20000000000000000000009, A2000000000000000000000A, A2000000000000000000000B, A2000000000000000000000C, A2000000000000000000000E, A2000000000000000000000F, A20000000000000000000011, A20000000000000000000014, A20000000000000000000015, A20000000000000000000016, A20000000000000000000017, A20000000000000000000018, A2000000000000000000001A, A2000000000000000000001C, A2000000000000000000001D, A2000000000000000000001E, A2000000000000000000001F, A20000000000000000000042, A20000000000000000000043, A20000000000000000000045, A20000000000000000000046, A20000000000000000000047, A20000000000000000000048, A20000000000000000000049, A2000000000000000000004A, A2000000000000000000004B, A2000000000000000000004C, A2000000000000000000004F, A20000000000000000000050, A20000000000000000000053, A20000000000000000000054, A20000000000000000000055, A20000000000000000000056, A20000000000000000000057, A20000000000000000000058, A20000000000000000000059, A2000000000000000000005A, A2000000000000000000005E, A2000000000000000000005F, A20000000000000000000060, A20000000000000000000061, A20000000000000000000062, A20000000000000000000063, A20000000000000000000065); runOnlyForDeploymentPostprocessing = 0; };
-		A50000000000000000000020 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A20000000000000000000003, A20000000000000000000005, A2000000000000000000000D, A20000000000000000000012, A20000000000000000000013, A20000000000000000000019, A2000000000000000000001B, A20000000000000000000040, A20000000000000000000041, A20000000000000000000044, A2000000000000000000004D, A2000000000000000000004E, A20000000000000000000051, A20000000000000000000052, A2000000000000000000005C); runOnlyForDeploymentPostprocessing = 0; };
-		A50000000000000000000030 /* Sources */ = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (A20000000000000000000004); runOnlyForDeploymentPostprocessing = 0; };
+		A50000000000000000000010 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A20000000000000000000001 /* LifeGridApp.swift in Sources */,
+				A20000000000000000000006 /* AppPreferences.swift in Sources */,
+				A20000000000000000000007 /* GameSetup.swift in Sources */,
+				A20000000000000000000008 /* CounterModels.swift in Sources */,
+				A20000000000000000000009 /* OpponentState.swift in Sources */,
+				A2000000000000000000000A /* ActiveGame.swift in Sources */,
+				A2000000000000000000000B /* DiceModels.swift in Sources */,
+				A2000000000000000000000C /* PersistedAppState.swift in Sources */,
+				A2000000000000000000000E /* AppStateRepository.swift in Sources */,
+				A2000000000000000000000F /* JSONAppStateRepository.swift in Sources */,
+				A20000000000000000000011 /* StateMigration.swift in Sources */,
+				A20000000000000000000014 /* AppEnvironment.swift in Sources */,
+				A20000000000000000000015 /* Randomness/RandomSource.swift in Sources */,
+				A20000000000000000000016 /* Time/ClockClient.swift in Sources */,
+				A20000000000000000000017 /* Feedback/HapticsClient.swift in Sources */,
+				A20000000000000000000018 /* Feedback/SoundClient.swift in Sources */,
+				A2000000000000000000001A /* AppStateStore.swift in Sources */,
+				A2000000000000000000001C /* Layout/GameLayoutMode.swift in Sources */,
+				A2000000000000000000001D /* Theme/AppearanceTokens.swift in Sources */,
+				A2000000000000000000001E /* Theme/AppScaleTokens.swift in Sources */,
+				A2000000000000000000001F /* Accessibility/AccessibilityValues.swift in Sources */,
+				A20000000000000000000042 /* StartingLifeInput.swift in Sources */,
+				A20000000000000000000043 /* NewGameDraft.swift in Sources */,
+				A20000000000000000000045 /* ActiveGameFactory.swift in Sources */,
+				A20000000000000000000046 /* LifeGridCard.swift in Sources */,
+				A20000000000000000000047 /* StartingLifePicker.swift in Sources */,
+				A20000000000000000000048 /* NewGameScreen.swift in Sources */,
+				A20000000000000000000049 /* LifeGridRootView.swift in Sources */,
+				A2000000000000000000004A /* ActiveGameSummaryScreen.swift in Sources */,
+				A2000000000000000000004B /* SettingsScreen.swift in Sources */,
+				A2000000000000000000004C /* ManualLifeChange.swift in Sources */,
+				A2000000000000000000004F /* RepeatActionButton.swift in Sources */,
+				A20000000000000000000050 /* LocalLifeCard.swift in Sources */,
+				A20000000000000000000053 /* CommanderDamageChange.swift in Sources */,
+				A20000000000000000000054 /* OpponentCard.swift in Sources */,
+				A20000000000000000000055 /* CounterCard.swift in Sources */,
+				A20000000000000000000056 /* DayNightCard.swift in Sources */,
+				A20000000000000000000057 /* PinCounterSheet.swift in Sources */,
+				A20000000000000000000058 /* CustomCounterEditor.swift in Sources */,
+				A20000000000000000000059 /* PinnedCountersView.swift in Sources */,
+				A2000000000000000000005A /* CountersScreen.swift in Sources */,
+				A2000000000000000000005E /* DiceScreen.swift in Sources */,
+				A2000000000000000000005F /* DiceRoller.swift in Sources */,
+				A20000000000000000000060 /* DiceHistoryView.swift in Sources */,
+				A20000000000000000000061 /* RandomPlayerPicker.swift in Sources */,
+				A20000000000000000000062 /* CoinFlipView.swift in Sources */,
+				A20000000000000000000063 /* SavedDieEditor.swift in Sources */,
+				A20000000000000000000065 /* OpponentEditor.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A50000000000000000000020 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A20000000000000000000003 /* FoundationSmokeTests.swift in Sources */,
+				A20000000000000000000005 /* Models/PersistedAppStateTests.swift in Sources */,
+				A2000000000000000000000D /* Persistence/JSONAppStateRepositoryTests.swift in Sources */,
+				A20000000000000000000012 /* Support/TestDoubles.swift in Sources */,
+				A20000000000000000000013 /* App/AppEnvironmentTests.swift in Sources */,
+				A20000000000000000000019 /* App/AppStateStoreTests.swift in Sources */,
+				A2000000000000000000001B /* Shared/LayoutFoundationTests.swift in Sources */,
+				A20000000000000000000040 /* StartingLifeInputTests.swift in Sources */,
+				A20000000000000000000041 /* NewGameDraftTests.swift in Sources */,
+				A20000000000000000000044 /* ActiveGameFactoryTests.swift in Sources */,
+				A2000000000000000000004D /* ManualLifeChangeTests.swift in Sources */,
+				A2000000000000000000004E /* RepeatActionButtonTests.swift in Sources */,
+				A20000000000000000000051 /* Models/OpponentStateTests.swift in Sources */,
+				A20000000000000000000052 /* CommanderDamageChangeTests.swift in Sources */,
+				A2000000000000000000005C /* CounterBehaviorTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A50000000000000000000030 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A20000000000000000000004 /* LifeGridUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		A60000000000000000000001 /* PBXTargetDependency */ = {isa = PBXTargetDependency; target = A10000000000000000000010 /* LifeGrid */; targetProxy = A40000000000000000000001 /* PBXContainerItemProxy */; };
-		A60000000000000000000002 /* PBXTargetDependency */ = {isa = PBXTargetDependency; target = A10000000000000000000010 /* LifeGrid */; targetProxy = A40000000000000000000002 /* PBXContainerItemProxy */; };
+		A60000000000000000000001 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A10000000000000000000010 /* LifeGrid */;
+			targetProxy = A40000000000000000000001 /* PBXContainerItemProxy */;
+		};
+		A60000000000000000000002 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A10000000000000000000010 /* LifeGrid */;
+			targetProxy = A40000000000000000000002 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		A80000000000000000000001 /* Project Debug */ = {isa = XCBuildConfiguration; buildSettings = {ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ENABLE_MODULES = YES; ENABLE_TESTABILITY = YES; IPHONEOS_DEPLOYMENT_TARGET = 17.0; SDKROOT = iphoneos; SWIFT_VERSION = 6.0; }; name = Debug; };
-		A80000000000000000000002 /* Project Release */ = {isa = XCBuildConfiguration; buildSettings = {ALWAYS_SEARCH_USER_PATHS = NO; CLANG_ENABLE_MODULES = YES; IPHONEOS_DEPLOYMENT_TARGET = 17.0; SDKROOT = iphoneos; SWIFT_COMPILATION_MODE = wholemodule; SWIFT_OPTIMIZATION_LEVEL = "-O"; SWIFT_VERSION = 6.0; }; name = Release; };
-		A80000000000000000000010 /* App Debug */ = {isa = XCBuildConfiguration; buildSettings = {CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 1; GENERATE_INFOPLIST_FILE = YES; INFOPLIST_KEY_CFBundleDisplayName = "Life Grid"; INFOPLIST_KEY_UILaunchScreen_Generation = YES; MARKETING_VERSION = 0.1.0; PRODUCT_BUNDLE_IDENTIFIER = com.ashathe.lifegrid; ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon; PRODUCT_MODULE_NAME = LifeGrid; PRODUCT_NAME = "Life Grid"; SUPPORTED_PLATFORMS = "iphoneos iphonesimulator"; SWIFT_STRICT_CONCURRENCY = complete; SWIFT_VERSION = 6.0; TARGETED_DEVICE_FAMILY = "1,2"; }; name = Debug; };
-		A80000000000000000000011 /* App Release */ = {isa = XCBuildConfiguration; buildSettings = {CODE_SIGN_STYLE = Automatic; CURRENT_PROJECT_VERSION = 1; GENERATE_INFOPLIST_FILE = YES; INFOPLIST_KEY_CFBundleDisplayName = "Life Grid"; INFOPLIST_KEY_UILaunchScreen_Generation = YES; MARKETING_VERSION = 0.1.0; PRODUCT_BUNDLE_IDENTIFIER = com.ashathe.lifegrid; ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon; PRODUCT_MODULE_NAME = LifeGrid; PRODUCT_NAME = "Life Grid"; SUPPORTED_PLATFORMS = "iphoneos iphonesimulator"; SWIFT_STRICT_CONCURRENCY = complete; SWIFT_VERSION = 6.0; TARGETED_DEVICE_FAMILY = "1,2"; }; name = Release; };
-		A80000000000000000000020 /* Tests Debug */ = {isa = XCBuildConfiguration; buildSettings = {BUNDLE_LOADER = "$(TEST_HOST)"; CODE_SIGN_STYLE = Automatic; GENERATE_INFOPLIST_FILE = YES; PRODUCT_BUNDLE_IDENTIFIER = com.ashathe.lifegrid.tests; PRODUCT_NAME = "$(TARGET_NAME)"; SUPPORTED_PLATFORMS = "iphoneos iphonesimulator"; SWIFT_STRICT_CONCURRENCY = complete; SWIFT_VERSION = 6.0; TARGETED_DEVICE_FAMILY = "1,2"; TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Life Grid.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Life Grid"; }; name = Debug; };
-		A80000000000000000000021 /* Tests Release */ = {isa = XCBuildConfiguration; buildSettings = {BUNDLE_LOADER = "$(TEST_HOST)"; CODE_SIGN_STYLE = Automatic; GENERATE_INFOPLIST_FILE = YES; PRODUCT_BUNDLE_IDENTIFIER = com.ashathe.lifegrid.tests; PRODUCT_NAME = "$(TARGET_NAME)"; SUPPORTED_PLATFORMS = "iphoneos iphonesimulator"; SWIFT_STRICT_CONCURRENCY = complete; SWIFT_VERSION = 6.0; TARGETED_DEVICE_FAMILY = "1,2"; TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Life Grid.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Life Grid"; }; name = Release; };
-		A80000000000000000000030 /* UI Tests Debug */ = {isa = XCBuildConfiguration; buildSettings = {CODE_SIGN_STYLE = Automatic; GENERATE_INFOPLIST_FILE = YES; PRODUCT_BUNDLE_IDENTIFIER = com.ashathe.lifegrid.uitests; PRODUCT_NAME = "$(TARGET_NAME)"; SUPPORTED_PLATFORMS = "iphoneos iphonesimulator"; SWIFT_STRICT_CONCURRENCY = complete; SWIFT_VERSION = 6.0; TARGETED_DEVICE_FAMILY = "1,2"; TEST_TARGET_NAME = LifeGrid; }; name = Debug; };
-		A80000000000000000000031 /* UI Tests Release */ = {isa = XCBuildConfiguration; buildSettings = {CODE_SIGN_STYLE = Automatic; GENERATE_INFOPLIST_FILE = YES; PRODUCT_BUNDLE_IDENTIFIER = com.ashathe.lifegrid.uitests; PRODUCT_NAME = "$(TARGET_NAME)"; SUPPORTED_PLATFORMS = "iphoneos iphonesimulator"; SWIFT_STRICT_CONCURRENCY = complete; SWIFT_VERSION = 6.0; TARGETED_DEVICE_FAMILY = "1,2"; TEST_TARGET_NAME = LifeGrid; }; name = Release; };
+		A80000000000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				ENABLE_TESTABILITY = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		A80000000000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		A80000000000000000000010 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BRTC4HJ79B;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Life Grid";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ashathe.lifegrid;
+				PRODUCT_MODULE_NAME = LifeGrid;
+				PRODUCT_NAME = "Life Grid";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A80000000000000000000011 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = BRTC4HJ79B;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Life Grid";
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ashathe.lifegrid;
+				PRODUCT_MODULE_NAME = LifeGrid;
+				PRODUCT_NAME = "Life Grid";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		A80000000000000000000020 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ashathe.lifegrid.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Life Grid.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Life Grid";
+			};
+			name = Debug;
+		};
+		A80000000000000000000021 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ashathe.lifegrid.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Life Grid.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Life Grid";
+			};
+			name = Release;
+		};
+		A80000000000000000000030 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ashathe.lifegrid.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = LifeGrid;
+			};
+			name = Debug;
+		};
+		A80000000000000000000031 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ashathe.lifegrid.uitests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = LifeGrid;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		A70000000000000000000001 /* Project configurations */ = {isa = XCConfigurationList; buildConfigurations = (A80000000000000000000001, A80000000000000000000002); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
-		A70000000000000000000010 /* App configurations */ = {isa = XCConfigurationList; buildConfigurations = (A80000000000000000000010, A80000000000000000000011); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
-		A70000000000000000000020 /* Tests configurations */ = {isa = XCConfigurationList; buildConfigurations = (A80000000000000000000020, A80000000000000000000021); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
-		A70000000000000000000030 /* UI Tests configurations */ = {isa = XCConfigurationList; buildConfigurations = (A80000000000000000000030, A80000000000000000000031); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release; };
+		A70000000000000000000001 /* Build configuration list for PBXProject "LifeGrid" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A80000000000000000000001 /* Debug */,
+				A80000000000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A70000000000000000000010 /* Build configuration list for PBXNativeTarget "LifeGrid" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A80000000000000000000010 /* Debug */,
+				A80000000000000000000011 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A70000000000000000000020 /* Build configuration list for PBXNativeTarget "LifeGridTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A80000000000000000000020 /* Debug */,
+				A80000000000000000000021 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A70000000000000000000030 /* Build configuration list for PBXNativeTarget "LifeGridUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A80000000000000000000030 /* Debug */,
+				A80000000000000000000031 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 	};
 	rootObject = A10000000000000000000001 /* Project object */;
