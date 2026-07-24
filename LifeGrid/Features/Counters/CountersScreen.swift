@@ -138,25 +138,25 @@ struct CountersScreen: View {
 
                     LazyVGrid(columns: [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)], spacing: 12) {
                         ForEach(unpinnedBuiltInIDs, id: \.self) { counterID in
-                            if case .builtIn(let builtIn) = counterID, builtIn.isDayNight {
-                                DayNightCard(store: store)
-                            } else {
-                                HStack(alignment: .top) {
+                            HStack(alignment: .top) {
+                                if case .builtIn(let builtIn) = counterID, builtIn.isDayNight {
+                                    DayNightCard(store: store)
+                                } else {
                                     CounterCard(
                                         name: counterName(counterID),
                                         counterID: counterID,
                                         store: store
                                     )
-                                    if pinnedIDs.count < 4 {
-                                        Button {
-                                            Task { await store.pinCounter(counterID) }
-                                        } label: {
-                                            Image(systemName: "pin.fill")
-                                                .font(.caption)
-                                                .frame(width: 28, height: 28)
-                                        }
-                                        .buttonStyle(.plain)
+                                }
+                                if pinnedIDs.count < 4 {
+                                    Button {
+                                        Task { await store.pinCounter(counterID) }
+                                    } label: {
+                                        Image(systemName: "pin.fill")
+                                            .font(.caption)
+                                            .frame(width: 28, height: 28)
                                     }
+                                    .buttonStyle(.plain)
                                 }
                             }
                         }
