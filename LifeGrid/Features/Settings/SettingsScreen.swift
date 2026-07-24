@@ -32,6 +32,7 @@ struct SettingsScreen: View {
                     displaySection
                     feedbackSection
                     legalSection
+                    versionLabel
                 }
                 .frame(maxWidth: 560)
                 .padding(12)
@@ -134,6 +135,14 @@ struct SettingsScreen: View {
             }
         }
         .padding(.horizontal, 4)
+    }
+
+    private var versionLabel: some View {
+        Text("Version 0.1.0")
+            .font(.caption2)
+            .foregroundStyle(LifeGridPalette.secondaryText.opacity(0.5))
+            .frame(maxWidth: .infinity)
+            .padding(.top, 4)
     }
 
     private func persistCurrentValue() {
