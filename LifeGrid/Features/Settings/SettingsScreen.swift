@@ -31,6 +31,7 @@ struct SettingsScreen: View {
                     commanderSection
                     displaySection
                     feedbackSection
+                    legalSection
                 }
                 .frame(maxWidth: 560)
                 .padding(12)
@@ -116,6 +117,23 @@ struct SettingsScreen: View {
                 .onChange(of: sound) { _, v in Task { await store.setSoundEffectsEnabled(v) } }
         }
         .lifeGridCard()
+    }
+
+    private var legalSection: some View {
+        VStack(spacing: 8) {
+            Link(destination: URL(string: "https://ashathe.github.io/life-grid/")!) {
+                HStack {
+                    Text("Terms of Service & Privacy Policy")
+                        .font(.subheadline)
+                    Spacer()
+                    Image(systemName: "arrow.up.forward")
+                        .font(.caption)
+                }
+                .foregroundStyle(LifeGridPalette.secondaryText)
+                .padding(.vertical, 8)
+            }
+        }
+        .padding(.horizontal, 4)
     }
 
     private func persistCurrentValue() {
