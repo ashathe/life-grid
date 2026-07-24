@@ -83,6 +83,7 @@ struct PinnedCountersView: View {
 
             Text("\(currentValue(for: counterID))")
                 .font(.title2.bold().monospacedDigit())
+                .foregroundStyle(valueColor(for: counterID))
                 .accessibilityLabel(displayName(for: counterID))
                 .accessibilityValue("\(currentValue(for: counterID))")
 
@@ -160,5 +161,12 @@ struct PinnedCountersView: View {
 
     private func currentValue(for id: CounterID) -> Int {
         store.state.activeGame?.counterValues[id, default: 0] ?? 0
+    }
+
+    private func valueColor(for id: CounterID) -> Color {
+        if id == CounterID.builtIn(.poison), currentValue(for: id) >= 10 {
+            return LifeGridPalette.destructive
+        }
+        return LifeGridPalette.primaryText
     }
 }
