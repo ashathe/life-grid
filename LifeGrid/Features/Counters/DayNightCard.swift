@@ -8,16 +8,14 @@ struct DayNightCard: View {
     }
 
     var body: some View {
-        HStack(spacing: 12) {
+        VStack(spacing: 6) {
             Text("Day / Night")
-                .font(.headline)
-
-            Spacer()
+                .font(.caption.bold())
+                .foregroundStyle(LifeGridPalette.secondaryText)
 
             Text(currentState.displayString)
-                .font(.title3.bold())
+                .font(.subheadline.bold())
                 .foregroundStyle(stateColor)
-                .frame(minWidth: 60)
                 .accessibilityLabel("Day/Night state")
                 .accessibilityValue(currentState.displayString)
 
@@ -25,18 +23,18 @@ struct DayNightCard: View {
                 Task { await store.toggleDayNight() }
             } label: {
                 Image(systemName: "arrow.trianglehead.2.clockwise.rotate.90")
-                    .font(.title3)
-                    .frame(width: 44, height: 44)
-                    .background(
-                        LifeGridPalette.accent,
-                        in: RoundedRectangle(cornerRadius: 8)
-                    )
+                    .font(.subheadline)
+                    .frame(width: 36, height: 36)
+                    .background(LifeGridPalette.accent, in: RoundedRectangle(cornerRadius: 8))
             }
             .buttonStyle(.plain)
             .accessibilityLabel(toggleLabel)
-            .accessibilityHint("Toggles between Day, Night, and Not Set")
             .accessibilityIdentifier("day-night-toggle")
         }
+        .padding(10)
+        .frame(maxWidth: .infinity)
+        .background(LifeGridPalette.field, in: RoundedRectangle(cornerRadius: 10))
+        .overlay { RoundedRectangle(cornerRadius: 10).stroke(LifeGridPalette.border) }
         .foregroundStyle(LifeGridPalette.primaryText)
     }
 
