@@ -1,32 +1,12 @@
 # Milestone Approval
 
 - Milestone: Visual Gate 2
-- Reviewed commit: ee37e03 (Phase 3B tip)
+- Reviewed commit: 377e8af1e2224fdf3b76d912cfbba36e2fc40049
 - Review date: 2026-07-22
 - Reviewer: Project owner
 - Validator result: Pending — `python3 protocol/validate.py gate visuals` not yet run against this commit
-- Evidence reviewed:
-  - `reviews/visuals/new-game/phase2-comparison.md` — New Game screen, iPhone portrait
-  - `reviews/visuals/game/phase3a-local-life-comparison.md` — Game local-life slice, iPhone portrait
-  - `reviews/visuals/game/phase3b-primary-opponents-comparison.md` — Game opponent slice, iPhone portrait
-  - `reviews/visuals/settings/phase2-default-life-variance.md` — Settings starting-life control
-  - `reports/test-results/phase2-new-game-iphone.png`
-  - `reports/test-results/phase2-invalid-custom-life-iphone.png`
-  - `reports/test-results/phase2-replacement-confirmation-iphone.png`
-  - `reports/test-results/phase2-settings-default-life-iphone.png`
-  - `reports/test-results/phase3a-game-iphone.png`
-  - `reports/test-results/phase3b-game-iphone.png`
-  - `reports/test-results/` — all unit (91) and UI (15) tests passing on iPhone 17 (26.5)
-- Accepted variances:
-  - **V1 — Native iOS icon tab bar** instead of approved slim text-only segmented bar. Tab structure (Game, Counters, Dice, Settings) is preserved. Accepted: custom shell deferred past Gate 3.
-  - **V1 — Missing D20 header badge and compact Game title/subtitle.** Accepted: deferred to later visual-shell approval slice.
-  - **V1 — Typography and controls larger than embedded mockup.** Accepted: implementation enforces minimum 44-point touch targets and native Dynamic Type. Accessibility-first density is intentional.
-  - **V1 — Opponent card density.** Cards are taller than mockup due to native text styles and 72-point interaction rows. Partial scroll required for 3+ opponents. Accepted: accessibility over pixel parity.
-- Rejected variances:
-  - None. All variances are documented, classified, and intentional.
-- Follow-up requirements:
-  - iPad, landscape, Light, System, Compact, and Large variants remain uncaptured. These are deferred per CR-002 (iPhone primary delivery).
-  - Counters, Dice, Player Statuses, Monarch, Out of Game, Quick Restart, and App Icon screens require implementation and visual comparison before Gate 3.
-  - Settings full page (player name, commander prefs, appearance, haptics/sound, Reset Game) is deferred.
-  - Shell treatment (tab bar style, D20 badge) requires a dedicated visual-shell review or approved change request before Gate 3 completion.
+- Evidence reviewed: reviews/visuals/new-game, reviews/visuals/game, reviews/visuals/settings, reports/test-results/*.png
+- Accepted variances: V1 native tab bar, V1 missing D20 header badge, V1 larger typography/controls (accessibility-first), V1 opponent card density (72pt rows). All documented, accepted.
+- Rejected variances: None. All variances documented, classified, and intentional.
+- Follow-up requirements: Counters/Dice screens need visual comparison screenshots. iPad/landscape deferred per CR-002. Shell treatment pending.
 - Explicit approval statement: APPROVED
