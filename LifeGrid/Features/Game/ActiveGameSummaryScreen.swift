@@ -142,3 +142,4 @@ struct ActiveGameSummaryScreen: View {
         .transition(.opacity.combined(with: .scale(0.8)))
         .animation(.spring(response: 0.3), value: quickRollLabel)
     }
+}
