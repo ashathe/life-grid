@@ -502,6 +502,17 @@ final class AppStateStore {
         return didMutate
     }
 
+    func diceCount(forSides sides: Int) -> Int {
+        min(max(state.lastDiceCountsBySides[sides] ?? 1, 1), 100)
+    }
+
+    func setDiceCount(_ count: Int, forSides sides: Int) async {
+        guard (2...999).contains(sides), (1...100).contains(count) else { return }
+        await mutateAndPersist({ state in
+            state.lastDiceCountsBySides[sides] = count
+        })
+    }
+
     @discardableResult
     func rollDice(sides: Int, count: Int) async -> DiceRollEntry? {
         guard (2...999).contains(sides), (1...100).contains(count) else { return nil }
