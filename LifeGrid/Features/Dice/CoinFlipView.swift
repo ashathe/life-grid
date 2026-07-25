@@ -50,6 +50,7 @@ struct CoinFlipView: View {
         try? await Task.sleep(for: .milliseconds(400))
         result = await store.flipCoin()
         await store.playHaptic(.adjustment)
+        await store.playSound(.coinFlip)
         isFlipping = false
     }
 }

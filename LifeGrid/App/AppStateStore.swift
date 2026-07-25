@@ -206,6 +206,11 @@ final class AppStateStore {
         await environment.haptics.play(event)
     }
 
+    func playSound(_ event: SoundEvent) async {
+        guard state.preferences.soundEffectsEnabled else { return }
+        await environment.sound.play(event)
+    }
+
     func adjustLocalCommanderTax(
         _ slot: LocalCommanderTaxSlot,
         by amount: Int
