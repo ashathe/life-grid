@@ -8,26 +8,76 @@ struct ActiveGameSummaryScreen: View {
     @State private var quickRollValue: String?
     @State private var quickRollRevision = 0
     @State private var quickRollDismissTask: Task<Void, Never>?
-    var body: some View {
-        NavigationStack {
+    @State private var containerWidth: CGFloat = 0
+
+    private var isLandscape: Bool { containerWidth > 560 }
+
+    private var singleColumnLayout: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 16) {
+                LocalLifeCard(store: store, game: game)
+                    .id(game.id)
+                PinnedCountersView(store: store)
+                if store.state.preferences.commanderEnabled {
+                    opponentsSection
+                }
+            }
+            .frame(maxWidth: 560)
+            .padding(16)
+            .frame(maxWidth: .infinity)
+        }
+        .background(LifeGridPalette.background.ignoresSafeArea())
+        .overlay {
+            if let label = quickRollLabel, let value = quickRollValue {
+                quickRollOverlay(label: label, value: value)
+            }
+        }
+    }
+
+    private var twoColumnLayout: some View {
+        HStack(alignment: .top, spacing: 12) {
             ScrollView {
-                VStack(alignment: .leading, spacing: 16) {
+                VStack(alignment: .leading, spacing: 12) {
                     LocalLifeCard(store: store, game: game)
                         .id(game.id)
                     PinnedCountersView(store: store)
-                    if store.state.preferences.commanderEnabled {
-                        opponentsSection
+                }
+                .padding(.leading, 16)
+                .padding(.vertical, 12)
+            }
+            .frame(maxWidth: .infinity)
+            .background(LifeGridPalette.background)
+
+            if store.state.preferences.commanderEnabled {
+                ScrollView {
+                    opponentsSection
+                        .padding(.trailing, 16)
+                        .padding(.vertical, 12)
+                }
+                .frame(maxWidth: .infinity)
+                .background(LifeGridPalette.background)
+            }
+        }
+        .background(LifeGridPalette.background.ignoresSafeArea())
+        .overlay {
+            if let label = quickRollLabel, let value = quickRollValue {
+                quickRollOverlay(label: label, value: value)
+            }
+        }
+    }
+
+    var body: some View {
+        NavigationStack {
+            GeometryReader { geometry in
+                Group {
+                    if isLandscape {
+                        twoColumnLayout
+                    } else {
+                        singleColumnLayout
                     }
                 }
-                .frame(maxWidth: 560)
-                .padding(16)
-                .frame(maxWidth: .infinity)
-            }
-            .background(LifeGridPalette.background.ignoresSafeArea())
-            .overlay {
-                if let label = quickRollLabel, let value = quickRollValue {
-                    quickRollOverlay(label: label, value: value)
-                }
+                .onAppear { containerWidth = geometry.size.width }
+                .onChange(of: geometry.size.width) { _, w in containerWidth = w }
             }
             .foregroundStyle(LifeGridPalette.primaryText)
             .toolbar {
