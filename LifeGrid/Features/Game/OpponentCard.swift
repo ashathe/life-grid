@@ -93,6 +93,13 @@ struct OpponentCard: View {
             }
             .foregroundStyle(LifeGridPalette.primaryText)
             .lifeGridCard()
+            .contextMenu {
+                Button {
+                    Task { await store.hideOpponent(opponentID) }
+                } label: {
+                    Label("Eliminate Player", systemImage: "eye.slash")
+                }
+            }
             .sheet(isPresented: $showsExactDamageEntry) {
                 exactDamageSheet(for: opponent)
             }

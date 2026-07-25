@@ -245,6 +245,33 @@ final class AppStateStore {
     // MARK: - Opponents
 
     @discardableResult
+    func hideOpponent(_ id: UUID) async -> Bool {
+        guard state.activeGame != nil else { return false }
+        return await mutateAndPersist(onlyIf: { state in
+            guard var game = state.activeGame,
+                  let index = game.opponents.firstIndex(where: { $0.id == id }),
+                  game.opponents[index].isVisible else { return false }
+            game.opponents[index].isVisible = false
+            game.opponents[index].hasCitysBlessing = false
+            state.activeGame = game
+            return true
+        })
+    }
+
+    @discardableResult
+    func restoreOpponent(_ id: UUID) async -> Bool {
+        guard state.activeGame != nil else { return false }
+        return await mutateAndPersist(onlyIf: { state in
+            guard var game = state.activeGame,
+                  let index = game.opponents.firstIndex(where: { $0.id == id }),
+                  !game.opponents[index].isVisible else { return false }
+            game.opponents[index].isVisible = true
+            state.activeGame = game
+            return true
+        })
+    }
+
+    @discardableResult
     func addOpponent() async -> OpponentMutationResult<OpponentState> {
         var added: OpponentState?
         let outcome = await mutateAndPersistWithOutcome(onlyIf: { state in
