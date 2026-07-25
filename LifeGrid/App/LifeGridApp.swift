@@ -16,11 +16,6 @@ struct LifeGridApp: App {
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
         UINavigationBar.appearance().compactAppearance = appearance
-
-        UITextField.appearance().attributedPlaceholder = NSAttributedString(
-            string: "",
-            attributes: [.foregroundColor: UIColor(red: 0.63, green: 0.60, blue: 0.69, alpha: 0.6)]
-        )
     }
 
     var body: some Scene {

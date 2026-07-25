@@ -8,7 +8,7 @@ struct SettingsScreen: View {
     @State private var damageLinkEnabled: Bool
     @State private var screenAwake: Bool
     @State private var haptics: Bool
-    @State private var sound: Bool
+    @FocusState private var nameIsFocused: Bool
 
     init(store: AppStateStore) {
         self.store = store
@@ -19,7 +19,6 @@ struct SettingsScreen: View {
         _damageLinkEnabled = State(initialValue: prefs.commanderDamageChangesLife)
         _screenAwake = State(initialValue: prefs.keepScreenAwakeDuringGames)
         _haptics = State(initialValue: prefs.hapticsEnabled)
-        _sound = State(initialValue: prefs.soundEffectsEnabled)
     }
 
     var body: some View {
@@ -57,10 +56,14 @@ struct SettingsScreen: View {
             Text("Player").font(.headline)
             TextField("Your name", text: $playerName, prompt: Text("You").foregroundStyle(LifeGridPalette.secondaryText))
                 .foregroundStyle(LifeGridPalette.primaryText)
+                .focused($nameIsFocused)
                 .padding(10)
                 .background(LifeGridPalette.field, in: RoundedRectangle(cornerRadius: 8))
                 .overlay { RoundedRectangle(cornerRadius: 8).stroke(LifeGridPalette.border) }
                 .onSubmit { persistPlayerName() }
+                .onChange(of: nameIsFocused) { _, isFocused in
+                    if !isFocused { persistPlayerName() }
+                }
         }
         .lifeGridCard()
     }
@@ -112,33 +115,39 @@ struct SettingsScreen: View {
             Toggle("Haptics", isOn: $haptics)
                 .tint(LifeGridPalette.accent)
                 .onChange(of: haptics) { _, v in Task { await store.setHapticsEnabled(v) } }
-            Divider().overlay(LifeGridPalette.border)
-            Toggle("Sound Effects", isOn: $sound)
-                .tint(LifeGridPalette.accent)
-                .onChange(of: sound) { _, v in Task { await store.setSoundEffectsEnabled(v) } }
         }
         .lifeGridCard()
     }
 
     private var legalSection: some View {
         VStack(spacing: 8) {
-            Link(destination: URL(string: "https://ashathe.github.io/life-grid/")!) {
-                HStack {
-                    Text("Terms of Service, Privacy Policy, and Support")
-                        .font(.subheadline)
-                    Spacer()
-                    Image(systemName: "arrow.up.forward")
-                        .font(.caption)
+            if let url = Self.supportURL {
+                Link(destination: url) {
+                    HStack {
+                        Text("Terms of Service, Privacy Policy, and Support")
+                            .font(.subheadline)
+                        Spacer()
+                        Image(systemName: "arrow.up.forward")
+                            .font(.caption)
+                    }
+                    .foregroundStyle(LifeGridPalette.secondaryText)
+                    .padding(.vertical, 8)
                 }
-                .foregroundStyle(LifeGridPalette.secondaryText)
-                .padding(.vertical, 8)
             }
         }
         .padding(.horizontal, 4)
     }
 
+    private static let supportURL = URL(string: "https://ashathe.github.io/life-grid/")
+
     private var versionLabel: some View {
-        Text("Version 1.2.1")
+        let version = Bundle.main.object(
+            forInfoDictionaryKey: "CFBundleShortVersionString"
+        ) as? String ?? "—"
+        let build = Bundle.main.object(
+            forInfoDictionaryKey: "CFBundleVersion"
+        ) as? String ?? "—"
+        return Text("Version \(version) (\(build))")
             .font(.caption2)
             .foregroundStyle(LifeGridPalette.secondaryText.opacity(0.5))
             .frame(maxWidth: .infinity)
