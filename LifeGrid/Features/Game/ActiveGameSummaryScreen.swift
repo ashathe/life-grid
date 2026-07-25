@@ -6,7 +6,6 @@ struct ActiveGameSummaryScreen: View {
     @State private var showsResetConfirmation = false
     @State private var quickRollLabel: String?
     @State private var quickRollValue: String?
-
     var body: some View {
         NavigationStack {
             ScrollView {

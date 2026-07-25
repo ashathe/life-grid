@@ -1,129 +1,6 @@
 import SwiftUI
 
-@MainActor
-final class OpponentDamageInteractionController {
-    private let store: AppStateStore
-    private let opponentID: UUID
-    private let amount: Int
-    private let driver: RepeatActionDriver
-    private var actionTail: Task<Void, Never>?
 
-    init(
-        store: AppStateStore,
-        opponentID: UUID,
-        amount: Int,
-        schedule: RepeatActionSchedule = .localLife,
-        sleep: RepeatActionDriver.Sleep? = nil
-    ) {
-        self.store = store
-        self.opponentID = opponentID
-        self.amount = amount
-        if let sleep {
-            self.driver = RepeatActionDriver(
-                schedule: schedule,
-                sleep: sleep
-            )
-        } else {
-            self.driver = RepeatActionDriver(schedule: schedule)
-        }
-    }
-
-    func begin() {
-        driver.begin(
-            onInitial: { [weak self] in
-                self?.enqueue(isRepeat: false)
-            },
-            onRepeat: { [weak self] in
-                self?.enqueue(isRepeat: true)
-            }
-        )
-    }
-
-    func end() {
-        driver.end()
-    }
-
-    func gestureActivityChanged(from wasActive: Bool, to isActive: Bool) {
-        driver.gestureActivityChanged(from: wasActive, to: isActive)
-    }
-
-    func cancel() {
-        driver.cancel()
-    }
-
-    func waitForPendingActions() async {
-        await actionTail?.value
-    }
-
-    private func enqueue(isRepeat: Bool) {
-        let predecessor = actionTail
-        actionTail = Task { @MainActor [weak self] in
-            if let predecessor {
-                await predecessor.value
-            }
-            guard let self else { return }
-            let result = await store.changePrimaryCommanderDamage(
-                for: opponentID,
-                by: amount
-            )
-            guard result.mutation != nil, isRepeat else { return }
-            await store.playHaptic(.adjustment)
-        }
-    }
-}
-
-private struct OpponentDamageRepeatButton<Label: View>: View {
-    private let accessibilityLabel: String
-    private let accessibilityHint: String
-    private let label: Label
-    @State private var interaction: OpponentDamageInteractionController
-    @GestureState private var gestureIsActive = false
-
-    init(
-        store: AppStateStore,
-        opponentID: UUID,
-        amount: Int,
-        accessibilityLabel: String,
-        accessibilityHint: String,
-        @ViewBuilder label: () -> Label
-    ) {
-        self.accessibilityLabel = accessibilityLabel
-        self.accessibilityHint = accessibilityHint
-        self.label = label()
-        _interaction = State(initialValue: OpponentDamageInteractionController(
-            store: store,
-            opponentID: opponentID,
-            amount: amount
-        ))
-    }
-
-    var body: some View {
-        label
-            .frame(minHeight: 44)
-            .contentShape(Rectangle())
-            .gesture(
-                DragGesture(minimumDistance: 0)
-                    .updating($gestureIsActive) { _, isActive, _ in
-                        isActive = true
-                    }
-                    .onChanged { _ in
-                        interaction.begin()
-                    }
-            )
-            .onChange(of: gestureIsActive) { wasActive, isActive in
-                interaction.gestureActivityChanged(
-                    from: wasActive,
-                    to: isActive
-                )
-            }
-            .accessibilityAddTraits(.isButton)
-            .accessibilityLabel(accessibilityLabel)
-            .accessibilityHint(accessibilityHint)
-            .onDisappear {
-                interaction.cancel()
-            }
-    }
-}
 
 struct OpponentCard: View {
     @Bindable var store: AppStateStore
@@ -234,12 +111,16 @@ struct OpponentCard: View {
         let damage = opponent.primaryCommanderDamage
 
         return HStack(spacing: 0) {
-            OpponentDamageRepeatButton(
-                store: store,
-                opponentID: opponentID,
-                amount: -1,
+            RepeatActionButton(
                 accessibilityLabel: "Remove one commander damage from \(name)",
-                accessibilityHint: "Hold to repeatedly remove commander damage"
+                accessibilityHint: "Hold to repeatedly remove commander damage",
+                onInitial: {
+                    _ = await store.changePrimaryCommanderDamage(for: opponentID, by: -1)
+                },
+                onRepeat: {
+                    let result = await store.changePrimaryCommanderDamage(for: opponentID, by: -1)
+                    if result.mutation != nil { await store.playHaptic(.adjustment) }
+                }
             ) {
                 Text("−")
                     .font(.title2)
@@ -261,26 +142,29 @@ struct OpponentCard: View {
                             : LifeGridPalette.primaryText
                     )
                     .frame(minWidth: 88, minHeight: 72)
+                    .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
-            .frame(minWidth: 44, minHeight: 44)
             .accessibilityLabel("Set \(name)'s commander damage")
             .accessibilityValue(
                 damage >= 21 ? "\(damage), commander lethal" : "\(damage)"
             )
             .accessibilityHint("Opens exact commander damage entry")
-            .accessibilityIdentifier("Set \(name)'s commander damage")
 
             Divider()
                 .overlay(LifeGridPalette.border)
                 .frame(height: 72)
 
-            OpponentDamageRepeatButton(
-                store: store,
-                opponentID: opponentID,
-                amount: 1,
+            RepeatActionButton(
                 accessibilityLabel: "Add one commander damage from \(name)",
-                accessibilityHint: "Hold to repeatedly add commander damage"
+                accessibilityHint: "Hold to repeatedly add commander damage",
+                onInitial: {
+                    _ = await store.changePrimaryCommanderDamage(for: opponentID, by: 1)
+                },
+                onRepeat: {
+                    let result = await store.changePrimaryCommanderDamage(for: opponentID, by: 1)
+                    if result.mutation != nil { await store.playHaptic(.adjustment) }
+                }
             ) {
                 Text("+")
                     .font(.title2)
@@ -442,6 +326,7 @@ struct OpponentCard: View {
                         damage >= 21 ? LifeGridPalette.destructive : LifeGridPalette.primaryText
                     )
                     .frame(minWidth: 72, minHeight: 60)
+                    .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
             .accessibilityLabel("Set \(name)'s partner damage")
