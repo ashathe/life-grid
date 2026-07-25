@@ -8,8 +8,7 @@ final class AppStateStore {
     private(set) var persistenceErrorDescription: String?
     private(set) var hasLoaded = false
     private let environment: AppEnvironment
-    private var persistenceIsBlocked = false
-    private var recoveryTask: Task<Bool, Never>?
+    private var persistenceWriteBlockDescription: String?
     private var persistenceRevision = 0
     private var persistenceTail: Task<PersistenceOutcome, Never>?
 
@@ -28,11 +27,16 @@ final class AppStateStore {
             if environment.uiTestingCommanderDisabled {
                 state.preferences.commanderEnabled = false
             }
-            persistenceIsBlocked = false
+            persistenceWriteBlockDescription = nil
             persistenceErrorDescription = nil
         } catch {
-            persistenceIsBlocked = true
-            persistenceErrorDescription = String(describing: error)
+            let description = String(describing: error)
+            persistenceErrorDescription = description
+            if error is StateMigrationError {
+                persistenceWriteBlockDescription = description
+            } else {
+                persistenceWriteBlockDescription = nil
+            }
         }
     }
 
@@ -732,7 +736,7 @@ final class AppStateStore {
     private func mutateAndPersistWithOutcome(
         onlyIf mutation: (inout PersistedAppState) -> Bool
     ) async -> MutationPersistenceOutcome {
-        guard await recoverPersistenceIfNeeded() else { return .rejected }
+        guard persistenceWriteBlockDescription == nil else { return .rejected }
         guard mutation(&state) else { return .rejected }
         switch await persistCurrentState() {
         case .success:
@@ -757,32 +761,8 @@ final class AppStateStore {
         }
     }
 
-    private func recoverPersistenceIfNeeded() async -> Bool {
-        guard persistenceIsBlocked else { return true }
-        if let recoveryTask {
-            return await recoveryTask.value
-        }
-
-        let repository = environment.repository
-        let operation = Task<Bool, Never> { @MainActor in
-            do {
-                state = try await repository.load()
-                persistenceIsBlocked = false
-                persistenceErrorDescription = nil
-                return true
-            } catch {
-                persistenceErrorDescription = String(describing: error)
-                return false
-            }
-        }
-        recoveryTask = operation
-        let recovered = await operation.value
-        recoveryTask = nil
-        return recovered
-    }
-
     private func persistCurrentState() async -> PersistenceOutcome {
-        guard !persistenceIsBlocked else {
+        guard persistenceWriteBlockDescription == nil else {
             return .failure(
                 persistenceErrorDescription ?? "Persistence is unavailable."
             )
