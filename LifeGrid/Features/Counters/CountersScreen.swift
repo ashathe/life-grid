@@ -7,6 +7,9 @@ struct CountersScreen: View {
     @State private var renameTarget: CustomCounterDefinition?
     @State private var deleteTarget: CustomCounterDefinition?
     @State private var showsDeleteConfirmation = false
+    @State private var containerWidth: CGFloat = 0
+
+    private var gridColumns: Int { max(2, Int(containerWidth / 180)) }
 
     private var pinnedIDs: [CounterID] {
         store.state.activeGame?.pinnedCounterIDs ?? []
@@ -32,6 +35,13 @@ struct CountersScreen: View {
             }
             .frame(maxWidth: .infinity)
             .background(LifeGridPalette.background.ignoresSafeArea())
+            .overlay {
+                GeometryReader { geo in
+                    Color.clear
+                        .onAppear { containerWidth = geo.size.width }
+                        .onChange(of: geo.size.width) { _, w in containerWidth = w }
+                }
+            }
             .foregroundStyle(LifeGridPalette.primaryText)
             .navigationTitle("Counters")
             .toolbarTitleDisplayMode(.inline)
@@ -136,7 +146,7 @@ struct CountersScreen: View {
                         .font(.headline)
                         .padding(.horizontal, 4)
 
-                    LazyVGrid(columns: [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)], spacing: 12) {
+                    LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 12), count: gridColumns), spacing: 12) {
                         ForEach(unpinnedBuiltInIDs, id: \.self) { counterID in
                             HStack(alignment: .top) {
                                 if case .builtIn(let builtIn) = counterID, builtIn.isDayNight {
