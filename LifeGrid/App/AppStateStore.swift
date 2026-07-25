@@ -256,7 +256,6 @@ final class AppStateStore {
             if game.currentMonarchPlayerID == PlayerID.opponent(removed.id) {
                 game.currentMonarchPlayerID = nil
             }
-            game.counterValues.removeValue(forKey: CounterID.custom(removed.id))
             game.opponents.removeLast()
             state.activeGame = game
             return true
@@ -264,7 +263,7 @@ final class AppStateStore {
     }
 
     func renameOpponent(_ id: UUID, to name: String) async {
-        let trimmed = name.trimmingCharacters(in: .whitespaces)
+        let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
         guard state.activeGame != nil else { return }
         _ = await mutateAndPersist(onlyIf: { state in
             guard var game = state.activeGame,
@@ -280,7 +279,7 @@ final class AppStateStore {
     }
 
     func setOpponentPartnerName(_ opponentID: UUID, name: String) async {
-        let trimmed = name.trimmingCharacters(in: .whitespaces)
+        let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
         guard state.activeGame != nil else { return }
         _ = await mutateAndPersist(onlyIf: { state in
             guard var game = state.activeGame,
@@ -417,7 +416,7 @@ final class AppStateStore {
 
     @discardableResult
     func addCustomCounter(name: String) async -> CustomCounterDefinition? {
-        let trimmed = name.trimmingCharacters(in: .whitespaces)
+        let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { return nil }
         guard !state.customCounters.contains(where: { $0.hasNameCollision(with: trimmed) }) else { return nil }
         guard !BuiltInCounterID.allCases.contains(where: {
@@ -440,7 +439,7 @@ final class AppStateStore {
 
     @discardableResult
     func renameCustomCounter(_ id: UUID, to name: String) async -> Bool {
-        let trimmed = name.trimmingCharacters(in: .whitespaces)
+        let trimmed = name.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { return false }
         guard !state.customCounters.contains(where: {
             $0.id != id && $0.hasNameCollision(with: trimmed)
