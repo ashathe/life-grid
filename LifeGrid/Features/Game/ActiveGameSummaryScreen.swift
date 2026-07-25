@@ -6,6 +6,8 @@ struct ActiveGameSummaryScreen: View {
     @State private var showsResetConfirmation = false
     @State private var quickRollLabel: String?
     @State private var quickRollValue: String?
+    @State private var quickRollRevision = 0
+    @State private var quickRollDismissTask: Task<Void, Never>?
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -63,6 +65,9 @@ struct ActiveGameSummaryScreen: View {
             .sheet(isPresented: $showsNewGame) {
                 NewGameScreen(store: store) { showsNewGame = false }
             }
+            .onDisappear {
+                quickRollDismissTask?.cancel()
+            }
         }
     }
 
@@ -105,15 +110,24 @@ struct ActiveGameSummaryScreen: View {
 
     private func quickRoll(sides: Int, label: String) async {
         guard let entry = await store.rollDice(sides: sides, count: 1) else { return }
-        await store.playHaptic(.result)
+        await store.playHaptic(.adjustment)
         let result = label == "Coin" ? (entry.total == 1 ? "Heads" : "Tails") : "\(entry.total)"
         quickRollLabel = label
         quickRollValue = result
-        Task {
-            try? await Task.sleep(for: .seconds(2))
+        quickRollRevision += 1
+        let revision = quickRollRevision
+        quickRollDismissTask?.cancel()
+        quickRollDismissTask = Task { @MainActor in
+            do {
+                try await Task.sleep(for: .seconds(2))
+            } catch {
+                return
+            }
+            guard revision == quickRollRevision else { return }
             quickRollLabel = nil
             quickRollValue = nil
         }
+    }
     }
 
     @ViewBuilder
