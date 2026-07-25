@@ -128,7 +128,6 @@ struct ActiveGameSummaryScreen: View {
             quickRollValue = nil
         }
     }
-    }
 
     @ViewBuilder
     private func quickRollOverlay(label: String, value: String) -> some View {
@@ -143,4 +142,3 @@ struct ActiveGameSummaryScreen: View {
         .transition(.opacity.combined(with: .scale(0.8)))
         .animation(.spring(response: 0.3), value: quickRollLabel)
     }
-}
