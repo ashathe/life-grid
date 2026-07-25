@@ -138,7 +138,7 @@ struct SettingsScreen: View {
     }
 
     private var versionLabel: some View {
-        Text("Version 1.2")
+        Text("Version 1.2.1")
             .font(.caption2)
             .foregroundStyle(LifeGridPalette.secondaryText.opacity(0.5))
             .frame(maxWidth: .infinity)

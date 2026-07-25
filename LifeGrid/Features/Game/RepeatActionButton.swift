@@ -30,26 +30,12 @@ final class RepeatActionDriver {
         self.sleep = sleep
     }
 
-    func begin(
-        onInitial: @escaping @MainActor @Sendable () -> Void,
-        onRepeat: @escaping @MainActor @Sendable () -> Void
-    ) {
+    func begin(onRepeat: @escaping @MainActor @Sendable () -> Void) {
         guard repeatTask == nil else { return }
-
-        onInitial()
         repeatTask = Task { @MainActor [weak self] in
             guard let self else { return }
             await repeatUntilCancelled(onRepeat: onRepeat)
         }
-    }
-
-    func end() {
-        cancel()
-    }
-
-    func gestureActivityChanged(from wasActive: Bool, to isActive: Bool) {
-        guard wasActive, !isActive else { return }
-        end()
     }
 
     func cancel() {
@@ -87,7 +73,6 @@ struct RepeatActionButton<Label: View>: View {
     private let label: Label
     @State private var driver: RepeatActionDriver
     @State private var actionTail: Task<Void, Never>?
-    @GestureState private var gestureIsActive = false
 
     init(
         accessibilityLabel: String,
@@ -108,37 +93,26 @@ struct RepeatActionButton<Label: View>: View {
     }
 
     var body: some View {
-        label
-            .frame(minHeight: 44)
-            .contentShape(Rectangle())
-            .gesture(
-                DragGesture(minimumDistance: 0)
-                    .updating($gestureIsActive) { _, isActive, _ in
-                        isActive = true
-                    }
-                    .onChanged { _ in
-                        driver.begin(
-                            onInitial: {
-                                enqueue(onInitial)
-                            },
-                            onRepeat: {
-                                enqueue(onRepeat)
-                            }
-                        )
-                    }
-            )
-            .onChange(of: gestureIsActive) { wasActive, isActive in
-                driver.gestureActivityChanged(from: wasActive, to: isActive)
-                if wasActive, !isActive {
-                    enqueue(onEnd)
+        Button {
+            enqueue(onInitial)
+        } label: {
+            label
+                .frame(minHeight: 44)
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .simultaneousGesture(
+            LongPressGesture(minimumDuration: 0.35)
+                .onEnded { _ in
+                    driver.begin(onRepeat: { enqueue(onRepeat) })
                 }
-            }
-            .accessibilityAddTraits(.isButton)
-            .accessibilityLabel(accessibilityLabel)
-            .accessibilityHint(accessibilityHint)
-            .onDisappear {
-                driver.cancel()
-            }
+        )
+        .accessibilityAddTraits(.isButton)
+        .accessibilityLabel(accessibilityLabel)
+        .accessibilityHint(accessibilityHint)
+        .onDisappear {
+            driver.cancel()
+        }
     }
 
     private func enqueue(

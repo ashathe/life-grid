@@ -5,3 +5,8 @@ __pycache__/
 xcuserdata/
 .DS_Store
 *.xcresult
+.atl/
+
+
+# APM dependencies
+apm_modules/
