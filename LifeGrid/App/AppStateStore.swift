@@ -592,38 +592,24 @@ final class AppStateStore {
         })
     }
 
-    func toggleCitysBlessing(for playerID: PlayerID) async {
-        guard state.activeGame != nil else { return }
-        _ = await mutateAndPersist(onlyIf: { state in
+    @discardableResult
+    func toggleCitysBlessing(for playerID: PlayerID) async -> Bool {
+        guard state.activeGame != nil else { return false }
+        let didMutate = await mutateAndPersist(onlyIf: { state in
             guard var game = state.activeGame else { return false }
-            let currentlyActive: Bool = {
-                switch playerID {
-                case .local: return game.playerHasCitysBlessing
-                case .opponent(let id):
-                    return game.opponents.first(where: { $0.id == id })?.hasCitysBlessing ?? false
+            switch playerID {
+            case .local:
+                game.playerHasCitysBlessing.toggle()
+            case .opponent(let id):
+                guard let index = game.opponents.firstIndex(where: { $0.id == id }) else {
+                    return false
                 }
-            }()
-            // Clear from all players first
-            game.playerHasCitysBlessing = false
-            for i in game.opponents.indices {
-                game.opponents[i].hasCitysBlessing = false
-            }
-            // If it wasn't already active, assign to the tapped player
-            if !currentlyActive {
-                switch playerID {
-                case .local:
-                    game.playerHasCitysBlessing = true
-                case .opponent(let id):
-                    if let index = game.opponents.firstIndex(where: { $0.id == id }) {
-                        game.opponents[index].hasCitysBlessing = true
-                    } else {
-                        return false
-                    }
-                }
+                game.opponents[index].hasCitysBlessing.toggle()
             }
             state.activeGame = game
             return true
         })
+        return didMutate
     }
 
     func saveForLifecycle() async {
