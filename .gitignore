@@ -1,10 +1,20 @@
-.worktrees/
+# Build artifacts
+DerivedData/
+*.xcresult
+.build/
+.swiftpm/
+
+# Apple/Xcode user state
+.DS_Store
+xcuserdata/
+*.xcuserstate
+
+# Python
 __pycache__/
 *.pyc
-*.xcuserstate
-xcuserdata/
-.DS_Store
-*.xcresult
+
+# Git worktrees
+.worktrees/
 .atl/
 
 
