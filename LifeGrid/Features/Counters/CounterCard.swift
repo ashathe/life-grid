@@ -50,8 +50,8 @@ struct CounterCard: View {
                     await store.adjustCounter(counterID, by: -1)
                 },
                 onRepeat: {
-                    await store.adjustCounter(counterID, by: -1)
-                    await store.playHaptic(.adjustment)
+                    let didMutate = await store.adjustCounter(counterID, by: -1)
+                    if didMutate { await store.playHaptic(.adjustment) }
                 },
                 onEnd: {}
             ) {
@@ -92,8 +92,8 @@ struct CounterCard: View {
                     await store.adjustCounter(counterID, by: 1)
                 },
                 onRepeat: {
-                    await store.adjustCounter(counterID, by: 1)
-                    await store.playHaptic(.adjustment)
+                    let didMutate = await store.adjustCounter(counterID, by: 1)
+                    if didMutate { await store.playHaptic(.adjustment) }
                 },
                 onEnd: {}
             ) {

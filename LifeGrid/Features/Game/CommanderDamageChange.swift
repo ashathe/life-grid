@@ -14,6 +14,8 @@ enum OpponentMutationResult<Value: Equatable & Sendable>: Equatable, Sendable {
         }
     }
 
+    var didMutate: Bool { mutation != nil }
+
     var persistedValue: Value? {
         guard case .persisted(let value) = self else { return nil }
         return value

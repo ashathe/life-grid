@@ -302,8 +302,8 @@ struct OpponentCard: View {
                     await store.changePartnerCommanderDamage(for: opponentID, by: -1)
                 },
                 onRepeat: {
-                    await store.changePartnerCommanderDamage(for: opponentID, by: -1)
-                    await store.playHaptic(.adjustment)
+                    let result = await store.changePartnerCommanderDamage(for: opponentID, by: -1)
+                    if result.didMutate { await store.playHaptic(.adjustment) }
                 },
                 onEnd: {}
             ) {
@@ -341,8 +341,8 @@ struct OpponentCard: View {
                     await store.changePartnerCommanderDamage(for: opponentID, by: 1)
                 },
                 onRepeat: {
-                    await store.changePartnerCommanderDamage(for: opponentID, by: 1)
-                    await store.playHaptic(.adjustment)
+                    let result = await store.changePartnerCommanderDamage(for: opponentID, by: 1)
+                    if result.didMutate { await store.playHaptic(.adjustment) }
                 },
                 onEnd: {}
             ) {
