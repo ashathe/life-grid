@@ -5,7 +5,7 @@ struct DiceScreen: View {
     @State private var showsCustomDieEditor = false
     @State private var containerWidth: CGFloat = 0
 
-    private var gridColumns: Int { max(2, Int(containerWidth / 180)) }
+    private var gridColumns: Int { max(2, min(3, Int(containerWidth / 200))) }
 
     private let builtInDice: [(sides: Int, label: String)] = [
         (4, "d4"), (6, "d6"), (8, "d8"),
@@ -16,7 +16,12 @@ struct DiceScreen: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
-                    CoinFlipView(store: store)
+                    HStack(spacing: 12) {
+                        CoinFlipView(store: store)
+                            .frame(maxWidth: .infinity)
+                        RandomPlayerPicker(store: store)
+                            .frame(maxWidth: .infinity)
+                    }
 
                     LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 12), count: gridColumns), spacing: 12) {
                         ForEach(builtInDice, id: \.sides) { die in
@@ -56,8 +61,6 @@ struct DiceScreen: View {
                     }
                     .buttonStyle(.borderedProminent)
                     .tint(LifeGridPalette.accent)
-
-                    RandomPlayerPicker(store: store)
 
                     DiceHistoryView(store: store)
                 }
