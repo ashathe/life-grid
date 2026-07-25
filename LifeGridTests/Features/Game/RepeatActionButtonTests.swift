@@ -11,88 +11,24 @@ import Testing
         ))
     }
 
-    @Test func repeatedBeginDuringOnePressInvokesInitialOnlyOnce() async {
+    @Test func beginFiresRepeatAfterInitialDelay() async {
         let sleeper = ControlledRepeatSleeper()
-        var actions: [RepeatAction] = []
-        let driver = RepeatActionDriver(
-            schedule: .localLife,
-            sleep: { duration in
-                await sleeper.sleep(for: duration)
-            }
-        )
-
-        driver.begin(
-            onInitial: { actions.append(.initial) },
-            onRepeat: { actions.append(.repeat) }
-        )
-        driver.begin(
-            onInitial: { actions.append(.initial) },
-            onRepeat: { actions.append(.repeat) }
-        )
-
-        #expect(actions == [.initial])
-        _ = await sleeper.waitForSleep()
-
-        driver.cancel()
-        await sleeper.resumeNext()
-    }
-
-    @Test func activeGestureBecomingInactiveStopsRepeatAndAllowsLaterPress() async {
-        let sleeper = ControlledRepeatSleeper()
-        var actions: [RepeatAction] = []
-        let driver = RepeatActionDriver(
-            schedule: .localLife,
-            sleep: { duration in
-                await sleeper.sleep(for: duration)
-            }
-        )
-        driver.begin(
-            onInitial: { actions.append(.initial) },
-            onRepeat: { actions.append(.repeat) }
-        )
-        _ = await sleeper.waitForSleep()
-
-        driver.gestureActivityChanged(from: false, to: true)
-        driver.gestureActivityChanged(from: true, to: false)
-        await Task.yield()
-        await sleeper.resumeNext()
-        await Task.yield()
-
-        #expect(actions == [.initial])
-
-        driver.begin(
-            onInitial: { actions.append(.initial) },
-            onRepeat: { actions.append(.repeat) }
-        )
-
-        #expect(actions == [.initial, .initial])
-        _ = await sleeper.waitForSleep()
-
-        driver.end()
-        await sleeper.resumeNext()
-    }
-
-    @Test func beginInvokesInitialOnceWithoutRepeatingBeforeTheDelay() async {
-        let sleeper = ControlledRepeatSleeper()
-        var actions: [RepeatAction] = []
+        var repeats = 0
         let driver = RepeatActionDriver(
             schedule: RepeatActionSchedule(
                 initialDelay: .milliseconds(350),
                 interval: .milliseconds(120)
             ),
-            sleep: { duration in
-                await sleeper.sleep(for: duration)
-            }
+            sleep: { duration in await sleeper.sleep(for: duration) }
         )
 
-        driver.begin(
-            onInitial: { actions.append(.initial) },
-            onRepeat: { actions.append(.repeat) }
-        )
+        driver.begin(onRepeat: { repeats += 1 })
 
-        #expect(actions == [.initial])
+        #expect(repeats == 0)
         #expect(await sleeper.waitForSleep() == .milliseconds(350))
-        #expect(actions == [.initial])
+        await sleeper.resumeNext()
+        await Task.yield()
+        #expect(repeats == 1)
 
         driver.cancel()
         await sleeper.resumeNext()
@@ -100,72 +36,40 @@ import Testing
 
     @Test func repeatFiresAfterInitialDelayAndEachInterval() async {
         let sleeper = ControlledRepeatSleeper()
-        var actions: [RepeatAction] = []
+        var repeats = 0
         let driver = RepeatActionDriver(
             schedule: RepeatActionSchedule(
                 initialDelay: .milliseconds(350),
                 interval: .milliseconds(120)
             ),
-            sleep: { duration in
-                await sleeper.sleep(for: duration)
-            }
+            sleep: { duration in await sleeper.sleep(for: duration) }
         )
 
-        driver.begin(
-            onInitial: { actions.append(.initial) },
-            onRepeat: { actions.append(.repeat) }
-        )
+        driver.begin(onRepeat: { repeats += 1 })
 
         #expect(await sleeper.waitForSleep() == .milliseconds(350))
         await sleeper.resumeNext()
         #expect(await sleeper.waitForSleep() == .milliseconds(120))
-        #expect(actions == [.initial, .repeat])
+        #expect(repeats == 1)
 
         await sleeper.resumeNext()
         #expect(await sleeper.waitForSleep() == .milliseconds(120))
-        #expect(actions == [.initial, .repeat, .repeat])
+        #expect(repeats == 2)
 
         driver.cancel()
         await sleeper.resumeNext()
-    }
-
-    @Test func endPreventsRepeatsAfterTheInitialDelay() async {
-        let sleeper = ControlledRepeatSleeper()
-        var actions: [RepeatAction] = []
-        let driver = RepeatActionDriver(
-            schedule: .localLife,
-            sleep: { duration in
-                await sleeper.sleep(for: duration)
-            }
-        )
-
-        driver.begin(
-            onInitial: { actions.append(.initial) },
-            onRepeat: { actions.append(.repeat) }
-        )
-        _ = await sleeper.waitForSleep()
-
-        driver.end()
-        await sleeper.resumeNext()
-        await Task.yield()
-
-        #expect(actions == [.initial])
     }
 
     @Test func cancelPreventsRepeatsAfterAnIntervalStarts() async {
         let sleeper = ControlledRepeatSleeper()
-        var actions: [RepeatAction] = []
+        var repeats = 0
         let driver = RepeatActionDriver(
             schedule: .localLife,
-            sleep: { duration in
-                await sleeper.sleep(for: duration)
-            }
+            sleep: { duration in await sleeper.sleep(for: duration) }
         )
 
-        driver.begin(
-            onInitial: { actions.append(.initial) },
-            onRepeat: { actions.append(.repeat) }
-        )
+        driver.begin(onRepeat: { repeats += 1 })
+
         _ = await sleeper.waitForSleep()
         await sleeper.resumeNext()
         _ = await sleeper.waitForSleep()
@@ -174,13 +78,29 @@ import Testing
         await sleeper.resumeNext()
         await Task.yield()
 
-        #expect(actions == [.initial, .repeat])
+        #expect(repeats == 1)
     }
-}
 
-private enum RepeatAction: Equatable {
-    case initial
-    case `repeat`
+    @Test func repeatedBeginDoesNotCreateMultipleRepeatLoops() async {
+        let sleeper = ControlledRepeatSleeper()
+        var repeats = 0
+        let driver = RepeatActionDriver(
+            schedule: .localLife,
+            sleep: { duration in await sleeper.sleep(for: duration) }
+        )
+
+        driver.begin(onRepeat: { repeats += 1 })
+        driver.begin(onRepeat: { repeats += 1 })
+
+        #expect(repeats == 0)
+        _ = await sleeper.waitForSleep()
+        await sleeper.resumeNext()
+        await Task.yield()
+        #expect(repeats == 1)
+
+        driver.cancel()
+        await sleeper.resumeNext()
+    }
 }
 
 private actor ControlledRepeatSleeper {

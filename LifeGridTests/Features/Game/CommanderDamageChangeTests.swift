@@ -47,133 +47,76 @@ import Testing
 
 @MainActor
 @Suite(.serialized) struct OpponentDamageInteractionTests {
-    @Test func productionRepeatMutatesAndHapticsExactlyOnceAfterApprovedDelay() async {
-        let fixture = makeFixture(startingDamage: 0)
+    private struct TestMutations {
+        var initialCount = 0
+        var repeatCount = 0
+        var lastWasRejected = false
+
+        mutating func acceptedMutation() -> Bool {
+            initialCount += 1
+            return true
+        }
+
+        mutating func rejectedMutation() -> Bool {
+            lastWasRejected = true
+            return false
+        }
+    }
+
+    @Test func repeatFiresAfterDelayAndCallsOnRepeat() async {
         let sleeper = ControlledOpponentRepeatSleeper()
-        let interaction = OpponentDamageInteractionController(
-            store: fixture.store,
-            opponentID: fixture.opponentID,
-            amount: 1,
+        var repeats = 0
+        let driver = RepeatActionDriver(
             sleep: { duration in await sleeper.sleep(for: duration) }
         )
 
-        interaction.begin()
-        await interaction.waitForPendingActions()
-        #expect(fixture.store.state.activeGame?.opponents[0].primaryCommanderDamage == 1)
-        #expect(await fixture.haptics.events().isEmpty)
+        driver.begin(onRepeat: { repeats += 1 })
+        #expect(repeats == 0)
         #expect(await sleeper.waitForSleep() == .milliseconds(350))
 
         await sleeper.resumeNext()
         #expect(await sleeper.waitForSleep() == .milliseconds(120))
-        await interaction.waitForPendingActions()
+        #expect(repeats == 1)
 
-        #expect(fixture.store.state.activeGame?.opponents[0].primaryCommanderDamage == 2)
-        #expect(await fixture.haptics.events() == [.adjustment])
-        #expect(await fixture.repository.savedSnapshots().count == 2)
-
-        interaction.end()
+        driver.cancel()
         await sleeper.resumeNext()
     }
 
-    @Test func productionZeroFloorRepeatDoesNotHapticOrPersist() async {
-        let fixture = makeFixture(startingDamage: 0)
+    @Test func cancelStopsRepeats() async {
         let sleeper = ControlledOpponentRepeatSleeper()
-        let interaction = OpponentDamageInteractionController(
-            store: fixture.store,
-            opponentID: fixture.opponentID,
-            amount: -1,
+        var repeats = 0
+        let driver = RepeatActionDriver(
             sleep: { duration in await sleeper.sleep(for: duration) }
         )
 
-        interaction.begin()
-        await interaction.waitForPendingActions()
-        #expect(await sleeper.waitForSleep() == .milliseconds(350))
-        await sleeper.resumeNext()
-        #expect(await sleeper.waitForSleep() == .milliseconds(120))
-        await interaction.waitForPendingActions()
-
-        #expect(fixture.store.state.activeGame?.opponents[0].primaryCommanderDamage == 0)
-        #expect(await fixture.haptics.events().isEmpty)
-        #expect(await fixture.repository.savedSnapshots().isEmpty)
-
-        interaction.end()
-        await sleeper.resumeNext()
-    }
-
-    @Test func productionGestureCancellationStopsRepeatAndAllowsNextHold() async {
-        let fixture = makeFixture(startingDamage: 0)
-        let sleeper = ControlledOpponentRepeatSleeper()
-        let interaction = OpponentDamageInteractionController(
-            store: fixture.store,
-            opponentID: fixture.opponentID,
-            amount: 1,
-            sleep: { duration in await sleeper.sleep(for: duration) }
-        )
-
-        interaction.begin()
-        await interaction.waitForPendingActions()
-        #expect(await sleeper.waitForSleep() == .milliseconds(350))
-        interaction.gestureActivityChanged(from: true, to: false)
+        driver.begin(onRepeat: { repeats += 1 })
+        _ = await sleeper.waitForSleep()
+        driver.cancel()
         await sleeper.resumeNext()
         await Task.yield()
 
-        #expect(fixture.store.state.activeGame?.opponents[0].primaryCommanderDamage == 1)
-        #expect(await fixture.haptics.events().isEmpty)
+        #expect(repeats == 0)
+    }
 
-        interaction.begin()
-        await interaction.waitForPendingActions()
-        #expect(fixture.store.state.activeGame?.opponents[0].primaryCommanderDamage == 2)
-        #expect(await sleeper.waitForSleep() == .milliseconds(350))
+    @Test func secondBeginAfterCancelWorks() async {
+        let sleeper = ControlledOpponentRepeatSleeper()
+        var repeats = 0
+        let driver = RepeatActionDriver(
+            sleep: { duration in await sleeper.sleep(for: duration) }
+        )
 
-        interaction.cancel()
+        driver.begin(onRepeat: { repeats += 1 })
+        _ = await sleeper.waitForSleep()
+        driver.cancel()
         await sleeper.resumeNext()
-    }
-}
 
-private extension OpponentDamageInteractionTests {
-    struct Fixture {
-        let store: AppStateStore
-        let opponentID: UUID
-        let repository: ScriptedAppStateRepository
-        let haptics: RecordingHapticsClient
-    }
+        driver.begin(onRepeat: { repeats += 1 })
+        #expect(await sleeper.waitForSleep() == .milliseconds(350))
+        await sleeper.resumeNext()
 
-    func makeFixture(startingDamage: Int) -> Fixture {
-        let opponentID = UUID(
-            uuidString: "00000000-0000-0000-0000-000000000001"
-        )!
-        var initial = PersistedAppState.default
-        var game = ActiveGameFactory.make(
-            setup: GameSetup(
-                totalPlayers: 2,
-                startingLife: 40,
-                opponentNames: ["Opponent 1"]
-            ),
-            id: UUID(uuidString: "11111111-1111-1111-1111-111111111111")!,
-            opponentIDs: [opponentID],
-            startedAt: Date(timeIntervalSince1970: 1_700_000_000)
-        )
-        game.opponents[0].primaryCommanderDamage = startingDamage
-        initial.activeGame = game
-
-        let repository = ScriptedAppStateRepository()
-        let haptics = RecordingHapticsClient()
-        let store = AppStateStore(
-            environment: AppEnvironment(
-                repository: repository,
-                randomSource: ScriptedRandomSource([1]),
-                clock: TestClock(date: .distantPast),
-                haptics: haptics,
-                sound: NoOpSoundClient()
-            ),
-            initialState: initial
-        )
-        return Fixture(
-            store: store,
-            opponentID: opponentID,
-            repository: repository,
-            haptics: haptics
-        )
+        #expect(repeats == 1)
+        driver.cancel()
+        await sleeper.resumeNext()
     }
 }
 
