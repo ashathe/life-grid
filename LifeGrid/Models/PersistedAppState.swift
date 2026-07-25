@@ -1,7 +1,7 @@
 import Foundation
 
 struct PersistedAppState: Codable, Equatable, Sendable {
-    static let currentSchemaVersion = 2
+    static let currentSchemaVersion = 3
 
     var schemaVersion: Int
     var preferences: AppPreferences
@@ -10,6 +10,7 @@ struct PersistedAppState: Codable, Equatable, Sendable {
     var customCounters: [CustomCounterDefinition]
     var savedDice: [SavedDieDefinition]
     var diceHistory: [DiceRollEntry]
+    var lastDiceCountsBySides: [Int: Int]
 
     static let `default` = PersistedAppState(
         schemaVersion: currentSchemaVersion,
@@ -18,7 +19,8 @@ struct PersistedAppState: Codable, Equatable, Sendable {
         activeGame: nil,
         customCounters: [],
         savedDice: [],
-        diceHistory: []
+        diceHistory: [],
+        lastDiceCountsBySides: [:]
     )
 }
 

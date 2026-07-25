@@ -14,6 +14,8 @@ struct StateMigration: Sendable {
         switch schemaVersion {
         case 1:
             return try migrateVersionOne(data, decoder: decoder)
+        case 2:
+            return try migrateVersionTwo(data, decoder: decoder)
         case PersistedAppState.currentSchemaVersion:
             return try decoder.decode(PersistedAppState.self, from: data)
         default:
@@ -45,7 +47,25 @@ struct StateMigration: Sendable {
             activeGame: legacy.activeGame,
             customCounters: legacy.customCounters,
             savedDice: legacy.savedDice,
-            diceHistory: legacy.diceHistory
+            diceHistory: legacy.diceHistory,
+            lastDiceCountsBySides: [:]
+        )
+    }
+
+    private func migrateVersionTwo(
+        _ data: Data,
+        decoder: JSONDecoder
+    ) throws -> PersistedAppState {
+        let legacy = try decoder.decode(PersistedAppStateV2.self, from: data)
+        return PersistedAppState(
+            schemaVersion: PersistedAppState.currentSchemaVersion,
+            preferences: legacy.preferences,
+            lastSetup: legacy.lastSetup,
+            activeGame: legacy.activeGame,
+            customCounters: legacy.customCounters,
+            savedDice: legacy.savedDice,
+            diceHistory: legacy.diceHistory,
+            lastDiceCountsBySides: [:]
         )
     }
 }
@@ -74,4 +94,14 @@ private struct AppPreferencesV1: Decodable {
     let soundEffectsEnabled: Bool
     let appearance: AppearanceMode
     let appScale: AppScale
+}
+
+private struct PersistedAppStateV2: Decodable {
+    let schemaVersion: Int
+    let preferences: AppPreferences
+    let lastSetup: GameSetup
+    let activeGame: ActiveGame?
+    let customCounters: [CustomCounterDefinition]
+    let savedDice: [SavedDieDefinition]
+    let diceHistory: [DiceRollEntry]
 }
