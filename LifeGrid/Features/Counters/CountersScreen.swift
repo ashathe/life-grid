@@ -9,7 +9,7 @@ struct CountersScreen: View {
     @State private var showsDeleteConfirmation = false
     @State private var containerWidth: CGFloat = 0
 
-    private var gridColumns: Int { max(2, Int(containerWidth / 180)) }
+    private var gridColumns: Int { max(2, min(3, Int(containerWidth / 200))) }
 
     private var pinnedIDs: [CounterID] {
         store.state.activeGame?.pinnedCounterIDs ?? []

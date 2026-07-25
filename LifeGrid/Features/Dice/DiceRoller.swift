@@ -17,38 +17,38 @@ struct DiceRoller: View {
     }
 
     var body: some View {
-        VStack(spacing: 8) {
+        VStack(spacing: 4) {
             Text(label)
-                .font(.subheadline.bold())
+                .font(.caption.bold())
                 .foregroundStyle(LifeGridPalette.secondaryText)
                 .accessibilityLabel("\(label) die")
 
             if let result = lastResult {
                 Text("\(result.total)")
-                    .font(.largeTitle.bold().monospacedDigit())
+                    .font(.title.bold().monospacedDigit())
                     .foregroundStyle(LifeGridPalette.primaryText)
                     .accessibilityLabel("\(label) result")
                     .accessibilityValue("\(result.total), from \(result.diceCount) \(label)")
             } else {
                 Text("—")
-                    .font(.largeTitle.monospacedDigit())
+                    .font(.title.monospacedDigit())
                     .foregroundStyle(LifeGridPalette.secondaryText)
                     .accessibilityLabel("\(label), no roll yet")
             }
 
-            HStack(spacing: 8) {
+            HStack(spacing: 4) {
                 Button {
                     if diceCount > 1 { diceCount -= 1 }
                 } label: {
                     Image(systemName: "minus.circle.fill")
-                        .font(.title3)
+                        .font(.caption)
                 }
                 .buttonStyle(.plain)
                 .accessibilityLabel("Fewer \(label)")
 
                 Text("\(diceCount)")
-                    .font(.title3.monospacedDigit().bold())
-                    .frame(minWidth: 28)
+                    .font(.caption.monospacedDigit())
+                    .frame(width: 20)
                     .accessibilityLabel("Number of dice")
                     .accessibilityValue("\(diceCount)")
 
@@ -56,19 +56,16 @@ struct DiceRoller: View {
                     if diceCount < 100 { diceCount += 1 }
                 } label: {
                     Image(systemName: "plus.circle.fill")
-                        .font(.title3)
+                        .font(.caption)
                 }
                 .buttonStyle(.plain)
                 .accessibilityLabel("More \(label)")
             }
 
-            Button {
+            Button("Roll") {
                 Task { await roll() }
-            } label: {
-                Text("Roll \(diceCount)d\(sides)")
-                    .font(.subheadline.bold())
-                    .frame(maxWidth: .infinity, minHeight: 36)
             }
+            .font(.caption.bold())
             .buttonStyle(.borderedProminent)
             .tint(LifeGridPalette.accent)
             .accessibilityLabel("Roll \(diceCount) \(label)")
@@ -91,7 +88,7 @@ struct DiceRoller: View {
                 }
             }
         }
-            .padding(12)
+            .padding(8)
         .frame(maxWidth: .infinity)
         .background(
             LifeGridPalette.field,
