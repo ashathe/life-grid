@@ -160,10 +160,46 @@ struct ActiveGameSummaryScreen: View {
                     .disabled(game.opponents.count >= OpponentState.maximumCount)
                 }
             }
-            ForEach(game.opponents) { opponent in
+            ForEach(game.opponents.filter(\.isVisible)) { opponent in
                 OpponentCard(store: store, opponentID: opponent.id)
             }
+
+            if !game.opponents.filter({ !$0.isVisible }).isEmpty {
+                outOfGameSection
+            }
         }
+    }
+
+    private var outOfGameSection: some View {
+        let hidden = game.opponents.filter { !$0.isVisible }
+        return VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                Text("Out of Game · \(hidden.count)")
+                    .font(.subheadline.bold())
+                    .foregroundStyle(LifeGridPalette.secondaryText)
+                Spacer()
+            }
+            ForEach(hidden) { opponent in
+                HStack {
+                    Text(OpponentCard.displayName(for: opponent))
+                        .font(.caption)
+                        .foregroundStyle(LifeGridPalette.secondaryText)
+                    Spacer()
+                    Button("Restore") {
+                        Task { await store.restoreOpponent(opponent.id) }
+                    }
+                    .font(.caption)
+                    .buttonStyle(.bordered)
+                    .tint(LifeGridPalette.accent)
+                }
+                .padding(.horizontal, 12)
+                .padding(.vertical, 6)
+                .background(LifeGridPalette.field, in: RoundedRectangle(cornerRadius: 8))
+            }
+        }
+        .padding(12)
+        .background(LifeGridPalette.surface, in: RoundedRectangle(cornerRadius: 12))
+        .overlay { RoundedRectangle(cornerRadius: 12).stroke(LifeGridPalette.border) }
     }
 
     private let quickRollDice: [(label: String, sides: Int)] = [
