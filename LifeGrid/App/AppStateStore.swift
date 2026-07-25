@@ -425,11 +425,12 @@ final class AppStateStore {
         }) else { return nil }
 
         var created: CustomCounterDefinition?
+        let createdAt = await environment.clock.now()
         _ = await mutateAndPersist({ state in
             let definition = CustomCounterDefinition(
                 id: UUID(),
                 name: trimmed,
-                createdAt: Date()
+                createdAt: createdAt
             )
             state.customCounters.append(definition)
             created = definition
@@ -510,9 +511,10 @@ final class AppStateStore {
             results.append(await environment.randomSource.nextInt(in: 1...sides))
         }
         let total = results.reduce(0, +)
+        let now = await environment.clock.now()
         let entry = DiceRollEntry(
             id: UUID(),
-            timestamp: Date(),
+            timestamp: now,
             sides: sides,
             diceCount: count,
             individualResults: results,
