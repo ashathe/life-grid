@@ -40,11 +40,15 @@ final class AppStateStore {
         }
     }
 
+    // MARK: - Preferences
+
     func applyFoundationMutation(
         _ mutation: (inout PersistedAppState) -> Void
     ) async {
         await mutateAndPersist(mutation)
     }
+
+    // MARK: - Game Lifecycle
 
     func startGame(
         using setup: GameSetup,
@@ -142,6 +146,8 @@ final class AppStateStore {
         })
     }
 
+    // MARK: - Local Player
+
     @discardableResult
     func changeLocalLife(by amount: Int) async -> ManualLifeChange? {
         guard state.activeGame != nil else { return nil }
@@ -230,6 +236,8 @@ final class AppStateStore {
             return true
         })
     }
+
+    // MARK: - Opponents
 
     @discardableResult
     func addOpponent() async -> OpponentMutationResult<OpponentState> {
@@ -366,6 +374,8 @@ final class AppStateStore {
         })
     }
 
+    // MARK: - Counters
+
     @discardableResult
     func adjustCounter(_ id: CounterID, by amount: Int) async -> Bool {
         guard state.activeGame != nil else { return false }
@@ -501,6 +511,8 @@ final class AppStateStore {
         return didMutate
     }
 
+    // MARK: - Dice
+
     func diceCount(forSides sides: Int) -> Int {
         min(max(state.lastDiceCountsBySides[sides] ?? 1, 1), 100)
     }
@@ -594,6 +606,8 @@ final class AppStateStore {
         return value == 0 ? .heads : .tails
     }
 
+    // MARK: - Statuses
+
     func assignMonarch(to playerID: PlayerID?) async {
         guard state.activeGame != nil else { return }
         _ = await mutateAndPersist(onlyIf: { state in
@@ -623,6 +637,8 @@ final class AppStateStore {
         })
         return didMutate
     }
+
+    // MARK: - Persistence
 
     func saveForLifecycle() async {
         guard hasLoaded else { return }
