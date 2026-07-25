@@ -46,10 +46,15 @@ enum ScriptedRepositoryError: Error {
     case saveFailed
 }
 
+enum ScriptedLoadFailure: Sendable {
+    case none
+    case transient(calls: Set<Int>)
+    case unsupportedSchema(Int)
+}
+
 actor ScriptedAppStateRepository: AppStateRepository {
     private let loadedState: PersistedAppState
-    private let shouldFailLoad: Bool
-    private let failingLoadCalls: Set<Int>
+    private let loadFailure: ScriptedLoadFailure
     private let failingSaveCalls: Set<Int>
     private var loadCallCount = 0
     private var saveCallCount = 0
@@ -57,20 +62,36 @@ actor ScriptedAppStateRepository: AppStateRepository {
 
     init(
         loadedState: PersistedAppState = .default,
+        loadFailure: ScriptedLoadFailure = .none,
+        failingSaveCalls: Set<Int> = []
+    ) {
+        self.loadedState = loadedState
+        self.loadFailure = loadFailure
+        self.failingSaveCalls = failingSaveCalls
+    }
+
+    // Legacy convenience init for existing tests
+    convenience init(
+        loadedState: PersistedAppState = .default,
         shouldFailLoad: Bool = false,
         failingLoadCalls: Set<Int> = [],
         failingSaveCalls: Set<Int> = []
     ) {
-        self.loadedState = loadedState
-        self.shouldFailLoad = shouldFailLoad
-        self.failingLoadCalls = failingLoadCalls
-        self.failingSaveCalls = failingSaveCalls
+        let loadFail: ScriptedLoadFailure = shouldFailLoad ? .transient(calls: failingLoadCalls.isEmpty ? Set([1]) : failingLoadCalls) : .none
+        self.init(loadedState: loadedState, loadFailure: loadFail, failingSaveCalls: failingSaveCalls)
     }
 
     func load() throws -> PersistedAppState {
         loadCallCount += 1
-        if shouldFailLoad || failingLoadCalls.contains(loadCallCount) {
-            throw ScriptedRepositoryError.loadFailed
+        switch loadFailure {
+        case .none:
+            break
+        case .transient(let calls):
+            if calls.contains(loadCallCount) {
+                throw ScriptedRepositoryError.loadFailed
+            }
+        case .unsupportedSchema(let version):
+            throw StateMigrationError.unsupportedSchema(version)
         }
         return loadedState
     }
