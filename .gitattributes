@@ -1,3 +1,6 @@
 PROTOCOL.md whitespace=-blank-at-eol
 docs/approved/*.md whitespace=-blank-at-eol
 *.pdf binary
+*.ipa filter=lfs diff=lfs merge=lfs -text
+docs/approved/*.pdf filter=lfs diff=lfs merge=lfs -text
+docs/approved/*.png filter=lfs diff=lfs merge=lfs -text
