@@ -107,5 +107,6 @@ struct DiceRoller: View {
         showAllResults = false
         lastResult = await store.rollDice(sides: sides, count: diceCount)
         await store.playHaptic(.adjustment)
+        await store.playSound(.diceResult)
     }
 }

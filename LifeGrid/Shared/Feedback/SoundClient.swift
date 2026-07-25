@@ -11,3 +11,18 @@ protocol SoundClient: Sendable {
 struct NoOpSoundClient: SoundClient {
     func play(_ event: SoundEvent) async {}
 }
+
+struct SystemSoundClient: SoundClient {
+    func play(_ event: SoundEvent) async {
+        let soundID: SystemSoundID = switch event {
+        case .diceResult:    1104
+        case .coinFlip:      1057
+        case .lethalWarning: 1006
+        }
+        await MainActor.run {
+            AudioServicesPlaySystemSound(soundID)
+        }
+    }
+}
+
+import AudioToolbox

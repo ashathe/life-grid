@@ -48,7 +48,7 @@ struct AppEnvironment: Sendable {
             randomSource: SystemRandomSource(),
             clock: SystemClockClient(),
             haptics: UIKitHapticsClient(),
-            sound: NoOpSoundClient(),
+            sound: SystemSoundClient(),
             uiTestingCommanderDisabled: arguments.contains(
                 "--ui-testing-commander-disabled"
             )

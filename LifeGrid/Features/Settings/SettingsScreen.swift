@@ -8,6 +8,7 @@ struct SettingsScreen: View {
     @State private var damageLinkEnabled: Bool
     @State private var screenAwake: Bool
     @State private var haptics: Bool
+    @State private var sound: Bool
     @FocusState private var nameIsFocused: Bool
 
     init(store: AppStateStore) {
@@ -19,6 +20,7 @@ struct SettingsScreen: View {
         _damageLinkEnabled = State(initialValue: prefs.commanderDamageChangesLife)
         _screenAwake = State(initialValue: prefs.keepScreenAwakeDuringGames)
         _haptics = State(initialValue: prefs.hapticsEnabled)
+        _sound = State(initialValue: prefs.soundEffectsEnabled)
     }
 
     var body: some View {
@@ -115,6 +117,10 @@ struct SettingsScreen: View {
             Toggle("Haptics", isOn: $haptics)
                 .tint(LifeGridPalette.accent)
                 .onChange(of: haptics) { _, v in Task { await store.setHapticsEnabled(v) } }
+            Divider().overlay(LifeGridPalette.border)
+            Toggle("Sound Effects", isOn: $sound)
+                .tint(LifeGridPalette.accent)
+                .onChange(of: sound) { _, v in Task { await store.setSoundEffectsEnabled(v) } }
         }
         .lifeGridCard()
     }
