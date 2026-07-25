@@ -9,6 +9,7 @@ struct ActiveGameSummaryScreen: View {
     @State private var quickRollRevision = 0
     @State private var quickRollDismissTask: Task<Void, Never>?
     @State private var containerWidth: CGFloat = 0
+    @State private var isLandscapeLocked = false
 
     private var isLandscape: Bool { containerWidth > 560 }
 
@@ -95,6 +96,17 @@ struct ActiveGameSummaryScreen: View {
                             .clipShape(RoundedRectangle(cornerRadius: 6))
                     }
                     .accessibilityLabel("Quick dice roll")
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button {
+                        isLandscapeLocked ? OrientationLock.reset() : OrientationLock.landscape()
+                        isLandscapeLocked.toggle()
+                    } label: {
+                        Image(systemName: isLandscapeLocked ? "lock.rotation" : "rotate.3d")
+                            .font(.callout)
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel(isLandscapeLocked ? "Unlock orientation" : "Rotate to landscape")
                 }
                 ToolbarItem(placement: .topBarTrailing) {
                     HStack(spacing: 4) {
@@ -191,5 +203,17 @@ struct ActiveGameSummaryScreen: View {
         .shadow(color: .black.opacity(0.5), radius: 20)
         .transition(.opacity.combined(with: .scale(0.8)))
         .animation(.spring(response: 0.3), value: quickRollLabel)
+    }
+}
+
+private enum OrientationLock {
+    static func landscape() {
+        guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+        scene.requestGeometryUpdate(.iOS(interfaceOrientations: .landscapeRight))
+    }
+
+    static func reset() {
+        guard let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+        scene.requestGeometryUpdate(.iOS(interfaceOrientations: .all))
     }
 }
