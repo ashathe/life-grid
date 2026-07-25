@@ -3,11 +3,9 @@ import SwiftUI
 struct DiceScreen: View {
     @Bindable var store: AppStateStore
     @State private var showsCustomDieEditor = false
+    @State private var containerWidth: CGFloat = 0
 
-    private let columns = [
-        GridItem(.flexible(), spacing: 12),
-        GridItem(.flexible(), spacing: 12)
-    ]
+    private var gridColumns: Int { max(2, Int(containerWidth / 180)) }
 
     private let builtInDice: [(sides: Int, label: String)] = [
         (4, "d4"), (6, "d6"), (8, "d8"),
@@ -20,7 +18,7 @@ struct DiceScreen: View {
                 VStack(alignment: .leading, spacing: 16) {
                     CoinFlipView(store: store)
 
-                    LazyVGrid(columns: columns, spacing: 12) {
+                    LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 12), count: gridColumns), spacing: 12) {
                         ForEach(builtInDice, id: \.sides) { die in
                             DiceRoller(
                                 sides: die.sides,
@@ -68,6 +66,13 @@ struct DiceScreen: View {
                 .frame(maxWidth: .infinity)
             }
             .background(LifeGridPalette.background.ignoresSafeArea())
+            .overlay {
+                GeometryReader { geo in
+                    Color.clear
+                        .onAppear { containerWidth = geo.size.width }
+                        .onChange(of: geo.size.width) { _, w in containerWidth = w }
+                }
+            }
             .foregroundStyle(LifeGridPalette.primaryText)
             .navigationTitle("Dice")
             .toolbarTitleDisplayMode(.inline)
